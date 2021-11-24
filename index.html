@@ -17,11 +17,15 @@
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="assets/js/index.js"></script>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script src="./assets/js/vue.js" defer></script>
+
 
 </head>
-<div id="app">
 
-    <body class="bgClassBlue">
+<body class="bgClassBlue">
+    <div id="app">
+
         <!-- Navbar -->
         <nav class="navbar">
             <div class="container-fluid">
@@ -30,17 +34,17 @@
                     <h1>Vintastisch</h1>
                 </a>
                 <div>
-                    <button type="button" class="btn btn-outline-secondary toggleMe d-none" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-outline-secondary" v-if="!isLoggedIn" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
                         Inloggen
                     </button>
-                    <div class="nav-item dropdown toggleMe ">
+                    <div class="nav-item dropdown" v-if="isLoggedIn">
                         <a href="#" class="btn btn-outline-secondary dropdown-toggle" id="profileDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Profiel</a>
                         <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                             <li><a class="dropdown-item" href="#">Profiel</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#" @click="isLoggedIn = false">Uitloggen</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,9 +81,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Terug</button>
-                        <button type="button" class="btn btn-outline-secondary">Inloggen</button>
-                        <button type="button" class="btn btn-outline-secondary" onclick="toggleLogin()">login
-                            toggle</button>
+                        <button type="button" class="btn btn-outline-secondary"
+                            @click="isLoggedIn = true">Inloggen</button>
                     </div>
 
                 </div>
@@ -155,8 +158,6 @@
         </div>
         <!-- /Carousel -->
 
-
-
         <!-- Uitgelicht -->
         <card-row v-bind:items="spotlightItems">Uitgelicht:</card-row>
         <!-- /uitgelicht -->
@@ -176,9 +177,8 @@
             </div>
         </footer>
         <!-- /Footer -->
-</div>
-<script src="./node_modules/vue/dist/vue.min.js"></script>
-<script src="./assets/js/vue.js"></script>
+    </div>
+
 
 </body>
 

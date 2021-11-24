@@ -33,6 +33,7 @@ Vue.component("card-row", {
 new Vue({
   el: "#app",
   data: {
+    isLoggedIn: false,
     items: [
       {
         ID: "1",
