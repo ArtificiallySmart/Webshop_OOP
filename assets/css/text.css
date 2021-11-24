@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #deb992;
+}
+
+.dropdown-item {
+  color: #1ba098;
+}
+
+.lobsterFont {
+  font-family: "Lobster", cursive;
+  color: #deb992;
+}
+.lobsterColor {
+  color: #deb992;
+}
+
+.darkGreen {
+  color: #1ba098;
+}

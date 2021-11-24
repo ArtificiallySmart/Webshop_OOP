@@ -1,0 +1,12 @@
+.dropdown-menu[data-bs-popper] {
+  top: 100%;
+  right: 0;
+  left: auto;
+  margin-top: 0.125rem;
+  background-color: #051622;
+  border-color: #1ba098;
+}
+
+.bgClassBlue {
+  background-color: #051622;
+}

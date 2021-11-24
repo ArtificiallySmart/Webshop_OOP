@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- #051622 #1BA098 #DEB992-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vintastisch</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body class="bgClassBlue">
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="container-fluid">
+            <div></div>
+            <a class="navbar-brand lobsterFont" href="index.html">
+                <h1>Vintastisch</h1>
+            </a>
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Inloggen
+            </button>
+        </div>
+    </nav>
+    <!-- /Navbar -->
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bgClassBlue darkGreen">
+
+                <div class="modal-header ">
+                    <h4 class="modal-title lobsterFont" id="exampleModalLabel">Inloggen</h4>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Modal Login form -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Gebruikersnaam</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Wachtwoord</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Onthoudt mijn gegevens</label>
+                        </div>
+                    </form>
+                    <!-- /Modal login form -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Terug</button>
+                    <button type="button" class="btn btn-outline-secondary">Inloggen</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Modal -->
+
+    <!--Nonstick search bar -->
+    <div class="container-fluid w-75 h-100">
+        <form class="d-flex">
+            <div class="input-group">
+                <input type="text" aria-label="Zoek" class="form-control" placeholder="Zoek">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Categorie</option>
+                    <option value="1">Meubilair</option>
+                    <option value="2">Vazen</option>
+                    <option value="3">kandelaars</option>
+                </select>
+                <button class="btn btn-secondary" type="submit">Zoek</button>
+            </div>
+        </form>
+    </div>
+    <!-- /Nonstick search bar -->
+
+    <div class="container my-3">
+        <h2 class="lobsterFont">Product name</h2>
+        <!-- Carousel with thumbnails -->
+        <div id="carouselExampleIndicators" class="carousel slide my-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://via.placeholder.com/1200x600" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1200x600" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1200x600" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- /Carousel with thumbnails -->
+
+        <div class="row">
+            <div class="col-md-8 order-2 order-md-1 darkGreen">
+
+                <h4 class="lobsterColor">Beschrijving</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis sapiente
+                        laudantium
+                        molestias!
+                        Et provident, magni necessitatibus, deleniti animi earum placeat tempora distinctio eius
+                        inventore
+                        at, beatae accusamus non sed totam!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore ut neque
+                        tempora itaque officia
+                        numquam, vitae consequatur odio facere enim laudantium ipsam doloremque, nisi praesentium
+                        quisquam.
+                        Esse ratione consequatur in.
+                        Sapiente, minima voluptate sequi necessitatibus dicta sit alias repellendus, dignissimos
+                        explicabo
+                        accusantium fugit placeat itaque maxime eius minus obcaecati quibusdam quod eveniet corporis!
+                        Mollitia quia laboriosam maxime, nam similique omnis.</p>
+
+                    <h4 class="lobsterColor">Gegevens</h4>
+                    <table class="table table-borderless darkGreen">
+                        <tbody>
+                            <tr>
+                                <td>Aantal items</td>
+                                <td>placeholder</td>
+                            </tr>
+                            <tr>
+                                <td>materiaal</td>
+                                <td>placeholder</td>
+                            </tr>
+                            <tr>
+                                <td>Ontwerper/Kunstenaar</td>
+                                <td>placeholder</td>
+                            </tr>
+                            <tr>
+                                <td>Fabrikant/Merk</td>
+                                <td>placeholder</td>
+                            </tr>
+                            <tr>
+                                <td>Stijl</td>
+                                <td>placeholder</td>
+                            </tr>
+                            <tr>
+                                <td>Periode</td>
+                                <td>placeholder</td>
+                            </tr>
+                            <tr>
+                                <td>Staat</td>
+                                <td>placeholder</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="lobsterColor">Verkoper</h4>
+                    <h5>Naam</h5>
+            </div>
+            <div class="col-md-4 order-1 order-md-2 darkGreen">
+                <div class="lobsterColor">
+                    <h3 style="display: inline-block">€XXX,xx</h3>
+                    <span>per stuk</span>
+                </div>
+
+                <small class="text-muted">Prijs is exclusief eventuele verzendkosten</small>
+                <div class="d-grid my-3">
+                    <button class="btn btn-outline-secondary lobsterColor" type="button">Toevoegen aan
+                        winkelwagen</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50 sticky-bottom">
+        <div class="container text-center">
+            <small>Copyright &copy; Vintastisch</small>
+        </div>
+    </footer>
+    <!-- /Footer -->
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

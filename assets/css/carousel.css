@@ -1,0 +1,22 @@
+.carousel-caption-lower {
+  position: absolute;
+  bottom: 0rem;
+  margin-bottom: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.carousel-caption-upper {
+  position: absolute;
+  top: 0rem;
+  margin-bottom: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #fff;
+  text-align: center;
+}
+.carousel-caption-upper h2 {
+  color: #fff;
+}
