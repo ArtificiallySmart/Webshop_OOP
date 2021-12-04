@@ -1,3 +1,80 @@
+Vue.component("vin-navbar", {
+  props: ["isLoggedIn"],
+  template: `
+  <div>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div></div>
+            <a class="navbar-brand lobsterFont justify-content-center">
+                <h1>Vintastisch</h1>
+            </a>
+            <div>
+                <button type="button" class="btn btn-outline-secondary" v-if="!isLoggedIn" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Inloggen
+                </button>
+                <div class="nav-item dropdown" v-if="isLoggedIn">
+                    <a href="#" class="btn btn-outline-secondary dropdown-toggle" id="profileDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Profiel</a>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#">Profiel</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#" @click="isLoggedIn = false">Uitloggen</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bgClassBlue darkGreen">
+
+                <div class="modal-header ">
+                    <h4 class="modal-title lobsterFont" id="exampleModalLabel">Inloggen</h4>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Modal Login form -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Gebruikersnaam</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Wachtwoord</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Onthoudt mijn gegevens</label>
+                        </div>
+                    </form>
+                    <!-- /Modal login form -->
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Terug</button>
+                    <button type="button" class="btn btn-outline-secondary"
+                        @click="isLoggedIn = true">Inloggen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    `,
+  data: {
+    isLoggedIn: false,
+  },
+});
+
+Vue.component("test-test", {
+  props: ["item"],
+  template: `
+  <p> {{item.name}} </p>
+  `,
+});
+
 Vue.component("item-card", {
   props: ["item"],
   template: `
@@ -8,7 +85,7 @@ Vue.component("item-card", {
         <p class="card-text"> {{item.description}} </p>
       </div>
       <div class="card-footer">
-        <a href="item.html" class="btn btn-outline-secondary">Naar item</a>
+        <a :href="'item.html#' + item.ID" class="btn btn-outline-secondary">Naar item</a>
       </div>
     </div>
   `,
@@ -64,6 +141,7 @@ new Vue({
         period: "1970",
         state: "as new",
         sellerId: "1",
+        price: '61,00'
       },
       {
         ID: "3",
@@ -80,6 +158,7 @@ new Vue({
         period: "2000",
         state: "used",
         sellerId: "2",
+        price: '152,00',
       },
       {
         ID: "4",
@@ -96,6 +175,7 @@ new Vue({
         period: "2014",
         state: "new",
         sellerId: "3",
+        price: '699,90',
       },
       {
         ID: "5",
@@ -112,6 +192,7 @@ new Vue({
         period: "2004",
         state: "as new",
         sellerId: "4",
+        price: '1890,00',
       },
       {
         ID: "6",
@@ -127,6 +208,7 @@ new Vue({
         period: "1993",
         state: "used",
         sellerId: "4",
+        price: '595,00',
       },
       {
         ID: "7",
@@ -143,6 +225,7 @@ new Vue({
         period: "1983",
         state: "used",
         sellerId: "4",
+        price: '2490,00'
       },
       {
         ID: "8",
@@ -159,6 +242,7 @@ new Vue({
         period: "2020",
         state: "new",
         sellerId: "4",
+        price: '75,00'
       },
       {
         ID: "9",
@@ -174,6 +258,7 @@ new Vue({
         period: "1950",
         state: "used",
         sellerId: "1",
+        price: '249,00',
       },
       {
         ID: "10",
@@ -190,6 +275,7 @@ new Vue({
         period: "1960",
         state: "used",
         sellerId: "5",
+        price: '149,95'
       },
       {
         ID: "11",
@@ -206,6 +292,7 @@ new Vue({
         period: "2006",
         state: "new",
         sellerId: "6",
+        price: '156,00'
       },
       {
         ID: "12",
@@ -221,6 +308,7 @@ new Vue({
         period: "-",
         state: "new",
         sellerId: "7",
+        price: '450,00'
       },
       {
         ID: "13",
@@ -237,6 +325,7 @@ new Vue({
         period: "1920",
         state: "used",
         sellerId: "8",
+        price: '60,00'
       },
       {
         ID: "14",
@@ -253,6 +342,7 @@ new Vue({
         period: "1920",
         state: "used",
         sellerId: "9",
+        price: '130,00'
       },
     ],
   },
@@ -279,12 +369,18 @@ new Vue({
       for (let i = 0; i < 6; i++) {
         rowItems.push(
           this.items[
-            indexArray.splice(Math.floor(Math.random() * indexArray.length), 1)
+          indexArray.splice(Math.floor(Math.random() * indexArray.length), 1)
           ]
         );
       }
       console.log(indexArray);
       return rowItems;
+    },
+    pageItem: function () {
+      let itemID = window.location.hash;
+      itemID = itemID.slice(1);
+      // itemID = parseInt(itemID);
+      return this.items.filter(item => item.ID == itemID)[0];
     },
   },
 });
