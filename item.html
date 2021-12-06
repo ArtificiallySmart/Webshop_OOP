@@ -14,63 +14,13 @@
 
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script src="./assets/js/vue.js" defer></script>
+    <script src="./assets/js/data.js"></script>
 </head>
 
 <body class="bgClassBlue">
     <div id="app">
 
-        <!-- Navbar -->
-        <nav class="navbar">
-
-            <div class="container-fluid">
-                <div></div>
-                <a class="navbar-brand lobsterFont" href="index.html">
-                    <h1>Vintastisch</h1>
-                </a>
-                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    Inloggen
-                </button>
-            </div>
-        </nav>
-        <!-- /Navbar -->
-
-        <!-- Modal -->
-        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog ">
-                <div class="modal-content bgClassBlue darkGreen">
-
-                    <div class="modal-header ">
-                        <h4 class="modal-title lobsterFont" id="exampleModalLabel">Inloggen</h4>
-                        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Modal Login form -->
-                        <form>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Gebruikersnaam</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Wachtwoord</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Onthoudt mijn gegevens</label>
-                            </div>
-                        </form>
-                        <!-- /Modal login form -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Terug</button>
-                        <button type="button" class="btn btn-outline-secondary">Inloggen</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- /Modal -->
+        <vin-navbar></vin-navbar>
 
         <!--Nonstick search bar -->
         <div class="container-fluid w-75 h-100">
@@ -92,83 +42,48 @@
         <div class="container my-3">
             <h2 class="lobsterFont">{{pageItem.name}}</h2>
             <!-- Carousel with thumbnails -->
-            <div id="carouselExampleIndicators" class="carousel slide my-3" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="text-center" style="aspect-ratio: 16/9;">
-                            <span class="carousel-helper"></span>
-                            <img :src="pageItem.image" class="carousel-image d-inline-block  mx-auto" alt="...">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="text-center" style="aspect-ratio: 16/9;">
-                            <span class="carousel-helper"></span>
-                            <img src="https://via.placeholder.com/1200x300"
-                                class="carousel-image d-inline-block mx-auto" alt="...">
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-            <!-- /Carousel with thumbnails -->
+            <item-carousel :images="pageItem.images"></item-carousel>
 
             <div class="row">
                 <div class="col-md-8 order-2 order-md-1 darkGreen">
-                    <h4 class="lobsterColor">Beschrijving</h3>
-                        <p> {{pageItem.description}} </p>
+                    <h4 class="lobsterColor">Beschrijving</h4>
+                    <p> {{pageItem.description}} </p>
 
-                        <h4 class="lobsterColor">Gegevens</h4>
-                        <table class="table table-borderless darkGreen">
-                            <tbody>
-                                <tr>
-                                    <td>Aantal items</td>
-                                    <td>{{pageItem.number}}</td>
-                                </tr>
-                                <tr>
-                                    <td>materiaal</td>
-                                    <td>{{pageItem.material}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Ontwerper/Kunstenaar</td>
-                                    <td>{{pageItem.designer}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Fabrikant/Merk</td>
-                                    <td>{{pageItem.brand}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Stijl</td>
-                                    <td>{{pageItem.style}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Periode</td>
-                                    <td>{{pageItem.period}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Staat</td>
-                                    <td>{{pageItem.state}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h4 class="lobsterColor">Verkoper</h4>
-                        <h5>Naam</h5>
+                    <h4 class="lobsterColor">Gegevens</h4>
+                    <table class="table table-borderless darkGreen">
+                        <tbody>
+                            <tr>
+                                <td>Aantal items</td>
+                                <td>{{pageItem.number}}</td>
+                            </tr>
+                            <tr>
+                                <td>materiaal</td>
+                                <td>{{pageItem.material}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ontwerper/Kunstenaar</td>
+                                <td>{{pageItem.designer}}</td>
+                            </tr>
+                            <tr>
+                                <td>Fabrikant/Merk</td>
+                                <td>{{pageItem.brand}}</td>
+                            </tr>
+                            <tr>
+                                <td>Stijl</td>
+                                <td>{{pageItem.style}}</td>
+                            </tr>
+                            <tr>
+                                <td>Periode</td>
+                                <td>{{pageItem.period}}</td>
+                            </tr>
+                            <tr>
+                                <td>Staat</td>
+                                <td>{{pageItem.state}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="lobsterColor">Verkoper</h4>
+                    <h5>Naam</h5>
                 </div>
                 <div class="col-md-4 order-1 order-md-2 darkGreen">
                     <div class="lobsterColor">
