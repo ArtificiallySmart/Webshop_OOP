@@ -68,13 +68,6 @@ Vue.component("vin-navbar", {
   },
 });
 
-Vue.component("test-test", {
-  props: ["item"],
-  template: `
-  <p> {{item.name}} </p>
-  `,
-});
-
 Vue.component("item-card", {
   props: ["item"],
   template: `
@@ -132,7 +125,14 @@ new Vue({
         name: "Arclumis kandelaars",
         description: "Stijlvol en tijdloos ontwerp van Matthew Hilton.",
         image:
-          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1637248993/webshop/swan_yxts4u.jpg",
+          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1637248993/webshop/3/swan_yxts4u.jpg",
+        images: [
+          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1638785944/webshop/3/bda9591b-894a-4cd8-97d9-ad940ec72b42_wvye67.jpg",
+          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1638785975/webshop/3/94a3850f-a642-4b5f-a953-779f549a31ff_zbdivy.jpg",
+          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1638786022/webshop/3/46b5cdc9-1ee5-4dc0-ad20-92866e66eda5_pnazjw.jpg",
+          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1638786105/webshop/3/feef3a63-ffe7-44d9-a5a2-6bcd4eae197c_htnkvr.jpg",
+          "https://res.cloudinary.com/dezwo7e6f/image/upload/v1638786128/webshop/3/7987aee3-4020-473f-a842-78e7cdd1ec19_vor2lo.jpg"
+        ],
         number: "2",
         material: "aluminium",
         designer: "Matthew Hilton",
