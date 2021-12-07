@@ -9,18 +9,18 @@
 
     <title>Vintastisch</title>
 
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/carousel.css">
     <link rel="stylesheet" href="./assets/css/card.css">
     <link rel="stylesheet" href="./assets/css/text.css">
 
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
+
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/components/navbar.js"></script>
     <script src="./assets/js/components/cards.js"></script>
-
     <script src="./assets/js/vue.js" defer></script>
 
 
@@ -102,15 +102,15 @@
         <!-- /Carousel -->
 
         <!-- Uitgelicht -->
-        <card-row v-bind:items="spotlightItems">Uitgelicht:</card-row>
+        <card-row :items="spotlightItems">Uitgelicht:</card-row>
         <!-- /uitgelicht -->
 
         <!-- New -->
-        <card-row v-bind:items="newItems">Nieuwe items:</card-row>
+        <card-row :items="newItems">Nieuwe items:</card-row>
         <!-- /New -->
 
         <!-- Random -->
-        <card-row v-bind:items="randomItems">Een greep uit de collectie:</card-row>
+        <card-row :items="randomItems">Een greep uit de collectie:</card-row>
         <!-- /Random -->
 
         <!-- Footer -->

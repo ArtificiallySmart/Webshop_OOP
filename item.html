@@ -96,8 +96,8 @@
 
                     <small class="text-muted">Prijs is exclusief eventuele verzendkosten</small>
                     <div class="d-grid my-3">
-                        <button class="btn btn-outline-secondary lobsterColor" type="button">Toevoegen aan
-                            winkelwagen</button>
+                        <button v-on:click="addToCart" class="btn btn-outline-secondary lobsterColor" type="button">{{
+                            addToCartText }}</button>
                     </div>
 
                 </div>
