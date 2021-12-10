@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vintastisch</title>
+
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/carousel.css">
+    <link rel="stylesheet" href="./assets/css/card.css">
+    <link rel="stylesheet" href="./assets/css/text.css">
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/components/navbar.js"></script>
+    <script src="./assets/js/components/cards.js"></script>
+    <script src="./assets/js/vue.js" defer></script>
+
+
+</head>
+
+<body class="bgClassBlue">
+    <div id="app">
+
+        <!-- Navbar -->
+        <vin-navbar></vin-navbar>
+        <!-- /Navbar -->
+        <!-- Sticky search bar -->
+        <div class=" container-fluid w-75 sticky-top" id="searchbar">
+            <form class="d-flex">
+                <div class="input-group">
+                    <input type="text" aria-label="Zoek" class="form-control" placeholder="Zoek">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Categorie</option>
+                        <option value="1">Meubilair</option>
+                        <option value="2">Vazen</option>
+                        <option value="3">kandelaars</option>
+                    </select>
+                    <button class="btn btn-secondary" type="submit">Zoek</button>
+                </div>
+            </form>
+        </div>
+        <!-- /Sticky search bar -->
+        <div class="container my-5">
+            <ul class="list-group">
+                <li v-for="item in cartItems" :key="item.ID" class="list-group-item">
+                    {{item.name}}
+                    <button @click="removeFromCart(item.ID)">remove from cart</button>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <!-- Footer -->
+        <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50">
+            <div class="container text-center">
+                <small>Copyright &copy; Vintastisch</small>
+            </div>
+        </footer>
+        <!-- /Footer -->
+    </div>
+
+
+</body>
+
+</html>

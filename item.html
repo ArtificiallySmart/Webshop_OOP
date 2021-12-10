@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vintastisch</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/text.css">
     <link rel="stylesheet" href="./assets/css/item.css">
@@ -96,14 +97,40 @@
 
                     <small class="text-muted">Prijs is exclusief eventuele verzendkosten</small>
                     <div class="d-grid my-3">
-                        <button v-on:click="addToCart" class="btn btn-outline-secondary lobsterColor" type="button">{{
+                        <button v-on:click="addToCart(pageItem.ID)" class="btn btn-outline-secondary lobsterColor"
+                            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">{{
                             addToCartText }}</button>
                     </div>
 
                 </div>
             </div>
         </div>
+        <!-- OffCanvas cart -->
 
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column justify-content-between">
+                <ul class="list-group" style="overflow: auto;">
+                    <li v-for="item in cartItems" :key="item.ID" class="list-group-item">
+                        <div>{{item.name}}</div>
+                        <div class="d-flex justify-content-between align-items-center">{{new
+                            Intl.NumberFormat(undefined,{style: 'currency', currency:
+                            'EUR'}).format(item.price)}}<button @click="removeFromCart(item.ID)"><i class="bi bi-trash"
+                                    style="font-size: 1.5rem;"></i></button></div>
+                    </li>
+                </ul>
+                <div>Totaalprijs: {{new
+                    Intl.NumberFormat(undefined,{style: 'currency', currency:
+                    'EUR'}).format(totalPrice)}}</div>
+            </div>
+
+        </div>
+        <!-- OffCanvas cart -->
         <!-- Footer -->
         <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50 sticky-bottom">
             <div class="container text-center">
