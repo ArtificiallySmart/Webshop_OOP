@@ -1,5 +1,5 @@
 Vue.component("vin-navbar", {
-props: ["isLoggedIn"],
+props: ["query"],
 template: `
 <div>
     <nav class="navbar">
@@ -11,14 +11,29 @@ template: `
 
             <div class="col-auto">
                 <label class="visually-hidden" for="autoSizingInputGroup">Search</label>
-                <div class="input-group">
 
-                    <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search">
-                    <div class="input-group-text"><i class="bi bi-search"></i></div>
-                </div>
+                <form action="/search.html">
+                    <div class="input-group">
+                        <input v-model="text" type="text" class="form-control " id="autoSizingInputGroup"
+                            placeholder="Search" name="search">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i
+                                class="bi bi-search"></i></button>
+                    </div>
+                    <!-- <div class="input-group-text"><a :href="'/search.html#'+text"
+                                @click="$emit('refresh-query', text)"><i class="bi bi-search"></i></a></div> -->
+                </form>
+
+
+
             </div>
         </div>
+
     </nav>
 </div>
 `,
+data: function () {
+return {
+text: ""
+}
+}
 });

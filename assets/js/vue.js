@@ -6,8 +6,10 @@ let app = new Vue({
 		inCart: false,
 		cart: Object.entries(localStorage) || '',
 		counter: 1,
+		query: (window.location.search).slice(8),
 	},
 	computed: {
+		// query: function () { return (window.location.hash).slice(1) },
 		cartItems: function () {
 			const cartItems = [];
 			if (this.cart) {
@@ -72,8 +74,15 @@ let app = new Vue({
 			}
 			return total;
 		},
+		searchResults: function () {
+
+			return items.filter(item => {
+				return item.name.includes(this.query) || item.description.includes(this.query)
+			})
+		}
 	},
 	methods: {
+		refreshQuery: function (newQuery) { this.query = newQuery },
 		removeFromCart: function (ID) {
 			this.cart.forEach((item, index) => {
 				if (item[0] == ID && item[1]) {
