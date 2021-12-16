@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- #051622 #1BA098 #DEB992-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vintastisch</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/text.css">
+    <link rel="stylesheet" href="./assets/css/item.css">
+    <link rel="shortcut icon" href="#">
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./assets/js/components/navbar.js"></script>
+    <script src="./assets/js/components/itemCarousel.js"></script>
+    <script src="./assets/js/components/offcanvasCart.js"></script>
+    <script src="./assets/js/data2.js"></script>
+
+    <script src="./assets/js/vue.js" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container bgClassBlue">
+            <vin-navbar @refresh-query="refreshQuery($event)"></vin-navbar>
+
+
+            <div class="container my-3">
+
+                <p>Your search for "<i>{{query}}</i>" had {{searchResults.length}} results</p>
+
+                <ul class="list-group" v-if="searchResults">
+                    <li v-for="item in searchResults" class="list-group-item" style="height: 200px;">
+                        <img :src=" item.thumbnail" class="img-thumbnail h-100" alt="...">
+                        {{item.name}}
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Footer -->
+            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50 sticky-bottom">
+                <div class="container text-center">
+                    <small>Copyright &copy; Vintastic</small>
+                </div>
+            </footer>
+            <!-- /Footer -->
+        </div>
+    </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
