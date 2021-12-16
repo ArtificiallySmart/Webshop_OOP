@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
 
 h1,
 h2,
@@ -6,21 +6,21 @@ h3,
 h4,
 h5,
 h6 {
-  color: #deb992;
+  color: #f58152;
 }
 
 .dropdown-item {
-  color: #1ba098;
+  color: #8e8d8a;
 }
 
 .lobsterFont {
-  font-family: "Lobster", cursive;
-  color: #deb992;
+  font-family: "Fugaz One", cursive;
+  color: #f58152;
 }
 .lobsterColor {
-  color: #deb992;
+  color: #f58152;
 }
 
 .darkGreen {
-  color: #1ba098;
+  color: #be489c;
 }
