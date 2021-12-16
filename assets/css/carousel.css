@@ -1,22 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+
 .carousel-caption-lower {
-  position: absolute;
-  bottom: 0rem;
-  margin-bottom: auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2); /* Black w/opacity/see-through */
+  backdrop-filter: blur(5px);
+  padding-left: 5%;
+  padding-right: 5%;
   text-align: center;
+  font-family: "Fugaz One", cursive;
+  color: #f58152;
 }
 
 .carousel-caption-upper {
-  position: absolute;
-  top: 0rem;
-  margin-bottom: auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2); /* Black w/opacity/see-through */
+  backdrop-filter: blur(5px);
+  padding-left: 5%;
+  padding-right: 5%;
   text-align: center;
 }
 .carousel-caption-upper h2 {
-  color: #fff;
+  font-family: "Fugaz One", cursive;
+  color: #f58152;
 }

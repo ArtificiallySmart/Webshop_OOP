@@ -21,9 +21,11 @@
     <script src="./node_modules/vue/dist/vue.js"></script>
 
     <script src="./assets/js/data2.js"></script>
+    <script src="./assets/js/slides.js"></script>
     <script src="./assets/js/components/navbar.js"></script>
     <script src="./assets/js/components/cards.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
+    <script src="./assets/js/components/mainCarousel.js"></script>
     <script src="./assets/js/vue.js" defer></script>
 
 
@@ -38,7 +40,7 @@
             <!-- /Navbar -->
 
             <!-- Carousel -->
-            <div class="container my-3">
+            <!-- <div class="container my-3">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-9">
                         <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -98,9 +100,11 @@
 
 
 
-            </div>
+            </div> -->
             <!-- /Carousel -->
 
+            <main-carousel :carouselslides="carousel">
+            </main-carousel>
             <!-- Uitgelicht -->
             <card-row :items="spotlightItems">In the spotlight:</card-row>
             <!-- /uitgelicht -->

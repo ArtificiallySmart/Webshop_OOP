@@ -1,6 +1,7 @@
 let app = new Vue({
 	el: "#app",
 	data: {
+		carousel: carouselSlides,
 		items: items,
 		inCart: false,
 		cart: Object.entries(localStorage) || '',
