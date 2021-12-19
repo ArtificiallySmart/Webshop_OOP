@@ -19,6 +19,7 @@
     <script src="./assets/js/components/itemCarousel.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
     <script src="./assets/js/data2.js"></script>
+    <script src="./assets/js/slides.js"></script>
 
     <script src="./assets/js/vue.js" defer></script>
 </head>
@@ -26,7 +27,8 @@
 <body>
     <div id="app">
         <div class="container bgClassBlue">
-            <vin-navbar @refresh-query="refreshQuery($event)"></vin-navbar>
+
+            <vin-navbar search></vin-navbar>
 
 
             <div class="container my-3">
@@ -35,8 +37,24 @@
 
                 <ul class="list-group" v-if="searchResults">
                     <li v-for="item in searchResults" class="list-group-item" style="height: 200px;">
-                        <img :src=" item.thumbnail" class="img-thumbnail h-100" alt="...">
-                        {{item.name}}
+                        <div class="d-flex h-100">
+                            <img :src=" item.thumbnail" class="img-thumbnail h-100" alt="...">
+                            <div class="d-flex flex-column justify-content-between my-3">
+                                <div>
+                                    <a :href="'/item.html#' + item.ID">
+                                        <h5>{{item.name}}</h5>
+                                    </a>
+                                </div>
+                                <div>
+                                    <p>{{item.short}}</p>
+                                </div>
+                                <div>
+                                    <p>{{new
+                                        Intl.NumberFormat(undefined,{style:'currency',currency:'EUR'}).format(item.price)}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
 

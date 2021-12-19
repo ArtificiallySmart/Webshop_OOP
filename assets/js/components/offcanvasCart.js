@@ -9,24 +9,40 @@ template: `
     <div class="offcanvas-body d-flex flex-column justify-content-between">
         <ul class="list-group" style="overflow: auto;">
             <li v-for="item in items" :key="item.ID" class="list-group-item">
-                <div>{{item.name}}</div>
-                <div class="d-flex justify-content-between align-items-center"><small>{{item.amount}} x {{new
-                        Intl.NumberFormat(undefined,{style: 'currency', currency:
-                        'EUR'}).format(item.price)}} = {{new
-                        Intl.NumberFormat(undefined,{style: 'currency', currency:
-                        'EUR'}).format(item.price*item.amount)}}</small>
+                <!--
+                <button @click="$emit('remove-from-cart', item.ID)"><i class="bi bi-trash"
+                        style="font-size: 1.5rem;"></i></button> -->
+
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <a :href="'/item.html#' + item.ID">
+                            <h5>{{item.name}}</h5>
+                        </a>
+                        <small>{{item.amount}} x {{formattedPrice(item.price)}}
+                        </small>
+
+                        <button type="button" class=" d-block btn btn-secondary btn-sm">remove from cart</button>
+                    </div>
+
+                    <div>
+                        {{formattedPrice(item.price*item.amount)}}
+                    </div>
+
+
 
                 </div>
-                <button @click="$emit('remove-from-cart', item.ID)"><i class="bi bi-trash"
-                        style="font-size: 1.5rem;"></i></button>
+
             </li>
         </ul>
-        <div>Totaalprijs: {{new
-            Intl.NumberFormat(undefined,{style: 'currency', currency:
-            'EUR'}).format(totalprice)}}</div>
+        <div>Totaalprijs: {{formattedPrice(totalprice)}}</div>
     </div>
 </div>
 `,
+methods: {
+formattedPrice: function (price) {
+return new Intl.NumberFormat(undefined, { style: 'currency', currency: 'EUR' }).format(price);
+}
+},
 })
 
 Vue.component("offcanvasbutton", {
