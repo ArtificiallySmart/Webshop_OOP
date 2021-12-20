@@ -2,113 +2,120 @@
 <html lang="en">
 
 <head>
-    <!-- #051622 #1BA098 #DEB992-->
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vintastisch</title>
+
+    <title>Vintastic</title>
+
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/text.css">
-    <link rel="stylesheet" href="./assets/css/item.css">
-    <link rel="shortcut icon" href="#">
 
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/mainText.css">
+    <link rel="stylesheet" href="./assets/css/itemCarousel.css">
+    <link rel="stylesheet" href="./assets/css/offcanvasCart.css">
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
+
     <script src="./assets/js/components/navbar.js"></script>
+    <script src="./assets/js/components/footer.js"></script>
     <script src="./assets/js/components/itemCarousel.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
-    <script src="./assets/js/data2.js"></script>
-    <script src="./assets/js/slides.js"></script>
-
+    <script src="./assets/js/data.js"></script>
     <script src="./assets/js/vue.js" defer></script>
+
 </head>
 
 <body>
-    <div id="app">
-        <div class="container bgClassBlue">
-            <vin-navbar @remove-from-cart="removeFromCart"></vin-navbar>
+    <div id="app" class="container content-box">
 
+        <vin-navbar @remove-from-cart="removeFromCart"></vin-navbar>
 
-            <div class="container my-3">
-                <h2 class="lobsterFont">{{pageItem.name}}</h2>
-                <!-- Carousel with thumbnails -->
-                <item-carousel :images="pageItem.images"></item-carousel>
+        <div class="container my-3">
 
-                <div class="row">
-                    <div class="col-md-8 order-2 order-md-1 darkGreen">
-                        <h4 class="lobsterColor">Description</h4>
-                        <p> {{pageItem.description}} </p>
+            <h2 class="lobsterFont">{{pageItem.name}}</h2>
 
-                        <h4 class="lobsterColor">Information</h4>
-                        <table class="table table-borderless darkGreen">
-                            <tbody>
-                                <tr>
-                                    <td>Material</td>
-                                    <td>{{pageItem.material}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Designer/Artist</td>
-                                    <td>{{pageItem.designer}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Manufacturer/Brand</td>
-                                    <td>{{pageItem.brand}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Style</td>
-                                    <td>{{pageItem.style}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Period</td>
-                                    <td>{{pageItem.period}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Condition</td>
-                                    <td>{{pageItem.state}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h4 class="lobsterColor">Verkoper</h4>
-                        <h5>Naam</h5>
+            <!-- Carousel with thumbnails -->
+            <item-carousel :images="pageItem.images"></item-carousel>
+            <!-- Carousel with thumbnails -->
+
+            <div class="row">
+                <!-- product information ( left column if screen size >= md, else upper column )-->
+                <div class="col-md-8 order-2 order-md-1 darkGreen">
+                    <h4 class="lobsterColor">Description</h4>
+                    <p> {{pageItem.description}} </p>
+
+                    <h4 class="lobsterColor">Information</h4>
+                    <table class="table table-borderless darkGreen">
+                        <tbody>
+                            <tr>
+                                <td>Material</td>
+                                <td>{{pageItem.material}}</td>
+                            </tr>
+                            <tr>
+                                <td>Designer/Artist</td>
+                                <td>{{pageItem.designer}}</td>
+                            </tr>
+                            <tr>
+                                <td>Manufacturer/Brand</td>
+                                <td>{{pageItem.brand}}</td>
+                            </tr>
+                            <tr>
+                                <td>Style</td>
+                                <td>{{pageItem.style}}</td>
+                            </tr>
+                            <tr>
+                                <td>Period</td>
+                                <td>{{pageItem.period}}</td>
+                            </tr>
+                            <tr>
+                                <td>Condition</td>
+                                <td>{{pageItem.state}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /product information ( left column if screen size >= md, else upper column )-->
+
+                <!-- product information ( right column if screen size >= md, else lower column )-->
+                <div class="col-md-4 order-1 order-md-2 darkGreen">
+                    <div class="lobsterColor">
+                        <h3 style="display: inline-block">€{{pageItem.price}}</h3>
+                        <span>price per piece</span>
                     </div>
-                    <div class="col-md-4 order-1 order-md-2 darkGreen">
-                        <div class="lobsterColor">
-                            <h3 style="display: inline-block">€{{pageItem.price}}</h3>
-                            <span>price per piece</span>
-                        </div>
-                        <small class="text-muted">Excl. shipping</small>
-                        <div class="lobsterColor">
-                            <span> {{pageItem.stock}} in stock</span>
-                        </div>
+                    <small class="text-muted">Excl. shipping</small>
+                    <div class="lobsterColor">
+                        <span> {{pageItem.stock}} in stock</span>
+                    </div>
 
-                        <div class="d-grid my-3">
-                            <div class="container w-50 my-3">
-                                <div class="row text-center">
-                                    <div class="col"><i class="bi bi-dash-lg" @click="itemCounter(-1)"></i></div>
-                                    <div class="col">{{counter}}</div>
-                                    <div class="col"><i class="bi bi-plus-lg" @click="itemCounter(1)"></i></div>
-                                </div>
+                    <div class="d-grid my-3">
+                        <div class="container w-50 my-3">
+                            <div class="row text-center">
+                                <div class="col"><i class="bi bi-dash-lg" @click="itemCounter(-1)"></i></div>
+                                <div class="col">{{counter}}</div>
+                                <div class="col"><i class="bi bi-plus-lg" @click="itemCounter(1)"></i></div>
                             </div>
-                            <offcanvasbutton @click.native="addToCart(pageItem.ID)">{{addToCartText}}</offcanvasbutton>
-                            <offcanvas :items="cartItems" :totalprice="totalPrice"
-                                @remove-from-cart="removeFromCart($event)"></offcanvas>
                         </div>
-
+                        <cart-button @click.native="addToCart(pageItem.ID)">{{addToCartText}}</cart-button>
+                        <hidden-cart-list :items="cartItems" :totalprice="totalPrice"
+                            @remove-from-cart="removeFromCart($event)"></hidden-cart-list>
                     </div>
-                </div>
-            </div>
 
-            <!-- Footer -->
-            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50 sticky-bottom">
-                <div class="container text-center">
-                    <small>Copyright &copy; Vintastic</small>
                 </div>
-            </footer>
-            <!-- /Footer -->
+                <!-- /product information ( right column if screen size >= md, else lower column )-->
+
+            </div>
         </div>
+
+        <!-- Footer -->
+        <vin-footer></vin-footer>
+        <!-- /Footer -->
+
     </div>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

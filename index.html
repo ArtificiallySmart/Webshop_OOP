@@ -11,103 +11,48 @@
 
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/carousel.css">
-    <link rel="stylesheet" href="./assets/css/card.css">
-    <link rel="stylesheet" href="./assets/css/text.css">
-    <link rel="shortcut icon" href="#">
+
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/mainText.css">
+    <link rel="stylesheet" href="./assets/css/cards.css">
+    <link rel="stylesheet" href="./assets/css/offcanvasCart.css">
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
 
-    <script src="./assets/js/data2.js"></script>
-    <script src="./assets/js/slides.js"></script>
     <script src="./assets/js/components/navbar.js"></script>
     <script src="./assets/js/components/cards.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
-    <script src="./assets/js/components/mainCarousel.js"></script>
+    <script src="./assets/js/components/footer.js"></script>
+    <script src="./assets/js/data.js"></script>
     <script src="./assets/js/vue.js" defer></script>
-
 
 </head>
 
 <body>
     <div id="app">
 
-        <div class="container bgClassBlue" id="background">
+        <div class="container content-box" id="background">
             <!-- Navbar -->
-            <vin-navbar @remove-from-cart="removeFromCart"></vin-navbar>
+            <vin-navbar search></vin-navbar>
             <!-- /Navbar -->
 
-            <!-- Carousel -->
-            <!-- <div class="container my-3">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-9">
-                        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="https://res.cloudinary.com/dezwo7e6f/image/upload/v1637248993/webshop/TKK-18-3-More-2-kandelaren-Gijs-Bakker-2019_gvvikh.jpg"
-                                        class="d-block w-100 carimg" alt="..." />
-                                    <div
-                                        class="carousel-caption-upper d-none d-md-block bg-secondary bg-opacity-10 w-100">
-                                        <h2>Deze week in de spotlight: Gijs Bakker</h2>
-                                    </div>
-                                    <div
-                                        class="carousel-caption-lower d-none d-md-block bg-secondary bg-opacity-10 w-100">
-                                        <p class="carouselText2">1963 Space Age kandelaars voor Keltum
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://res.cloudinary.com/dezwo7e6f/image/upload/v1637248991/webshop/031.Glasses.1972_kbzuox.jpg"
-                                        class="d-block w-100 carimg" alt="..." />
-                                    <div
-                                        class="carousel-caption-upper d-none d-md-block bg-secondary bg-opacity-25 w-100">
-                                        <h2>Deze week in de spotlight: Gijs Bakker</h2>
-                                    </div>
-                                    <div
-                                        class="carousel-caption-lower d-none d-md-block bg-secondary bg-opacity-25 w-100">
-                                        <p class="carouselText2">1972 Glasses voor Polaroid</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://res.cloudinary.com/dezwo7e6f/image/upload/v1637248994/webshop/155_-Coffee-Knitted-Maria-_DD_ewbzj2.jpg"
-                                        class="d-block w-100 carimg" alt="..." />
-                                    <div
-                                        class="carousel-caption-upper d-none d-md-block bg-secondary bg-opacity-10 w-100">
-                                        <h2>Deze week in de spotlight: Gijs Bakker</h2>
-                                    </div>
-                                    <div
-                                        class="carousel-caption-lower d-none d-md-block bg-secondary bg-opacity-50 w-100">
-                                        <p class="carouselText2">1997 Knitted Maria koffiekan voor Rosenthal</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <!-- Banner -->
+            <div class="position-relative">
+                <img src="https://res.cloudinary.com/dezwo7e6f/image/upload/c_fill,g_auto,h_250,w_1200/b_rgb:000000,e_gradient_fade,y_-0.50/v1639920642/vintastic/images/48544860554171.5a514f8673446_a0lu0r.png"
+                    class="img-fluid w-100" alt="">
+                <h3 class="position-absolute top-0 start-0 banner blur px-2 py-2 d-none d-md-block">Brighten up your
+                    home this winter
+                </h3>
+                <h3 class="position-absolute bottom-0 end-0 mx-2 my-2 banner blur d-none d-md-block">Browse our lighting
+                    category!
+                </h3>
+            </div>
+            <!-- /Banner -->
 
-
-
-
-            </div> -->
-            <!-- /Carousel -->
-
-            <main-carousel :carouselslides="carousel">
-            </main-carousel>
-            <!-- Uitgelicht -->
+            <!-- Spotlight-->
             <card-row :items="spotlightItems">In the spotlight:</card-row>
-            <!-- /uitgelicht -->
+            <!-- /Spotlight-->
 
             <!-- New -->
             <card-row :items="newItems">New items:</card-row>
@@ -118,20 +63,17 @@
             <!-- /Random -->
 
             <!-- Footer -->
-            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50">
-                <div class="container text-center">
-                    <small>Copyright &copy; Vintastisch</small>
-                </div>
-            </footer>
+            <vin-footer></vin-footer>
             <!-- /Footer -->
 
         </div>
         <!-- Shopping cart -->
-        <offcanvas :items="cartItems" :totalprice="totalPrice" @remove-from-cart="removeFromCart($event)"></offcanvas>
+        <hidden-cart-list :items="cartItems" :totalprice="totalPrice" @remove-from-cart="removeFromCart">
+        </hidden-cart-list>
         <div class="shopping-cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{amtItemsInCart}}
-                <span class="visually-hidden">unread messages</span>
+                <span class="visually-hidden">amount of items in cart</span>
             </span>
             <i class="bi bi-cart4"></i>
         </div>

@@ -1,7 +1,6 @@
 let app = new Vue({
 	el: "#app",
 	data: {
-		carousel: carouselSlides,
 		items: items,
 		inCart: false,
 		cart: Object.entries(localStorage) || '',
@@ -82,7 +81,6 @@ let app = new Vue({
 		}
 	},
 	methods: {
-		refreshQuery: function (newQuery) { this.query = newQuery },
 		removeFromCart: function (ID) {
 			this.cart.forEach((item, index) => {
 				if (item[0] == ID && item[1]) {
@@ -111,7 +109,11 @@ let app = new Vue({
 			if (num == -1 && this.counter > 0) {
 				this.counter--;
 			}
-		}
+		},
+		advancedSearch: function () {
+			console.log('yaay')
+		},
+
 	},
 });
 
