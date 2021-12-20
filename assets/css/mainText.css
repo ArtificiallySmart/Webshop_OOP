@@ -9,10 +9,6 @@ h6 {
   color: #f58152;
 }
 
-.dropdown-item {
-  color: #8e8d8a;
-}
-
 .lobsterFont {
   font-family: "Fugaz One", cursive;
   color: #f58152;
@@ -22,5 +18,10 @@ h6 {
 }
 
 .darkGreen {
-  color: #be489c;
+  color: #8e8d8a;
+}
+
+.banner {
+  font-family: "Fugaz One", cursive;
+  color: #eae7dc;
 }

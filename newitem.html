@@ -11,26 +11,28 @@
 
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/carousel.css">
-    <link rel="stylesheet" href="./assets/css/card.css">
-    <link rel="stylesheet" href="./assets/css/text.css">
-    <link rel="shortcut icon" href="#">
+
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/mainText.css">
+    <link rel="stylesheet" href="./assets/css/cards.css">
+    <link rel="stylesheet" href="./assets/css/offcanvasCart.css">
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
-    <script src="./assets/js/components/navbar.js"></script>
 
+    <script src="./assets/js/components/navbar.js"></script>
+    <script src="./assets/js/components/cards.js"></script>
+    <script src="./assets/js/components/offcanvasCart.js"></script>
+    <script src="./assets/js/components/footer.js"></script>
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/vue.js" defer></script>
 
-
 </head>
 
-<body class="bgClassBlue">
+<body class="content-box">
 
     <div id="app">
-        <div class="container bgClassBlue" id="background">
+        <div class="container content-box" id="background">
 
             <vin-navbar @remove-from-cart="removeFromCart"></vin-navbar>
 
@@ -40,8 +42,8 @@
                     <input v-model="name" placeholder="name">
                 </div>
                 <div class="mb-3">
-                    <input v-model="description" placeholder="description">
                     <input v-model="thumbnail" placeholder="thumbnail">
+                    <input v-model="state" placeholder="state">
                 </div>
                 <div class="mb-3">
                     <input v-model="images" placeholder="images">
@@ -56,12 +58,11 @@
                     <input v-model="period" placeholder="period">
                 </div>
                 <div class="mb-3">
-                    <input v-model="state" placeholder="state">
-                    <input v-model="sellerId" placeholder="sellerId">
-                </div>
-                <div class="mb-3">
                     <input v-model="stock" placeholder="stock">
                     <input v-model="price" placeholder="price">
+                </div>
+                <div class="mb-3">
+                    <textarea v-model="description" cols="30" rows="10"></textarea>
                 </div>
             </div>
             <div class="container">

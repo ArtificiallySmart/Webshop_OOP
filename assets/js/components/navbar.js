@@ -14,10 +14,14 @@ template: `
             <div class="col-auto">
                 <label class="visually-hidden" for="autoSizingInputGroup">Search</label>
                 <vin-navbar-search v-if="search"></vin-navbar-search>
+
             </div>
+
+
         </div>
 
     </nav>
+
 </div>
 `,
 
