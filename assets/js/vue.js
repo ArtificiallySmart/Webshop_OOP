@@ -6,9 +6,17 @@ let app = new Vue({
 		cart: Object.entries(localStorage) || '',
 		counter: 1,
 		query: (window.location.search).slice(8),
+		catArr: catArr,
+		catlist: catlist,
+		categories: categories,
+		catRad: ""
 	},
 	computed: {
-		// query: function () { return (window.location.hash).slice(1) },
+		catList: function () {
+			return items.filter(item => {
+				return item.subcategory.includes(this.catRad)
+			})
+		},
 		cartItems: function () {
 			const cartItems = [];
 			if (this.cart) {

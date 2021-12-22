@@ -6,10 +6,9 @@ Webshop I'll be making for CodeGorilla Base/Bootcamp
 
 ### Important
 
-- Revamp the CSS so the names make sense
 - Remove "item is already in cart" message, maybe change to "x in shopping cart" on button.
-- Add shopping cart to item page
 - add categories to responsive navbar
+- change shopping cart to be responsive
 
 ### Nice to have
 
@@ -25,3 +24,4 @@ Webshop I'll be making for CodeGorilla Base/Bootcamp
 - show relevant categories in search (when search chair, suggest furniture/chairs)
 - x results per page on search
 - filters on search
+- Admin page with CRUD compatibility

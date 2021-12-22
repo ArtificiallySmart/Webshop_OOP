@@ -21,7 +21,7 @@ const items = [
         period: "1960s",
         state: "Very good",
         category: "lighting",
-        subcategory: "table lamps",
+        subcategory: "Table lamps",
         sellerId: "1",
         stock: 3,
         price: 2249.00
@@ -47,7 +47,7 @@ const items = [
         period: "1970s",
         state: "Good",
         category: "furniture",
-        subcategory: "chairs",
+        subcategory: "Chairs",
         sellerId: "1",
         stock: 1,
         price: 995.00
@@ -70,7 +70,7 @@ const items = [
         period: "1970s",
         state: "Very Good",
         category: "lighting",
-        subcategory: "table lamps",
+        subcategory: "Table lamps",
         sellerId: "1",
         stock: 4,
         price: 490
@@ -94,7 +94,7 @@ const items = [
         period: "1970s",
         state: "Very Good",
         category: "lighting",
-        subcategory: "wall lights",
+        subcategory: "Wall lights",
         sellerId: "1",
         stock: 1,
         price: 350
@@ -118,7 +118,7 @@ const items = [
         period: "1960s",
         state: "Very good",
         category: "decor",
-        subcategory: "vases",
+        subcategory: "Vases",
         sellerId: "1",
         stock: 2,
         price: 200
@@ -142,7 +142,7 @@ const items = [
         period: "1960s",
         state: "Good",
         category: "lighting",
-        subcategory: "ceiling lights",
+        subcategory: "Ceiling lights",
         sellerId: "1",
         stock: 1,
         price: 240
@@ -166,7 +166,7 @@ const items = [
         period: "1970s",
         state: "Very good",
         category: "furniture",
-        subcategory: "chairs",
+        subcategory: "Chairs",
         sellerId: "1",
         stock: 1,
         price: 1000
@@ -191,7 +191,7 @@ const items = [
         period: "1970s",
         state: "Very good",
         category: "textiles",
-        subcategory: "carpets and rugs",
+        subcategory: "Carpets and rugs",
         sellerId: "1",
         stock: 1,
         price: 250
@@ -215,7 +215,7 @@ const items = [
         period: "1960s",
         state: "Very good",
         category: "lighting",
-        subcategory: "table lamps",
+        subcategory: "Table lamps",
         sellerId: "1",
         stock: 2,
         price: 215
@@ -239,7 +239,7 @@ const items = [
         period: "1960s",
         state: "Good",
         category: "decor",
-        subcategory: "clocks",
+        subcategory: "Clocks",
         sellerId: "1",
         stock: 4,
         price: 350
@@ -263,7 +263,7 @@ const items = [
         period: "1960s",
         state: "Very Good",
         category: "decor",
-        subcategory: "coat racks",
+        subcategory: "Coat racks",
         sellerId: "1",
         stock: 8,
         price: 645
@@ -288,7 +288,7 @@ const items = [
         period: "1970s",
         state: "Good",
         category: "textiles",
-        subcategory: "carpets and rugs",
+        subcategory: "Carpets and rugs",
         sellerId: "1",
         stock: 2,
         price: 750
@@ -312,7 +312,7 @@ const items = [
         period: "1960s",
         state: "Good",
         category: "furniture",
-        subcategory: "tables",
+        subcategory: "Tables",
         sellerId: "1",
         stock: 1,
         price: 625
@@ -335,7 +335,7 @@ const items = [
         period: "1970s",
         state: "Very Good",
         category: "lighting",
-        subcategory: "wall lights",
+        subcategory: "Wall lights",
         sellerId: "1",
         stock: 6,
         price: 60
@@ -359,7 +359,7 @@ const items = [
         period: "1970s",
         state: "Good",
         category: "furniture",
-        subcategory: "chairs",
+        subcategory: "Chairs",
         sellerId: "1",
         stock: 5,
         price: 335
@@ -384,7 +384,7 @@ const items = [
         period: "1970s",
         state: "Good",
         category: "furniture",
-        subcategory: "chairs",
+        subcategory: "Chairs",
         sellerId: "1",
         stock: 2,
         price: 1200
@@ -408,7 +408,7 @@ const items = [
         period: "1970s",
         state: "Very Good",
         category: "lighting",
-        subcategory: "ceiling lights",
+        subcategory: "Ceiling lights",
         sellerId: "1",
         stock: 3,
         price: 150
@@ -432,7 +432,7 @@ const items = [
         period: "1970s",
         state: "Excellent",
         category: "decor",
-        subcategory: "vases",
+        subcategory: "Vases",
         sellerId: "1",
         stock: 3,
         price: 125
@@ -457,7 +457,7 @@ const items = [
         period: "1970s",
         state: "Excellent",
         category: "textiles",
-        subcategory: "carpets and rugs",
+        subcategory: "Carpets and rugs",
         sellerId: "1",
         stock: 1,
         price: 1905
@@ -481,7 +481,7 @@ const items = [
         period: "1970s",
         state: "Good",
         category: "furniture",
-        subcategory: "chairs",
+        subcategory: "Chairs",
         sellerId: "1",
         stock: 1,
         price: 1899
@@ -489,3 +489,4 @@ const items = [
 
 
 ]
+
