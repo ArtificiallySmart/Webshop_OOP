@@ -5,10 +5,9 @@ let app = new Vue({
 		inCart: false,
 		cart: Object.entries(localStorage) || '',
 		counter: 1,
-		query: (window.location.search).slice(8),
+		query: decodeURI((window.location.search).slice(8)),
+		hash: decodeURI((window.location.hash).slice(1)),
 		catArr: catArr,
-		catlist: catlist,
-		categories: categories,
 		catRad: ""
 	},
 	computed: {
@@ -63,9 +62,7 @@ let app = new Vue({
 			return rowItems;
 		},
 		pageItem: function () {
-			let itemID = window.location.hash;
-			itemID = itemID.slice(1);
-			return items.filter((item) => item.ID == itemID)[0];
+			return items.filter((item) => item.ID == this.hash)[0];
 		},
 		addToCartText: function () {
 			if (localStorage.getItem(this.pageItem.ID) || this.inCart) {
@@ -84,7 +81,7 @@ let app = new Vue({
 		searchResults: function () {
 
 			return items.filter(item => {
-				return item.name.includes(this.query) || item.description.includes(this.query)
+				return item.name.toLowerCase().includes(this.query.toLowerCase()) || item.description.toLowerCase().includes(this.query.toLowerCase())
 			})
 		}
 	},
@@ -121,12 +118,8 @@ let app = new Vue({
 		advancedSearch: function () {
 			console.log('yaay')
 		},
-
 	},
 });
 
 Vue.config.devtools = true;
 Vue.config.productionTip = false;
-
-
-// for (let i = 0; i <= 10; i++) localStorage.setItem(i, 1)

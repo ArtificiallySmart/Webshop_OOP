@@ -11,12 +11,11 @@ nav.primary-navigation ul li {
   position: relative;
   text-decoration: none;
 }
-nav.primary-navigation li button {
+nav.primary-navigation li button,
+nav.primary-navigation li a {
   color: black;
 }
-nav.primary-navigation li button:hover {
-  color: #3ca0e7;
-}
+
 nav.primary-navigation li:hover {
   cursor: pointer;
 }
@@ -31,16 +30,17 @@ nav.primary-navigation ul li ul {
 }
 nav.primary-navigation ul li:hover > ul,
 nav.primary-navigation ul li ul:hover {
-  background-color: rgba(0, 0, 0, 0.2); /* Black w/opacity/see-through */
-  backdrop-filter: blur(5px);
   visibility: visible;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #eae7dc;
   opacity: 1;
   display: block;
   min-width: 250px;
   text-align: left;
   padding-top: 20px;
-  box-shadow: 0px 3px 5px -1px #ccc;
   z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
 }
 nav.primary-navigation ul li ul li {
   clear: both;
@@ -53,12 +53,4 @@ nav.primary-navigation ul li ul li {
 
 a {
   text-decoration: none;
-}
-
-a:hover {
-  color: #3ca0e7;
-}
-
-ul li ul li a {
-  transition: all 0.5s ease;
 }

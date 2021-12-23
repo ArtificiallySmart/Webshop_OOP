@@ -1,8 +1,6 @@
-Vue.component("vin-navbar", {
-    props: {
-        search: Boolean,
-    },
-    template: `
+Vue.component("double-nav", {
+props: [ 'catarr', 'link' ],
+template: `
 <div>
     <nav class="navbar navbar-expand-lg pb-0">
         <div class="container-fluid">
@@ -34,30 +32,24 @@ Vue.component("vin-navbar", {
 
             <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                 <nav role="navigation" class="primary-navigation w-100">
-                            <ul class="w-100 d-none d-lg-flex justify-content-lg-between">
-                                <li><a href="#">Lights</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Table lights</a></li>
-                                        <li><a href="#">Wall lights</a></li>
-                                        <li><a href="#">Ceiling lights</a></li>
-                                    </ul>
-                                <li><a href="#">Decor</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Clocks</a></li>
-                                        <li><a href="#">Vases</a></li>
-                                        <li><a href="#">Coat racks</a></li>
-                                    </ul>
-                                <li><a href="#">Furniture</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Tables</a></li>
-                                        <li><a href="#">chairs</a></li>
-                                    </ul>
-                                <li><a href="#">Textiles</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Carpets and rugs</a></li>
-                                    </ul>
+
+                    <ul class="w-100 d-none d-lg-flex justify-content-lg-between">
+                        <li v-for="category in catarr">
+                            <a v-if="link" :href="'/category.html?search=' + category[0][0]">{{ category[0][0] }}</a>
+                            <button v-else class="btn">{{ category[0][0] }}</button>
+                            <ul class="dropdown">
+                                <li v-for="subcategory in category[1]">
+                                    <a v-if="link"
+                                        :href="'/category.html?search=' + category[0][0] + '#' + subcategory">{{
+                                        subcategory }}</a>
+                                    <button v-else class="btn">{{ subcategory }}</button>
+                                </li>
                             </ul>
-                        </nav>
+                        </li>
+                    </ul>
+
+
+                </nav>
                 <a class="d-lg-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
                     Categories
@@ -77,5 +69,4 @@ Vue.component("vin-navbar", {
     </nav>
 </div>
 `,
-
 });
