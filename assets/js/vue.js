@@ -8,14 +8,8 @@ let app = new Vue({
 		query: decodeURI((window.location.search).slice(8)),
 		hash: decodeURI((window.location.hash).slice(1)),
 		catArr: catArr,
-		catRad: ""
 	},
 	computed: {
-		catList: function () {
-			return items.filter(item => {
-				return item.subcategory.includes(this.catRad)
-			})
-		},
 		cartItems: function () {
 			const cartItems = [];
 			if (this.cart) {
@@ -83,6 +77,17 @@ let app = new Vue({
 			return items.filter(item => {
 				return item.name.toLowerCase().includes(this.query.toLowerCase()) || item.description.toLowerCase().includes(this.query.toLowerCase())
 			})
+		},
+		catResults: function () {
+			if (this.hash) {
+				return items.filter(item => {
+					return item.subcategory.includes(this.hash)
+				})
+			} else if (this.query) {
+				return items.filter(item => {
+					return item.category.toLowerCase().includes(this.query.toLowerCase())
+				})
+			}
 		}
 	},
 	methods: {
@@ -115,9 +120,13 @@ let app = new Vue({
 				this.counter--;
 			}
 		},
-		advancedSearch: function () {
-			console.log('yaay')
+		newQuery: function (newQuery) {
+			this.query = newQuery;
+			this.hash = "";
 		},
+		newHash: function (newHash) {
+			this.hash = newHash;
+		}
 	},
 });
 

@@ -1,10 +1,8 @@
-Vue.component("vin-navbar", {
-props: {
-search: Boolean,
-},
+Vue.component("double-nav", {
+props: [ 'catarr', 'link' ],
 template: `
 <div>
-    <nav class="navbar navbar-expand-lg pb-0">
+    <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
             <a class="navbar-brand lobsterFont " href="index.html">
                 <h2 class="display-2">Vintastic</h2>
@@ -29,22 +27,37 @@ template: `
             </div>
         </div>
     </nav>
-    <nav class="navbar navbar-expand-lg pt-0">
+    <nav class="navbar navbar-expand-md pt-0">
         <div class="container-fluid ">
 
             <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
-                <div class="d-none d-lg-flex justify-content-lg-between w-100">
-                    <a class="nav-link" href="/category.html?search=Lighting">Lighting </a>
-                    <a class="nav-link" href="/category.html?search=Furniture">Furniture </a>
-                    <a class="nav-link" href="/category.html?search=Decor">Decor </a>
-                    <a class="nav-link" href="/category.html?search=Textiles">Textiles </a>
-                </div>
-                <a class="d-lg-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                <nav role="navigation" class="primary-navigation w-100">
+
+                    <ul class="w-100 d-none d-md-flex justify-content-md-between">
+                        <li v-for="category in catarr">
+                            <a v-if="link" :href="'/category.html?search=' + category[0][0]">{{ category[0][0] }}</a>
+                            <button v-else class="btn" @click="$emit('newquery', category[0][0])">{{ category[0][0]
+                                }}</button>
+                            <ul class="dropdown">
+                                <li v-for="subcategory in category[1]">
+                                    <a v-if="link"
+                                        :href="'/category.html?search=' + category[0][0] + '#' + subcategory">{{
+                                        subcategory }}</a>
+                                    <button v-else class="btn" @click="$emit('newhash', subcategory)">{{ subcategory
+                                        }}</button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+                </nav>
+                <a class="d-md-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
                     Categories
                 </a>
 
-                <div class="collapse d-lg-none" id="collapseExample">
+                <div class="collapse d-md-none" id="collapseExample">
                     <div>
                         <a class="nav-link" href="#">Lighting</a>
                         <a class="nav-link" href="#">Furniture</a>
@@ -58,5 +71,4 @@ template: `
     </nav>
 </div>
 `,
-
 });

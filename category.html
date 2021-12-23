@@ -16,11 +16,12 @@
     <link rel="stylesheet" href="./assets/css/mainText.css">
     <link rel="stylesheet" href="./assets/css/cards.css">
     <link rel="stylesheet" href="./assets/css/offcanvasCart.css">
+    <link rel="stylesheet" href="./assets/css/doublenav.css">
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
 
-    <script src="./assets/js/components/navbar2.js"></script>
+    <script src="./assets/js/components/navbar.js"></script>
     <script src="./assets/js/components/cards.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
     <script src="./assets/js/components/footer.js"></script>
@@ -35,38 +36,14 @@
 
         <div class="container content-box" id="background">
             <!-- Navbar -->
-            <vin-navbar search></vin-navbar>
+            <double-nav :catarr="catArr" @newquery="newQuery" @newhash="newHash"></double-nav>
             <!-- /Navbar -->
 
-            <div class="accordion" id="accordionExample">
+            <p>Showing all items in the <template v-if="hash"> {{hash}} subcategory:</template> <template v-else>
+                    {{query}} category:</template></p>
 
-                <div class="accordion-item" v-for="category in catArr">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            :data-bs-target="'#' + category[0][0]" aria-expanded="false" aria-controls="collapseOne">
-                            {{ category[0][0] }}
-                        </button>
-                    </h2>
-                    <div :id="category[0][0]" class="accordion-collapse collapse " aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample" :class="{ show: query == category[0] }">
-                        <div class="accordion-body">
-                            <ul>
-                                <li v-for="subcategory in category[1]">
-                                    <input v-model="catRad" class="form-check-input" type="radio"
-                                        name="flexRadioDefault" :id="subcategory" :value="subcategory">
-                                    <label class="form-check-label" :for="subcategory">
-                                        {{ subcategory }}
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <ul class="list-group" v-if="catRad">
-                <li v-for="item in catList" class="list-group-item" style="height: 200px;">
+            <ul class="list-group" v-if="catResults">
+                <li v-for="item in catResults" class="list-group-item" style="height: 200px;">
                     <div class="d-flex h-100">
                         <img :src=" item.thumbnail" class="img-thumbnail h-100" alt="...">
                         <div class="d-flex flex-column justify-content-between my-3">

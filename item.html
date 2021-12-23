@@ -16,11 +16,12 @@
     <link rel="stylesheet" href="./assets/css/mainText.css">
     <link rel="stylesheet" href="./assets/css/itemCarousel.css">
     <link rel="stylesheet" href="./assets/css/offcanvasCart.css">
+    <link rel="stylesheet" href="./assets/css/doublenav.css">
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
 
-    <script src="./assets/js/components/navbar2.js"></script>
+    <script src="./assets/js/components/navbar.js"></script>
     <script src="./assets/js/components/footer.js"></script>
     <script src="./assets/js/components/itemCarousel.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
@@ -33,7 +34,7 @@
 <body>
     <div id="app" class="container content-box">
 
-        <vin-navbar search></vin-navbar>
+        <double-nav :link=true :catarr="catArr"></double-nav>
 
         <div class="container my-3">
 
