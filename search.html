@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/mainText.css">
+    <link rel="stylesheet" href="./assets/css/doublenav.css">
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
@@ -22,6 +23,7 @@
     <script src="./assets/js/components/footer.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
     <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/categories.js"></script>
     <script src="./assets/js/vue.js" defer></script>
 </head>
 
@@ -29,7 +31,7 @@
     <div id="app">
         <div class="container content-box">
 
-            <vin-navbar search></vin-navbar>
+            <double-nav :link=true :catarr="catArr"></double-nav>
 
 
             <div class="container my-3">
@@ -62,11 +64,7 @@
             </div>
 
             <!-- Footer -->
-            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-transparent text-white-50 sticky-bottom">
-                <div class="container text-center">
-                    <small>Copyright &copy; Vintastic</small>
-                </div>
-            </footer>
+            <vin-footer></vin-footer>
             <!-- /Footer -->
         </div>
     </div>

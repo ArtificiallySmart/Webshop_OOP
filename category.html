@@ -36,33 +36,36 @@
 
         <div class="container content-box" id="background">
             <!-- Navbar -->
-            <double-nav :link=true :catarr="catArr"></double-nav>
+            <double-nav :catarr="catArr" @newquery="newQuery" @newhash="newHash"></double-nav>
             <!-- /Navbar -->
 
-            <!-- Banner -->
-            <div class="position-relative">
-                <img src="https://res.cloudinary.com/dezwo7e6f/image/upload/c_fill,g_auto,h_250,w_1200/b_rgb:000000,e_gradient_fade,y_-0.50/v1639920642/vintastic/images/48544860554171.5a514f8673446_a0lu0r.png"
-                    class="img-fluid w-100" alt="">
-                <h3 class="position-absolute top-0 start-0 banner blur px-2 py-2 d-none d-md-block">Brighten up your
-                    home this winter
-                </h3>
-                <h3 class="position-absolute bottom-0 end-0 mx-2 my-2 banner blur d-none d-md-block">Browse our lighting
-                    category!
-                </h3>
-            </div>
-            <!-- /Banner -->
+            <p>Showing all items in the <template v-if="hash"> {{hash}} subcategory:</template> <template v-else>
+                    {{query}} category:</template></p>
 
-            <!-- Spotlight-->
-            <card-row :items="spotlightItems">In the spotlight:</card-row>
-            <!-- /Spotlight-->
+            <ul class="list-group" v-if="catResults">
+                <li v-for="item in catResults" class="list-group-item" style="height: 200px;">
+                    <div class="d-flex h-100">
+                        <img :src=" item.thumbnail" class="img-thumbnail h-100" alt="...">
+                        <div class="d-flex flex-column justify-content-between my-3">
+                            <div>
+                                <a :href="'/item.html#' + item.ID">
+                                    <h5>{{item.name}}</h5>
+                                </a>
+                            </div>
+                            <div>
+                                <p>{{item.short}}</p>
+                            </div>
+                            <div>
+                                <p>{{new
+                                    Intl.NumberFormat(undefined,{style:'currency',currency:'EUR'}).format(item.price)}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
 
-            <!-- New -->
-            <card-row :items="newItems">New items:</card-row>
-            <!-- /New -->
 
-            <!-- Random -->
-            <card-row :items="randomItems">A random selection:</card-row>
-            <!-- /Random -->
 
             <!-- Footer -->
             <vin-footer></vin-footer>

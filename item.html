@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./assets/css/mainText.css">
     <link rel="stylesheet" href="./assets/css/itemCarousel.css">
     <link rel="stylesheet" href="./assets/css/offcanvasCart.css">
+    <link rel="stylesheet" href="./assets/css/doublenav.css">
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./node_modules/vue/dist/vue.js"></script>
@@ -25,6 +26,7 @@
     <script src="./assets/js/components/itemCarousel.js"></script>
     <script src="./assets/js/components/offcanvasCart.js"></script>
     <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/categories.js"></script>
     <script src="./assets/js/vue.js" defer></script>
 
 </head>
@@ -32,7 +34,7 @@
 <body>
     <div id="app" class="container content-box">
 
-        <vin-navbar @remove-from-cart="removeFromCart"></vin-navbar>
+        <double-nav :link=true :catarr="catArr"></double-nav>
 
         <div class="container my-3">
 
@@ -110,6 +112,13 @@
             </div>
         </div>
 
+        <div class="shopping-cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{amtItemsInCart}}
+                <span class="visually-hidden">amount of items in cart</span>
+            </span>
+            <i class="bi bi-cart4"></i>
+        </div>
         <!-- Footer -->
         <vin-footer></vin-footer>
         <!-- /Footer -->
