@@ -6,9 +6,9 @@ Webshop I'll be making for CodeGorilla Base/Bootcamp
 
 ### Important
 
+- Rename variables so they make sense.
 - Remove "item is already in cart" message, maybe change to "x in shopping cart" on button.
-- change shopping cart to be responsive
-- add style to shopping cart list
+- change shopping cart button to be responsive
 
 ### Nice to have
 
