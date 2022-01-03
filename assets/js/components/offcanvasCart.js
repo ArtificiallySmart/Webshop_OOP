@@ -1,12 +1,13 @@
 Vue.component("hidden-cart-list", {
-    props: ["items", "totalprice"],
-    template: `
-<div class="offcanvas offcanvas-end cart-list" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+props: ["items", "totalprice"],
+template: `
+<div class="offcanvas offcanvas-bottom cart-list" tabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h3 id="offcanvasRightLabel" class="lobsterFont">Shopping cart</h3>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body d-flex flex-column justify-content-between bg-light">
+    <div class="offcanvas-body d-flex flex-column justify-content-between bg-none">
         <ul class="list-group" style="overflow: auto;">
             <li v-for="item in items" :key="item.ID" class="list-group-item">
 
@@ -36,16 +37,16 @@ Vue.component("hidden-cart-list", {
     </div>
 </div>
 `,
-    methods: {
-        formattedPrice: function (price) {
-            return new Intl.NumberFormat(undefined, { style: 'currency', currency: 'EUR' }).format(price);
-        }
-    },
+methods: {
+formattedPrice: function (price) {
+return new Intl.NumberFormat(undefined, { style: 'currency', currency: 'EUR' }).format(price);
+}
+},
 })
 
 Vue.component("cart-button", {
-    props: [],
-    template: `
+props: [],
+template: `
 <button class="btn btn-outline-secondary lobsterColor" type="button" data-bs-toggle="offcanvas"
     data-bs-target="#offcanvasRight">
     <slot></slot>
