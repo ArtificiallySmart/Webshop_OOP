@@ -1,0 +1,13 @@
+{
+    "name": "bryan/vintastic-php",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Bryan van Tol",
+            "email": "bryanparcival@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}

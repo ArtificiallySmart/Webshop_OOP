@@ -8,6 +8,8 @@ let app = new Vue({
 		query: decodeURI((window.location.search).slice(8)),
 		hash: decodeURI((window.location.hash).slice(1)),
 		catArr: catArr,
+		$_GET: $_GET
+
 	},
 	computed: {
 		cartItems: function () {
@@ -56,7 +58,7 @@ let app = new Vue({
 			return rowItems;
 		},
 		pageItem: function () {
-			return items.filter((item) => item.ID == this.hash)[0];
+			return items.filter((item) => item.ID == $_GET.itemid)[0];
 		},
 		addToCartText: function () {
 			if (localStorage.getItem(this.pageItem.ID) || this.inCart) {
@@ -79,13 +81,13 @@ let app = new Vue({
 			})
 		},
 		catResults: function () {
-			if (this.hash) {
+			if ($_GET.subcategory) {
 				return items.filter(item => {
-					return item.subcategory.includes(this.hash)
+					return item.subcategory.includes($_GET.subcategory)
 				})
-			} else if (this.query) {
+			} else if ($_GET.category) {
 				return items.filter(item => {
-					return item.category.toLowerCase().includes(this.query.toLowerCase())
+					return item.category.toLowerCase().includes($_GET.category.toLowerCase())
 				})
 			}
 		}

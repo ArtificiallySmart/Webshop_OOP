@@ -8,7 +8,7 @@ Vue.component("item-card", {
 		<p class="card-text"> {{item.short}} </p>
 	</div>
 	<div class="card-footer">
-		<a :href="'item.html#' + item.ID" class="btn btn-outline-secondary">To item</a>
+		<a :href="'?page=item&itemid=' + item.ID" class="btn btn-outline-secondary">To item</a>
 	</div>
 </div>
 `,

@@ -4,7 +4,7 @@ template: `
 <div>
     <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
-            <a class="navbar-brand lobsterFont " href="index.html">
+            <a class="navbar-brand lobsterFont " href="/">
                 <h2 class="display-2">Vintastic</h2>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
@@ -16,7 +16,7 @@ template: `
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="me-auto">
                 </ul>
-                <form action="/search.html">
+                <form action="/?page=search" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search"
                             name="search">
@@ -35,13 +35,13 @@ template: `
 
                     <ul class="w-100 d-none d-md-flex justify-content-md-between">
                         <li v-for="category in catarr">
-                            <a v-if="link" :href="'/category.html?search=' + category[0][0]">{{ category[0][0] }}</a>
+                            <a v-if="link" :href="'?page=category&category=' + category[0][0]">{{ category[0][0] }}</a>
                             <button v-else class="btn" @click="$emit('newquery', category[0][0])">{{ category[0][0]
                                 }}</button>
                             <ul class="dropdown">
                                 <li v-for="subcategory in category[1]">
                                     <a v-if="link"
-                                        :href="'/category.html?search=' + category[0][0] + '#' + subcategory">{{
+                                        :href="'?page=category&category=' + category[0][0] + '&subcategory=' + subcategory">{{
                                         subcategory }}</a>
                                     <button v-else class="btn" @click="$emit('newhash', subcategory)">{{ subcategory
                                         }}</button>
