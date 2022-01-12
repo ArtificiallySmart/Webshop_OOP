@@ -1,4 +1,4 @@
-<double-nav :link=true :catarr="catArr"></double-nav>
+<double-nav :link=true></double-nav>
 
 <div class="container my-3">
 

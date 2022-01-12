@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<double-nav :link=true :catarr="catArr"></double-nav>
+<double-nav :link=true></double-nav>
 <!-- /Navbar -->
 
 <!-- Banner -->
@@ -15,13 +15,13 @@
 <!-- /Banner -->
 
 <!-- Spotlight-->
-<card-row :items="spotlightItems">In the spotlight:</card-row>
+<card-row :type="`spotlight`">In the spotlight:</card-row>
 <!-- /Spotlight-->
 
 <!-- New -->
-<card-row :items="newItems">New items:</card-row>
+<card-row :type="`new`">New items:</card-row>
 <!-- /New -->
 
 <!-- Random -->
-<card-row :items="randomItems">A random selection:</card-row>
+<card-row :type="`random`">A random selection:</card-row>
 <!-- /Random -->

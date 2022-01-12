@@ -40,3 +40,8 @@ function getAction()
 {
     return array_key_exists('action', $_GET) ? $_GET['action'] : 'index';
 }
+
+function getParams()
+{
+    return array_key_exists('params', $_GET) ? $_GET['params'] : '';
+}

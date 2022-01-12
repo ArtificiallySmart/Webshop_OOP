@@ -1,6 +1,32 @@
 Vue.component("double-nav", {
-props: [ 'catarr', 'link' ],
-template: `
+    props: ['link'],
+    data: function () {
+        return {
+            categories: [],
+        }
+    },
+    created() {
+        this.getCategories();
+    },
+    methods: {
+        getCategories() {
+            let self = this;
+
+            axios({
+                method: 'GET',
+                url: '?page=mysql&action=getCategories',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }).then(function (response) {
+                if (response.data.success) {
+                    self.categories = response.data.categories;
+                }
+            }).catch(function (error) {
+            });
+        }
+    },
+    template: `
 <div>
     <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
@@ -16,7 +42,7 @@ template: `
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="me-auto">
                 </ul>
-                <form action="/?page=search" method="get">
+                <form action="/?page=search&action=handleForm" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search"
                             name="search">
@@ -34,14 +60,15 @@ template: `
                 <nav role="navigation" class="primary-navigation w-100">
 
                     <ul class="w-100 d-none d-md-flex justify-content-md-between">
-                        <li v-for="category in catarr">
-                            <a v-if="link" :href="'?page=category&category=' + category[0][0]">{{ category[0][0] }}</a>
+                        <li v-for="category in categories">
+                            <a v-if="link" :href="'?page=category&category=' + category.category">{{ category.category
+                                }}</a>
                             <button v-else class="btn" @click="$emit('newquery', category[0][0])">{{ category[0][0]
                                 }}</button>
                             <ul class="dropdown">
-                                <li v-for="subcategory in category[1]">
+                                <li v-for="subcategory in category.subcategory">
                                     <a v-if="link"
-                                        :href="'?page=category&category=' + category[0][0] + '&subcategory=' + subcategory">{{
+                                        :href="'?page=category&category=' + subcategory">{{
                                         subcategory }}</a>
                                     <button v-else class="btn" @click="$emit('newhash', subcategory)">{{ subcategory
                                         }}</button>

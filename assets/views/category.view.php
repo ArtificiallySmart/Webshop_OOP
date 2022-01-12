@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<double-nav :catarr="catArr" @newquery="newQuery" @newhash="newHash" :link=true></double-nav>
+<double-nav @newquery="newQuery" @newhash="newHash" :link=true></double-nav>
 <!-- /Navbar -->
 
 <p>Showing all items in the <template v-if="$data.$_GET.subcategory"> {{$data.$_GET.subcategory}} subcategory:</template> <template v-else>
@@ -11,7 +11,7 @@
             <img :src=" item.thumbnail" class="img-thumbnail h-100" alt="...">
             <div class="d-flex flex-column justify-content-between my-3">
                 <div>
-                    <a :href="'/item.html#' + item.ID">
+                    <a :href="'?page=item&itemid=' + item.id">
                         <h5>{{item.name}}</h5>
                     </a>
                 </div>

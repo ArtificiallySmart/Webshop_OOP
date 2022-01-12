@@ -1,9 +1,9 @@
-<double-nav :link=true :catarr="catArr"></double-nav>
+<double-nav :link=true></double-nav>
 
 
 <div class="container my-3">
 
-    <p>Your search for "<i>{{query}}</i>" had {{searchResults.length}} results</p>
+    <p>Your search for "<i>{{$data.$_GET.search}}</i>" had {{searchResults.length}} results</p>
 
     <ul class="list-group" v-if="searchResults">
         <li v-for="item in searchResults" class="list-group-item" style="height: 200px;">
