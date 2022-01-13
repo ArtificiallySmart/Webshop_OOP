@@ -8,32 +8,23 @@ let app = new Vue({
 		$_GET: $_GET,
 		pageItem: {},
 		catResults: [],
-		searchResults: []
+		searchResults: [],
+		cartItems: []
 	},
 	created() {
+		this.fetchCart();
 		if ($_GET.itemid) this.getPageItem();
 		if ($_GET.category) this.getCatResults();
 		if ($_GET.search) this.getSearchResults();
 	},
 	computed: {
-		// cartItems: function () {
-		// 	const cartItems = [];
-		// 	if (this.cart) {
-		// 		this.cart.forEach(key => {
-		// 			let cartItem = (this.items.filter(item => item.ID == key[0]));
-		// 			cartItem[0].amount = key[1];
-		// 			cartItems.push(...cartItem);
-		// 		});
-		// 	}
-		// 	return cartItems;
-		// },
-		// amtItemsInCart: function () {
-		// 	let amount = 0;
-		// 	this.cartItems.forEach(item => {
-		// 		amount += parseInt(item.amount);
-		// 	})
-		// 	return amount;
-		// },
+		amtItemsInCart: function () {
+			let amount = 0;
+			this.cartItems.forEach(item => {
+				amount += parseInt(item.amount);
+			})
+			return amount;
+		},
 		addToCartText: function () {
 			if (localStorage.getItem(this.pageItem.ID) || this.inCart) {
 				return "Toegevoegd aan winkelwagen";
@@ -102,26 +93,55 @@ let app = new Vue({
 			});
 		},
 		removeFromCart: function (ID) {
-			this.cart.forEach((item, index) => {
-				if (item[0] == ID && item[1]) {
-					this.cart.splice(index, 1)
+			axios({
+				method: 'POST',
+				url: `?page=shoppingcart&action=removefromcart`,
+				data: {
+					id: ID,
+				},
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
 				}
-			})
-			// this.cart.splice(this.cart.indexOf(ID), 1);
-			localStorage.removeItem(ID);
+			}).then(function (response) {
+
+			}).catch(function (error) {
+				console.log(error)
+			});
+			this.fetchCart();
 		},
-		addToCart: function (ID) {
-			if (this.counter) {
-				if (localStorage.getItem(ID)) {
-					alert('This item is already in your cart')
-				} else {
-					localStorage.setItem(ID, this.counter);
-					this.cart.push([ID, this.counter]);
-					this.counter = 1;
-					this.inCart = true;
+		addToCart: function (ID, amt) {
+			axios({
+				method: 'POST',
+				url: `?page=shoppingcart&action=addtocart`,
+				data: {
+					id: ID,
+					amt: amt
+				},
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
 				}
-			}
+			}).then(function (response) {
+
+			}).catch(function (error) {
+				console.log(error)
+			});
+			this.fetchCart();
 		},
+		fetchCart: function () {
+			let self = this;
+			axios({
+				method: 'GET',
+				url: `?page=shoppingcart&action=fetchcart`,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
+			}).then(function (response) {
+				self.cartItems = response.data.cartItems;
+			}).catch(function (error) {
+				console.log(error)
+			});
+		},
+
 		itemCounter: function (num) {
 			if (num == 1 && this.counter < this.pageItem.stock) {
 				this.counter++;

@@ -65,7 +65,7 @@
                         <div class="col"><i class="bi bi-plus-lg" @click="itemCounter(1)"></i></div>
                     </div>
                 </div>
-                <cart-button @click.native="addToCart(pageItem.ID)">{{addToCartText}}</cart-button>
+                <cart-button @click.native="addToCart(pageItem.product_id, counter)">{{addToCartText}}</cart-button>
 
             </div>
 

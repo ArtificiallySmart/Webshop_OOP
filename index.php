@@ -1,4 +1,6 @@
 <?php
+session_start();
+// $_SESSION['cart']["vinprod61decffd02e168.41571026"] = 1;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -9,9 +11,6 @@ require 'vendor/autoload.php';
 // .env configuration
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
-// starting a server php session
-session_start();
 
 // include core modules
 
