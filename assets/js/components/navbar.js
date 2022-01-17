@@ -1,32 +1,32 @@
 Vue.component("double-nav", {
-    props: ['link'],
-    data: function () {
-        return {
-            categories: [],
-        }
-    },
-    created() {
-        this.getCategories();
-    },
-    methods: {
-        getCategories() {
-            let self = this;
+props: ['link'],
+data: function () {
+return {
+categories: [],
+}
+},
+created() {
+this.getCategories();
+},
+methods: {
+getCategories() {
+let self = this;
 
-            axios({
-                method: 'GET',
-                url: '?page=mysql&action=getCategories',
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            }).then(function (response) {
-                if (response.data.success) {
-                    self.categories = response.data.categories;
-                }
-            }).catch(function (error) {
-            });
-        }
-    },
-    template: `
+axios({
+method: 'GET',
+url: '?page=mysql&action=getCategories',
+headers: {
+"X-Requested-With": "XMLHttpRequest"
+}
+}).then(function (response) {
+if (response.data.success) {
+self.categories = response.data.categories;
+}
+}).catch(function (error) {
+});
+}
+},
+template: `
 <div>
     <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
@@ -41,15 +41,21 @@ Vue.component("double-nav", {
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="me-auto">
+
                 </ul>
-                <form action="/?page=search&action=handleForm" method="POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search"
-                            name="search">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i
-                                class="bi bi-search"></i></button>
-                    </div>
-                </form>
+                <div>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">Login</button>
+                    <a href="/?page=newuser" class="btn btn-outline-secondary">Register</a>
+                    <form action="/?page=search&action=handleForm" method="POST">
+                        <div class="input-group">
+                            <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search"
+                                name="search">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i
+                                    class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -67,8 +73,7 @@ Vue.component("double-nav", {
                                 }}</button>
                             <ul class="dropdown">
                                 <li v-for="subcategory in category.subcategory">
-                                    <a v-if="link"
-                                        :href="'?page=category&category=' + subcategory">{{
+                                    <a v-if="link" :href="'?page=category&category=' + subcategory">{{
                                         subcategory }}</a>
                                     <button v-else class="btn" @click="$emit('newhash', subcategory)">{{ subcategory
                                         }}</button>
@@ -96,6 +101,7 @@ Vue.component("double-nav", {
         </div>
 
     </nav>
+
 </div>
 `,
 });

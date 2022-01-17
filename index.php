@@ -1,6 +1,15 @@
 <?php
 session_start();
-// $_SESSION['cart']["vinprod61decffd02e168.41571026"] = 1;
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+};
+if (!isset($_SESSION['alert'])) {
+    $_SESSION['alert'] = [];
+}
+if (!isset($_SESSION["loggedin"])) {
+    $_SESSION["loggedin"] = false;
+}
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -22,6 +31,7 @@ set_exception_handler('exception_handler');
 if (!isAjax()) {
     // Load the HTML <head> section
     require 'assets/views/partials/head.view.php';
+
 
     $content = [];
 

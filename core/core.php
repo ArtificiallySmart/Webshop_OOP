@@ -4,6 +4,7 @@
  * (var_)dump variable(s)
  * No params, just get vars from func_get_args function
  */
+
 function dd()
 {
     $args = func_get_args();

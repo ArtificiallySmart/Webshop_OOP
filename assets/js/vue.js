@@ -17,6 +17,9 @@ let app = new Vue({
 		if ($_GET.category) this.getCatResults();
 		if ($_GET.search) this.getSearchResults();
 	},
+	mounted() {
+		validateform();
+	},
 	computed: {
 		amtItemsInCart: function () {
 			let amount = 0;

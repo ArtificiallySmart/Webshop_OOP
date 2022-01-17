@@ -2,9 +2,6 @@
 
 function addtocart()
 {
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
     $item = json_decode(file_get_contents("php://input"), true);
     if (!array_key_exists($item['id'], $_SESSION['cart'])) {
         $_SESSION['cart'][$item['id']] = $item['amt'];

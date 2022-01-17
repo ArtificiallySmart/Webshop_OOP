@@ -1,5 +1,6 @@
 <!-- Navbar -->
 <double-nav :link=true></double-nav>
+<?= $login_err ?>
 <!-- /Navbar -->
 
 <!-- Banner -->
