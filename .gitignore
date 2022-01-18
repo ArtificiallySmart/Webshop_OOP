@@ -1,2 +1,5 @@
 /node_modules
-dev.html
+/vendor
+/database
+/data
+.env

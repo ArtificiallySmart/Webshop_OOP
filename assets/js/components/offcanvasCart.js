@@ -9,22 +9,22 @@ template: `
     </div>
     <div class="offcanvas-body d-flex flex-column justify-content-between bg-none">
         <ul class="list-group" style="overflow: auto;">
-            <li v-for="item in items" :key="item.ID" class="list-group-item">
+            <li v-for="item in items" :key="item.id" class="list-group-item">
 
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <a :href="'/item.html#' + item.ID">
+                        <a :href="'/?page=item&itemid=' + item.id">
                             <h5>{{item.name}}</h5>
                         </a>
-                        <small>{{item.amount}} x {{formattedPrice(item.price)}}
+                        <small>{{item.amount}} x {{formattedPrice(parseInt(item.price))}}
                         </small>
 
                         <button type="button" class="d-block btn btn-secondary btn-sm"
-                            @click="$emit('remove-from-cart', item.ID)">remove from cart</button>
+                            @click="$emit('remove-from-cart', item.product_id)">remove from cart</button>
                     </div>
 
                     <div>
-                        {{formattedPrice(item.price*item.amount)}}
+                        {{formattedPrice(parseInt(item.price)*item.amount)}}
                     </div>
 
 

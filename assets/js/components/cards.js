@@ -8,14 +8,40 @@ Vue.component("item-card", {
 		<p class="card-text"> {{item.short}} </p>
 	</div>
 	<div class="card-footer">
-		<a :href="'item.html#' + item.ID" class="btn btn-outline-secondary">To item</a>
+		<a :href="'?page=item&itemid=' + item.id" class="btn btn-outline-secondary">To item</a>
 	</div>
 </div>
 `,
 });
 
 Vue.component("card-row", {
-	props: ["items"],
+	props: ["type"],
+	data: function () {
+		return {
+			items: []
+		}
+	},
+	created() {
+		this.fillCards(this.type);
+	},
+	methods: {
+		fillCards(type) {
+			let self = this;
+			axios({
+				method: 'GET',
+				url: `?page=home&action=get${type}`,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
+			}).then(function (response) {
+				if (response.data.success) {
+					self.items = response.data.items;
+				}
+			}).catch(function (error) {
+
+			});
+		}
+	},
 	template: `
 <div class="container my-3">
 	<div class="lobsterFont">

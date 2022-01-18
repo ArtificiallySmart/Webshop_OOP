@@ -1,62 +1,32 @@
 let app = new Vue({
 	el: "#app",
 	data: {
-		items: items,
+		items: [],
 		inCart: false,
 		cart: Object.entries(localStorage) || '',
 		counter: 1,
-		query: decodeURI((window.location.search).slice(8)),
-		hash: decodeURI((window.location.hash).slice(1)),
-		catArr: catArr,
+		$_GET: $_GET,
+		pageItem: {},
+		catResults: [],
+		searchResults: [],
+		cartItems: []
+	},
+	created() {
+		this.fetchCart();
+		if ($_GET.itemid) this.getPageItem();
+		if ($_GET.category) this.getCatResults();
+		if ($_GET.search) this.getSearchResults();
+	},
+	mounted() {
+		validateform();
 	},
 	computed: {
-		cartItems: function () {
-			const cartItems = [];
-			if (this.cart) {
-				this.cart.forEach(key => {
-					let cartItem = (items.filter(item => item.ID == key[0]));
-					cartItem[0].amount = key[1];
-					cartItems.push(...cartItem);
-				});
-			}
-			return cartItems;
-		},
 		amtItemsInCart: function () {
 			let amount = 0;
 			this.cartItems.forEach(item => {
 				amount += parseInt(item.amount);
 			})
 			return amount;
-		},
-		spotlightItems: function () {
-			const spot = [];
-			spot.push(items[0], items[10], items[13], items[17], items[2], items[1]);
-			return spot;
-		},
-		newItems: function () {
-			let newArray = [];
-			for (let i = 1; i <= 6; i++) {
-				newArray.push(items[items.length - i]);
-			}
-			return newArray;
-		},
-		randomItems: function () {
-			let rowItems = [];
-			let indexArray = [];
-			for (let i = 0; i < items.length; i++) {
-				indexArray[i] = i;
-			}
-			for (let i = 0; i < 6; i++) {
-				rowItems.push(
-					items[
-					indexArray.splice(Math.floor(Math.random() * indexArray.length), 1)
-					]
-				);
-			}
-			return rowItems;
-		},
-		pageItem: function () {
-			return items.filter((item) => item.ID == this.hash)[0];
 		},
 		addToCartText: function () {
 			if (localStorage.getItem(this.pageItem.ID) || this.inCart) {
@@ -72,46 +42,109 @@ let app = new Vue({
 			}
 			return total;
 		},
-		searchResults: function () {
-
-			return items.filter(item => {
-				return item.name.toLowerCase().includes(this.query.toLowerCase()) || item.description.toLowerCase().includes(this.query.toLowerCase())
-			})
-		},
-		catResults: function () {
-			if (this.hash) {
-				return items.filter(item => {
-					return item.subcategory.includes(this.hash)
-				})
-			} else if (this.query) {
-				return items.filter(item => {
-					return item.category.toLowerCase().includes(this.query.toLowerCase())
-				})
-			}
-		}
 	},
 	methods: {
+		getPageItem() {
+			let self = this;
+
+			axios({
+				method: 'GET',
+				url: `?page=item&action=getitem&params=${$_GET.itemid}`,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
+			}).then(function (response) {
+				if (response.data.success) {
+					self.pageItem = response.data.item[0];
+				}
+			}).catch(function (error) {
+
+			});
+		},
+		getCatResults: function () {
+			let self = this;
+
+			axios({
+				method: 'GET',
+				url: `?page=mysql&action=getByCategory&params=${$_GET.category}`,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
+			}).then(function (response) {
+				if (response.data.success) {
+					self.catResults = response.data.catResults;
+				}
+			}).catch(function (error) {
+
+			});
+		},
+		getSearchResults: function () {
+			let self = this;
+
+			axios({
+				method: 'GET',
+				url: `?page=mysql&action=search&params=${$_GET.search}`,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
+			}).then(function (response) {
+				if (response.data.success) {
+					self.searchResults = response.data.searchResults;
+				}
+			}).catch(function (error) {
+
+			});
+		},
 		removeFromCart: function (ID) {
-			this.cart.forEach((item, index) => {
-				if (item[0] == ID && item[1]) {
-					this.cart.splice(index, 1)
+			axios({
+				method: 'POST',
+				url: `?page=shoppingcart&action=removefromcart`,
+				data: {
+					id: ID,
+				},
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
 				}
-			})
-			// this.cart.splice(this.cart.indexOf(ID), 1);
-			localStorage.removeItem(ID);
+			}).then(function (response) {
+
+			}).catch(function (error) {
+				console.log(error)
+			});
+			this.fetchCart();
 		},
-		addToCart: function (ID) {
-			if (this.counter) {
-				if (localStorage.getItem(ID)) {
-					alert('This item is already in your cart')
-				} else {
-					localStorage.setItem(ID, this.counter);
-					this.cart.push([ID, this.counter]);
-					this.counter = 1;
-					this.inCart = true;
+		addToCart: function (ID, amt) {
+			axios({
+				method: 'POST',
+				url: `?page=shoppingcart&action=addtocart`,
+				data: {
+					id: ID,
+					amt: amt
+				},
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
 				}
-			}
+			}).then(function (response) {
+
+			}).catch(function (error) {
+				console.log(error)
+			});
+			this.fetchCart();
 		},
+		fetchCart: function () {
+			let self = this;
+			axios({
+				method: 'GET',
+				url: `?page=shoppingcart&action=fetchcart`,
+				headers: {
+					"X-Requested-With": "XMLHttpRequest"
+				}
+			}).then(function (response) {
+				self.cartItems = response.data.cartItems;
+			}).catch(function (error) {
+				console.log(error)
+			});
+		},
+
 		itemCounter: function (num) {
 			if (num == 1 && this.counter < this.pageItem.stock) {
 				this.counter++;

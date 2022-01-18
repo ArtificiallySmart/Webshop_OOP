@@ -34,7 +34,20 @@ body {
   background-color: rgba(0, 0, 0, 0.5); /* Black w/opacity/see-through */
   backdrop-filter: blur(5px);
 }
+.alert {
+  background-color: #39eb9a;
+  border: none;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  z-index: 2;
+  margin-bottom: 0;
+}
 
+.has_required {
+  text-decoration: line-through;
+  color: #689868;
+}
 /* orange: #f58152
 whitish: #F9EBCE
 purple: #be489c */ ;
