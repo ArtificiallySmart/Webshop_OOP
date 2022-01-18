@@ -30,7 +30,6 @@
     <script src="./assets/js/components/itemCarousel.js"></script>
     <script src="./assets/js/components/newUserForm.js"></script>
     <script src="./assets/js/get.js"></script>
-    <script src="./assets/js/validateform.js"></script>
     <script src="node_modules/axios/dist/axios.min.js"></script>
     <script src="./assets/js/vue.js" defer></script>
 </head>

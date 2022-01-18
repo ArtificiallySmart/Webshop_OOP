@@ -13,7 +13,7 @@ Vue.component('new-user-form', {
         }
     },
     mounted() {
-        this.setpass();
+        this.getElementsById();
     },
     template:
         `
@@ -47,8 +47,8 @@ Vue.component('new-user-form', {
             </div>
 
             <div class="form-floating mb-3">
-                <input class="form-control" id="username" name="username" placeholder="username" @change="validateUsername"
-                    required>
+                <input class="form-control" id="username" name="username" placeholder="username"
+                    @change="validateUsername" required>
                 <label for="username" class="form-label">Username</label>
                 <div class="invalid-feedback">
                     {{ usernameerr }}
@@ -56,8 +56,8 @@ Vue.component('new-user-form', {
             </div>
 
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" @change="validateEmail"
-                required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                    @change="validateEmail" required>
                 <label for="email" class="form-label">E-mail</label>
                 <div class="invalid-feedback">
                     {{ emailerr }}
@@ -98,7 +98,7 @@ Vue.component('new-user-form', {
 
             <div class="collapse" id="collapseExample">
                 <div class="card card-body">
-                    By making an account on this website, you agree to the facts that I'm in week 2 of learning PHP and
+                    By making an account on this website, you agree to the facts that I'm in week 3 of learning PHP and
                     MySQL, I know next to nothing about data protection, and there's a fat chance that your data will be
                     leaked.
                 </div>
@@ -110,12 +110,12 @@ Vue.component('new-user-form', {
                 <label class="form-check-label" for="mailinglist">I would like to receive promotional emails.</label>
             </div>
         </div>
-        <button class="btn btn-primary" @click="submitForm">submit</button>
+        <button class="btn btn-primary" @click="submitForm($event)">submit</button>
     </div>
 </form>
 `,
     methods: {
-        setpass: function () {
+        getElementsById: function () {
             this.password = document.getElementById("password");
             this.confirm_password = document.getElementById("confirm_password");
             this.username = document.getElementById("username")
@@ -124,8 +124,10 @@ Vue.component('new-user-form', {
         validatePassword: function () {
             if (this.password.value != this.confirm_password.value) {
                 this.confirm_password.setCustomValidity("Passwords Don't Match");
+                this.confirm_password.classList.add("is-invalid");
             } else {
                 this.confirm_password.setCustomValidity('');
+                this.confirm_password.classList.remove("is-invalid");
             }
         },
         validateUsername: function () {
@@ -144,11 +146,12 @@ Vue.component('new-user-form', {
                     console.log(response.data.message);
                     self.username.setCustomValidity("username already exists");
                     self.usernameerr = username.validationMessage;
+                    self.username.classList.add("is-invalid");
                 } else {
                     self.username.setCustomValidity("");
+                    self.username.classList.remove("is-invalid");
                 }
             }).catch(function (error) {
-
             });
         },
         validateEmail: function () {
@@ -167,15 +170,22 @@ Vue.component('new-user-form', {
                     console.log(response.data.message);
                     self.email.setCustomValidity("email already exists");
                     self.emailerr = email.validationMessage;
+                    self.email.classList.add("is-invalid");
                 } else {
                     self.email.setCustomValidity("");
+                    self.email.classList.remove("is-invalid");
                 }
             }).catch(function (error) {
 
             });
         },
-        submitForm: function () {
+        submitForm: function (event) {
+            event.preventDefault()
+            event.stopPropagation()
+
             let form = document.getElementById("new-user-form")
+            form.classList.add('was-validated')
+
             if (form.checkValidity()) {
                 axios({
                     method: 'POST',
@@ -186,18 +196,18 @@ Vue.component('new-user-form', {
                         username: this.username.value,
                         email: this.email.value,
                         password: this.password.value,
-                        mailing_list: this.mailingList
+                        mailing_list: this.mailingList ? '1' : '0'
                     },
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"
                     }
                 }).then(function (response) {
-
+                    console.log(response);
                 }).catch(function (error) {
                     console.log(error)
                 });
+                window.location.href = "/";
             }
-
         }
     }
 });
