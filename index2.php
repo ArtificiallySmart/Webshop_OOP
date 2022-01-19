@@ -12,5 +12,3 @@ require 'vendor/autoload.php';
 // .env configuration
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
-var_dump(phpinfo());
