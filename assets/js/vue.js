@@ -18,7 +18,6 @@ let app = new Vue({
 		if ($_GET.search) this.getSearchResults();
 	},
 	mounted() {
-		validateform();
 	},
 	computed: {
 		amtItemsInCart: function () {
