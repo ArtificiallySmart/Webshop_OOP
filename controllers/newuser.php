@@ -37,4 +37,7 @@ function submitForm()
     $userinfo['password'] = password_hash($userinfo['password'], PASSWORD_DEFAULT);
     insert($userinfo, 'users');
     $_SESSION['alert'] = array("class" => "alert-success", "text" => "Thanks for registering, please login to continue.");
+    echo json_encode([
+        'success' => true
+    ]);
 }

@@ -1,5 +1,5 @@
 body {
-  background-image: url("../../images/pattern3.png");
+  background-image: url("../images/pattern3.png");
   background-attachment: fixed;
   background-repeat: repeat;
   background-size: contain;
@@ -13,6 +13,7 @@ body {
 }
 
 .shopping-cart {
+  cursor: pointer;
   background-color: #eae7dc;
   z-index: 1;
   position: fixed;

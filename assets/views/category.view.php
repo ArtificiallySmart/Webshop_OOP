@@ -1,7 +1,3 @@
-<!-- Navbar -->
-<double-nav @newquery="newQuery" @newhash="newHash" :link=true></double-nav>
-<!-- /Navbar -->
-
 <p>Showing all items in the <template v-if="$data.$_GET.subcategory"> {{$data.$_GET.subcategory}} subcategory:</template> <template v-else>
         {{$data.$_GET.category}} category:</template></p>
 

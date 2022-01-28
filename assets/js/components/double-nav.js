@@ -1,5 +1,5 @@
 Vue.component("double-nav", {
-props: ['link'],
+props: ['link', 'logged_in'],
 data: function () {
 return {
 categories: [],
@@ -9,12 +9,27 @@ created() {
 this.getCategories();
 },
 methods: {
+logOut: function () {
+document.cookie = "loggedIn=false";
+axios({
+method: 'GET',
+url: '?page=login&action=logOut',
+headers: {
+"X-Requested-With": "XMLHttpRequest"
+}
+}).then(function (response) {
+if (response.data.success) {
+window.location.href = "/"
+}
+}).catch(function (error) {
+});
+},
 getCategories() {
 let self = this;
 
 axios({
 method: 'GET',
-url: '?page=mysql&action=getCategories',
+url: '?page=category&action=getCategories',
 headers: {
 "X-Requested-With": "XMLHttpRequest"
 }
@@ -44,9 +59,16 @@ template: `
 
                 </ul>
                 <div>
-                    <button class="btn btn-outline-secondary" data-bs-toggle="modal"
-                        data-bs-target="#loginModal">Login</button>
-                    <a href="/?page=newuser" class="btn btn-outline-secondary">Register</a>
+                    <div v-if="!logged_in">
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">Login</button>
+                        <a href="/?page=newuser" class="btn btn-outline-secondary">Register</a>
+                    </div>
+                    <div v-else>
+                        <button class="btn btn-outline-secondary" @click="logOut">Log out</button>
+                        <a href="/?page=user" class="btn btn-outline-secondary">Profile</a>
+                    </div>
+
                     <form action="/?page=search&action=handleForm" method="POST">
                         <div class="input-group">
                             <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search"
@@ -84,7 +106,7 @@ template: `
 
 
                 </nav>
-                <a class="d-md-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                <!-- <a class="d-md-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
                     Categories
                 </a>
@@ -96,7 +118,7 @@ template: `
                         <a class="nav-link" href="#">Decor</a>
                         <a class="nav-link" href="#">Textiles</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 

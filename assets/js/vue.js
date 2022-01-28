@@ -2,16 +2,16 @@ let app = new Vue({
 	el: "#app",
 	data: {
 		items: [],
-		inCart: false,
-		cart: Object.entries(localStorage) || '',
 		counter: 1,
 		$_GET: $_GET,
 		pageItem: {},
 		catResults: [],
 		searchResults: [],
-		cartItems: []
+		cartItems: [],
+		loggedIn: false
 	},
 	created() {
+		this.isLoggedIn();
 		this.fetchCart();
 		if ($_GET.itemid) this.getPageItem();
 		if ($_GET.category) this.getCatResults();
@@ -27,13 +27,6 @@ let app = new Vue({
 			})
 			return amount;
 		},
-		addToCartText: function () {
-			if (localStorage.getItem(this.pageItem.ID) || this.inCart) {
-				return "Toegevoegd aan winkelwagen";
-			} else {
-				return "Toevoegen aan winkelwagen";
-			}
-		},
 		totalPrice: function () {
 			let total = 0;
 			if (this.cartItems) {
@@ -43,6 +36,32 @@ let app = new Vue({
 		},
 	},
 	methods: {
+		validateForm: function () {
+			'use strict'
+
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			var forms = document.querySelectorAll('.needs-validation')
+
+			// Loop over them and prevent submission
+			Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+					form.addEventListener('submit', function (event) {
+						if (!form.checkValidity()) {
+							event.preventDefault()
+							event.stopPropagation()
+						}
+
+						form.classList.add('was-validated')
+					}, false)
+				})
+		},
+		isLoggedIn: function () {
+			const cookieValue = document.cookie
+				.split('; ')
+				.find(row => row.startsWith('loggedIn='))
+				.split('=')[1];
+			this.loggedIn = cookieValue == "true" ? true : false;
+		},
 		getPageItem() {
 			let self = this;
 
@@ -65,7 +84,7 @@ let app = new Vue({
 
 			axios({
 				method: 'GET',
-				url: `?page=mysql&action=getByCategory&params=${$_GET.category}`,
+				url: `?page=category&action=getByCategory&params=${$_GET.category}`,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}
@@ -82,7 +101,7 @@ let app = new Vue({
 
 			axios({
 				method: 'GET',
-				url: `?page=mysql&action=search&params=${$_GET.search}`,
+				url: `?page=search&action=search&params=${$_GET.search}`,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}
@@ -143,7 +162,6 @@ let app = new Vue({
 				console.log(error)
 			});
 		},
-
 		itemCounter: function (num) {
 			if (num == 1 && this.counter < this.pageItem.stock) {
 				this.counter++;
@@ -152,13 +170,6 @@ let app = new Vue({
 				this.counter--;
 			}
 		},
-		newQuery: function (newQuery) {
-			this.query = newQuery;
-			this.hash = "";
-		},
-		newHash: function (newHash) {
-			this.hash = newHash;
-		}
 	},
 });
 

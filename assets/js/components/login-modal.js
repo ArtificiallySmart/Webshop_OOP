@@ -3,15 +3,15 @@ Vue.component('login-modal', {
         return {
             username: "",
             password: "",
-            loginError: ""
+            loginError: "",
         }
     },
     mounted() {
-        this.getElementsById();
+
     },
     template:
         `
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="LoginModal" aria-hidden="true">
+<div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="LoginModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,15 +22,16 @@ Vue.component('login-modal', {
                 <div class="modal-body">
 
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="login-username" name="username" placeholder="username" required>
+                        <input class="form-control" id="login-username" name="username" placeholder="username"
+                            v-model="username" required>
                         <label for="username" class="form-label">Username</label>
                         <div class="invalid-feedback">
                             Please enter your username.
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="password" id="login-password"
-                            required>
+                        <input type="password" class="form-control" name="password" placeholder="password"
+                            id="login-password" v-model=password required>
                         <label for="password" class="form-label">Password</label>
                         <div class="invalid-feedback">
                             Please enter your password.
@@ -38,20 +39,17 @@ Vue.component('login-modal', {
                     </div>
                     {{ loginError }}
                 </div>
-                <div class="modal-footer">
+            </form>
+            <div class="modal-footer">
                     <button type="button" class="btn btn-primary" @click="validateSubmit">Login</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </form>
+            </div>
+
         </div>
     </div>
 </div>
 `,
     methods: {
-        getElementsById: function () {
-            this.password = document.getElementById("login-password");
-            this.username = document.getElementById("login-username")
-        },
         validateSubmit: function () {
             let self = this;
             let form = document.getElementById("login-form")
@@ -60,21 +58,21 @@ Vue.component('login-modal', {
                 axios({
                     method: 'POST',
                     url: `?page=login&action=verifyLogin`,
-                    data: {
-                        username: this.username.value,
-                        password: this.password.value,
+                    data:
+                    {
+                        username: this.username,
+                        password: this.password,
                     },
                     headers: {
-                        "X-Requested-With": "XMLHttpRequest"
+                        "X-Requested-With": "XMLHttpRequest",
                     }
                 }).then(function (response) {
                     if (response.data.success) {
-                        console.log("true")
                         document.cookie = "loggedIn=true";
                         window.location.href = "/";
                     } else {
-                        self.username.value = "";
-                        self.password.value = "";
+                        self.username = "";
+                        self.password = "";
                         form.classList.remove('was-validated');
                         self.loginError = "Incorrect username or password. Please try again"
                     }
