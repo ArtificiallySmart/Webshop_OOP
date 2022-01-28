@@ -9,7 +9,9 @@ if (!isset($_SESSION['alert'])) {
 if (!isset($_SESSION["loggedin"])) {
     $_SESSION["loggedin"] = false;
 }
-
+if (!isset($_COOKIE["loggedIn"]) || !$_SESSION["loggedin"]) {
+    setcookie("loggedIn", "false");
+}
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -22,7 +24,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // include core modules
-
 require 'core/mysql.php';
 require 'core/core.php';
 
@@ -32,9 +33,7 @@ if (!isAjax()) {
     // Load the HTML <head> section
     require 'assets/views/partials/head.view.php';
 
-
     $content = [];
-
 
     // Inject code from controller
     require 'core/bootstrap.php';

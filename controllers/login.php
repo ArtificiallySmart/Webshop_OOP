@@ -22,3 +22,13 @@ function verifyLogin()
         ]);
     }
 }
+
+function logOut()
+{
+    $_SESSION["loggedin"] = false;
+    unset($_SESSION["id"]);
+    unset($_SESSION["username"]);
+    echo json_encode([
+        'success'   => true,
+    ]);
+}

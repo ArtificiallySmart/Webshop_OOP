@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2022 at 08:51 AM
+-- Generation Time: Jan 28, 2022 at 01:11 PM
 -- Server version: 8.0.27-0ubuntu0.21.10.1
 -- PHP Version: 7.4.27
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `vintastic`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing_addresses`
+--
+
+CREATE TABLE `billing_addresses` (
+  `id` int NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `house_number` int NOT NULL,
+  `addition` varchar(255) DEFAULT NULL,
+  `postal_code` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `edited_at` timestamp NULL DEFAULT NULL,
+  `user_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `billing_addresses`
+--
+
+INSERT INTO `billing_addresses` (`id`, `street`, `house_number`, `addition`, `postal_code`, `city`, `created_at`, `edited_at`, `user_id`) VALUES
+(1, 'glamdringlaan', 1, 'a', '1234AA', 'Rivendell', '2022-01-26 15:05:30', NULL, 31),
+(4, 'Bag-end', 1, 'a', '1234ME', 'Shire', '2022-01-28 11:47:31', NULL, 38),
+(5, 'Orthanc', 6, 'c', '4567ME', 'Isengard', '2022-01-28 12:11:00', NULL, 32);
 
 -- --------------------------------------------------------
 
@@ -146,19 +173,80 @@ INSERT INTO `images` (`id`, `url`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `materials`
+--
+
+CREATE TABLE `materials` (
+  `id` int NOT NULL,
+  `material` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `materials`
+--
+
+INSERT INTO `materials` (`id`, `material`) VALUES
+(22, 'acrylic glass'),
+(16, 'aluminium'),
+(9, 'canvas'),
+(11, 'cardboard'),
+(6, 'ceramic'),
+(8, 'chrome'),
+(12, 'clay'),
+(4, 'copper'),
+(15, 'fiberglass'),
+(21, 'glass'),
+(19, 'iron'),
+(7, 'marble'),
+(1, 'metal'),
+(2, 'plastic'),
+(13, 'polyurethane'),
+(17, 'rosewood'),
+(14, 'textile'),
+(5, 'wood'),
+(3, 'wool');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `created at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` varchar(255) NOT NULL DEFAULT 'open'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_products`
+--
+
+CREATE TABLE `order_products` (
+  `id` int NOT NULL,
+  `order_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `amount` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
   `id` int NOT NULL,
-  `product_id` varchar(30) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
   `name` varchar(200) NOT NULL,
   `description` text NOT NULL,
   `short` text NOT NULL,
   `category` int NOT NULL,
   `subcategory` int NOT NULL,
   `thumbnail` varchar(5000) NOT NULL,
-  `material` varchar(250) NOT NULL,
   `designer` varchar(250) NOT NULL,
   `brand` varchar(250) NOT NULL,
   `style` varchar(250) NOT NULL,
@@ -177,27 +265,74 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_id`, `name`, `description`, `short`, `category`, `subcategory`, `thumbnail`, `material`, `designer`, `brand`, `style`, `period`, `state`, `sellerId`, `stock`, `price`, `spotlight`, `created_at`, `edited_at`, `deleted_at`) VALUES
-(1, 'vinprod61deceade75878.36545995', 'Duetto Table Lamp', 'Imposing space age table lamp by Guzzini, designed by Luigi Massoni. The plastic screen shows the classic form of Guzzini lights.It is designed translucent orange and has a gradient from darker to the bottom.The shield is at the upper part on the foot, is produced whereby a ring of light as a partition between the foot and screen.The screen is fixed to the tip in a trough- like depression with a chrome ball.This table lamp not only provides functional lighting, but staged at the same time as a luminous object in space.The lamp has a cord switch.', 'Imposing space age table lamp by Guzzini, designed by Luigi Massoni.', 1, 1, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_1118,w_1118/v1639484566/vintastic/mid-century-italian-space-age-duetto-table-lamp-by-luigi-massoni-for-guzzini-1_ovwliy.jpg', 'Metal, Plastic', 'Luigi Massoni', 'Guzzini', 'Space age', '1960s', 'Very good', '1', 3, 2249, 1, '2022-01-07 09:56:54', NULL, NULL),
-(2, 'vinprod61decfec28e3c4.08945564', 'Lounge Chair', 'This lounge chair is attributed to Gerard van den Berg. It was made in the 1970s. The chair is totally covered in grey leather, in good condition with some patina on the seat.', 'Lounge chair by Gerard van den Berg', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_800,w_800/v1639484920/vintastic/space-age-lounge-chair-1970s-1_bohlgq.jpg', 'Metal, Plastic', 'Gerard van den Berg', '-', 'Space age', '1970s', 'Good', '1', 1, 995, 0, '2022-01-07 09:56:54', NULL, NULL),
-(3, 'vinprod61decff66e9257.80836770', 'Space Age Table Lamp', 'This original Space Age table lamp with sequins works perfectly.', 'Original Space Age table lamp with sequins', 1, 1, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485018/vintastic/space-age-table-lamp-1970s-1_nbdtvg.jpg', 'Plastic', '-', '-', 'Space Age', '1970s', 'Very Good', '1', 4, 490, 1, '2022-01-07 09:56:54', NULL, NULL),
-(4, 'vinprod61decffd02e168.41571026', 'Space Age Ceramic Wall Lamp', 'Vintage Design With on/off cord, can be disabled for direct connection to power.', 'Vintage Design With on/off cord', 1, 2, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_795,w_795/v1639485158/vintastic/space-age-ceramic-wall-lamp-1_vaghul.jpg', 'Ceramic', '-', '-', 'Mid-Century', '1970s', 'Very Good', '1', 1, 350, 1, '2022-01-07 09:56:54', NULL, NULL),
-(5, 'vinprod61ded001c6dbb8.30154286', 'Space Age Pottery Jar', 'This Dutch pottery jar was made by J. Verdoorn in 1968. This vase like object resembles some kind of U.F.O. It remains in a very good vintage condition.', 'Dutch pottery jar by J. Verdoorn', 2, 5, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485239/vintastic/space-age-pottery-jar-by-j-verdoorn-1968-1_jrxeuw.jpg', 'Stoneware', 'J. Verdoorn', '-', 'Space age', '1960s', 'Very good', '1', 2, 200, 0, '2022-01-07 09:56:54', NULL, NULL),
-(6, 'vinprod61ded008aa52c8.97873282', 'Space Age Pendant Lamp', 'Beautiful 1950s / 60s hanging lamp made of aluminum and with beautiful details. The design of this lamp strongly reminds us of a Swedish granhaga lamp, or a lamp of Dutch or Scandinavian origin from, for example, the Granhaga or Vitrika brand. Unfortunately, the mark is missing. The lamp has two funnel-shaped metal bowls that are connected to each other and between which the lamp burns. The open part of the bowl that faces upwards is painted orange. The part that faces down is painted white which gives a clear reflection. Both bowls have a brass-colored brushed coating on the outside.', 'Beautiful space age hanging lamp', 1, 3, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485273/vintastic/space-age-pendant-lamp-1960s-1_gpqtt9.jpg', 'Aluminum, Metal', '-', '-', 'Space Age', '1960s', 'Good', '1', 1, 240, 1, '2022-01-07 09:56:54', NULL, NULL),
-(7, 'vinprod61ded00f055713.44012389', 'Space Age Fiberglass Lounge Chair with Pouf', 'Italian handmade easy chair with pouf from the 1970s - Features a structure in painted fiberglass - Seat and pouf are padded in plastic material - Designed like the seat of a sports car', 'Italian handmade easy chair with pouf', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485340/vintastic/space-age-fiberglass-lounge-chair-with-pouf-1970s-1_jamifz.jpg', 'Fiberglass, Plastic', '-', '-', 'Space Age', '1970s', 'Very good', '1', 1, 1000, 0, '2022-01-07 09:56:54', NULL, NULL),
-(8, 'vinprod61ded01529c373.80280299', 'Red Splash Carpet', '-', 'Beautiful handmade carpet', 4, 9, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485353/vintastic/space-age-red-splash-carpet-1_ubriw9.jpg', 'Wool', '-', '-', 'Space Age', '1970s', 'Very good', '1', 1, 250, 0, '2022-01-07 09:56:54', NULL, NULL),
-(9, 'vinprod61ded01e0d0584.90929345', 'Glass Table Lamp', 'This Space Age table lamp is made of white and coral opaline glass. It emits a beautiful diffused light and retains its original switch.', 'Table lamp of white and coral opaline glass', 1, 1, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_960,w_960/v1639485363/vintastic/space-age-glass-table-lamp-1960s-1_dr3a92.jpg', 'Opaline Glass', '-', '-', 'Space Age', '1960s', 'Very good', '1', 2, 215, 1, '2022-01-07 09:56:54', NULL, NULL),
-(10, 'vinprod61ded024a28602.70847835', 'Space Age Clock', 'Vintage Design', 'Beautiful Junghans starburst clock', 2, 4, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485486/vintastic/space-age-clock-from-junghans-1960s-1_c4ok7v.jpg', ' Iron, Metal', '-', 'Junghans', 'Mid Century Modern', '1960s', 'Good', '1', 4, 350, 0, '2022-01-07 09:56:54', NULL, NULL),
-(11, 'vinprod61ded02e805eb7.03296105', 'Space Age Rosewood Coat Rack', 'Beautiful wall coat rack from the 60s in a beautiful condition. The coat rack has 9 square rosewood panels that are separated by two wider panels. The five original aluminum coat hooks are provided with the coat rack. An aluminum frame can be found at the rear of the coat rack to which the panels are attached. In the frame there are two screw holes at the rear from which the coat rack can be hung.', 'Beautiful wall coat rack from the 60s', 2, 6, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485496/vintastic/vintage-space-age-rosewood-coat-rack-1960s-1_qqjpte.jpg', ' Aluminum, Rosewood', '-', '-', 'Mid-Century, Vintage, Scandinavian Modern', '1960s', 'Very Good', '1', 8, 645, 0, '2022-01-07 09:56:54', NULL, NULL),
-(12, 'vinprod61ded034eb6e93.73848180', 'Handmade Wool Carpet', 'Has been professionally cleaned. The carpet has four light marks, see pictures. There was once a table on it. A stunning carpet from the 1970s in good condition.', 'Stunning carpet from the 1970s in good condition.', 4, 9, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485505/vintastic/space-age-scandinavian-handmade-wool-carpet-1970s-1_hahinv.jpg', 'Wool', '-', '-', 'Vintage, Space Age', '1970s', 'Good', '1', 2, 750, 0, '2022-01-07 09:56:54', NULL, NULL),
-(13, 'vinprod61ded03d4da2e1.56893797', 'Wenge Wood Coffee Table', 'Vintage Design', 'Beautiful dark wood with glass coffee table', 3, 7, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_1200,w_1200/v1639485569/vintastic/vintage-space-age-wenge-wood-coffee-table-1_me1odu.jpg', 'Wood', '-', '-', 'Pop Art, Vintage, Space Age', '1960s', 'Good', '1', 1, 625, 0, '2022-01-07 09:56:54', NULL, NULL),
-(14, 'vinprod61ded043302d08.16188390', 'Space Age Sconces', 'Pair of Space Age 1970 square -plexis smoked and metal * The cable of this item may be original and might need replacement, if not specified otherwise.', 'Pair of Space Age 1970 square sconces', 1, 2, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485629/vintastic/space-age-sconces-1970s-set-of-2-1_gbwf33.jpg', 'Acrylic Glass', '-', '-', 'Mid-Century', '1970s', 'Very Good', '1', 6, 60, 1, '2022-01-07 09:56:54', NULL, NULL),
-(15, 'vinprod61ded04a88a189.43089301', 'Susy Bench', 'Beautiful bench for a waiting room with a base in black enameled iron, two fixed seats made of plastic material in a gray color and seats covered in red cloth. Mark Neolt on the back of the seats; Susy model.', 'Beautiful bench by Mark Neolt', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485696/vintastic/space-age-susy-bench-from-neolt-1980s-1_bqtxdg.jpg', 'Plastic, Iron, Fabric', '-', 'Neolt', 'Space Age', '1970s', 'Good', '1', 5, 335, 0, '2022-01-07 10:56:54', NULL, NULL),
-(16, 'vinprod61ded0505ccca0.49634040', 'Lounge Chairs, Set of 2', '-', '', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_1067,w_1067,x_250/v1639485703/vintastic/space-age-lounge-chairs-1970s-set-of-2-1_vlvqnc.jpg', 'Metal, Chrome Plating, Textile', '-', '-', 'Space Age', '1970s', 'Good', '1', 2, 1200, 0, '2022-01-07 11:56:54', NULL, NULL),
-(17, 'vinprod61ded0568aab95.69606641', 'Pendant Lamp', 'Futuristic 1970s pendant lamp in beautiful original condition. Metal body with a brushed surface, aluminum tubes from the inside in matte (slightly red) orange coated.', 'Futuristic 1970s pendant lamp in beautiful condition', 1, 3, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485713/vintastic/space-age-bar-pendant-lamp-in-aluminum-1970s-1_u56mwv.jpg', 'Metal', '-', '-', 'Space Age', '1970s', 'Very Good', '1', 3, 150, 0, '2022-01-07 12:56:54', NULL, NULL),
-(18, 'vinprod61ded060c3c988.85070435', 'Brown Vase in Ceramic', '1970s Stunning Space Age Brown Vase in Ceramic and in excellent condition. Made in Italy', 'Stunning Space Age Vase in Ceramic', 2, 5, 'https://res.cloudinary.com/dezwo7e6f/image/upload/v1639485720/vintastic/space-age-brown-vase-in-ceramic-italy-1970s-1_aa3ucu.jpg', 'Ceramic', '-', '-', 'Space Age, Mid-Century', '1970s', 'Excellent', '1', 3, 125, 0, '2022-01-07 13:56:54', NULL, NULL),
-(19, 'vinprod61ded0668d2370.44739450', 'Geometric Wool Rug', '1970s Stunning space age rug with a beautiful geometric design. Pure wool made in Italy. In excellent condition. This rug is rare.', 'Stunning space age rug with a beautiful geometric design', 4, 9, 'https://res.cloudinary.com/dezwo7e6f/image/upload/v1639485728/vintastic/space-age-geometric-wool-rug-italy-1970s-1_yj215y.jpg', 'Wool', '-', '-', 'Space Age, Mid-Century', '1970s', 'Excellent', '1', 1, 1905, 0, '2022-01-07 14:56:54', NULL, NULL),
-(20, 'vinprod61ded06d690905.21305297', 'Garden Egg', 'The both of chairs are marked with the manufacturer stamps / see photos / and originally dated 1.Oct.1974 and 27.Aug.1974. The original condition, including the original cloth upholstery Lacquered surface with normal traces of use - abrasions. The Garden Egg chair was designed by the Hungarian émigré Peter Ghyczy 1968, who started his working career as chief designer for the Polyurethane factory \'Elastogran GmbH\' in Lemförde (West Germany). The license to produce the chair was sold to the VEB Synthesewerk Schwarzheide close to the city of Senftenberg. The latter gives the chair its other name, the \'Senftenberg Egg\'. Officially, one third of their production was for the West German market, the rest for East Germany and for export. The production was halted in 1975 as the lacquering remained problematic, yet the chair became and iconic \'east\' German product, due to its popularity in trade shows and exhibitions / Jana Scholze - Garden egg chair by Peter Ghyczy, 1968 - Victoria and Albert Museum.', 'Beautiful garden chair by Peter Ghyczy', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/v1639485735/vintastic/space-age-garden-egg-by-peter-ghyczy-1960s-1_uunsv0.jpg', 'Upholstery, Polyurethane', 'Peter Ghyczy', 'VEB Synthesewerk Schwarzheide', 'Space Age, Vintage', '1970s', 'Good', '1', 1, 1899, 0, '2022-01-07 15:56:54', NULL, NULL);
+INSERT INTO `products` (`id`, `product_id`, `name`, `description`, `short`, `category`, `subcategory`, `thumbnail`, `designer`, `brand`, `style`, `period`, `state`, `sellerId`, `stock`, `price`, `spotlight`, `created_at`, `edited_at`, `deleted_at`) VALUES
+(1, '61effaae9c274', 'Duetto Table Lamp', 'Imposing space age table lamp by Guzzini, designed by Luigi Massoni. The plastic screen shows the classic form of Guzzini lights.It is designed translucent orange and has a gradient from darker to the bottom.The shield is at the upper part on the foot, is produced whereby a ring of light as a partition between the foot and screen.The screen is fixed to the tip in a trough- like depression with a chrome ball.This table lamp not only provides functional lighting, but staged at the same time as a luminous object in space.The lamp has a cord switch.', 'Imposing space age table lamp by Guzzini, designed by Luigi Massoni.', 1, 1, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_1118,w_1118/v1639484566/vintastic/mid-century-italian-space-age-duetto-table-lamp-by-luigi-massoni-for-guzzini-1_ovwliy.jpg', 'Luigi Massoni', 'Guzzini', 'Space age', '1960s', 'Very good', '1', 3, 2249, 1, '2022-01-07 09:56:54', NULL, NULL),
+(2, '61effb54a5e81', 'Lounge Chair', '\'This lounge chair is attributed to Gerard van den Berg.<div><br></div><div>&nbsp;It was made in the 1970s.&nbsp;</div><div>The chair is totally covered in grey leather, in good condition with some patina on the seat.</div>\'', 'Lounge chair by Gerard van den Berg', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_800,w_800/v1639484920/vintastic/space-age-lounge-chair-1970s-1_bohlgq.jpg', 'Gerard van den Berg', '-', 'Space age', '1970s', 'Good', '1', 1, 995, 0, '2022-01-07 09:56:54', NULL, NULL),
+(3, '61effb54af4e6', 'Space Age Table Lamp', 'This original Space Age table lamp with sequins works perfectly.', 'Original Space Age table lamp with sequins', 1, 1, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485018/vintastic/space-age-table-lamp-1970s-1_nbdtvg.jpg', '-', '-', 'Space Age', '1970s', 'Very Good', '1', 4, 490, 1, '2022-01-07 09:56:54', NULL, NULL),
+(4, '61effb54b1725', 'Space Age Ceramic Wall Lamp', 'Vintage Design With on/off cord, can be disabled for direct connection to power.', 'Vintage Design With on/off cord', 1, 2, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_795,w_795/v1639485158/vintastic/space-age-ceramic-wall-lamp-1_vaghul.jpg', '-', '-', 'Mid-Century', '1970s', 'Very Good', '1', 1, 350, 1, '2022-01-07 09:56:54', NULL, NULL),
+(5, '61effb54b3b53', 'Space Age Pottery Jar', 'This Dutch pottery jar was made by J. Verdoorn in 1968. This vase like object resembles some kind of U.F.O. It remains in a very good vintage condition.', 'Dutch pottery jar by J. Verdoorn', 2, 5, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485239/vintastic/space-age-pottery-jar-by-j-verdoorn-1968-1_jrxeuw.jpg', 'J. Verdoorn', '-', 'Space age', '1960s', 'Very good', '1', 2, 200, 0, '2022-01-07 09:56:54', NULL, NULL),
+(6, '61effb54b63a3', 'Space Age Pendant Lamp', 'Beautiful 1950s / 60s hanging lamp made of aluminum and with beautiful details. The design of this lamp strongly reminds us of a Swedish granhaga lamp, or a lamp of Dutch or Scandinavian origin from, for example, the Granhaga or Vitrika brand. Unfortunately, the mark is missing. The lamp has two funnel-shaped metal bowls that are connected to each other and between which the lamp burns. The open part of the bowl that faces upwards is painted orange. The part that faces down is painted white which gives a clear reflection. Both bowls have a brass-colored brushed coating on the outside.', 'Beautiful space age hanging lamp', 1, 3, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485273/vintastic/space-age-pendant-lamp-1960s-1_gpqtt9.jpg', '-', '-', 'Space Age', '1960s', 'Good', '1', 1, 240, 1, '2022-01-07 09:56:54', NULL, NULL),
+(7, '61effb54b98db', 'Space Age Fiberglass Lounge Chair with Pouf', 'Italian handmade easy chair with pouf from the 1970s - Features a structure in painted fiberglass - Seat and pouf are padded in plastic material - Designed like the seat of a sports car', 'Italian handmade easy chair with pouf', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485340/vintastic/space-age-fiberglass-lounge-chair-with-pouf-1970s-1_jamifz.jpg', '-', '-', 'Space Age', '1970s', 'Very good', '1', 1, 1000, 0, '2022-01-07 09:56:54', NULL, NULL),
+(8, '61effb54bbdbc', 'Red Splash Carpet', '-', 'Beautiful handmade carpet', 4, 9, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485353/vintastic/space-age-red-splash-carpet-1_ubriw9.jpg', '-', '-', 'Space Age', '1970s', 'Very good', '1', 1, 250, 0, '2022-01-07 09:56:54', NULL, NULL),
+(9, '61effb54bf415', 'Glass Table Lamp', 'This Space Age table lamp is made of white and coral opaline glass. It emits a beautiful diffused light and retains its original switch.', 'Table lamp of white and coral opaline glass', 1, 1, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_960,w_960/v1639485363/vintastic/space-age-glass-table-lamp-1960s-1_dr3a92.jpg', '-', '-', 'Space Age', '1960s', 'Very good', '1', 2, 215, 1, '2022-01-07 09:56:54', NULL, NULL),
+(10, '61effb54c2b93', 'Space Age Clock', 'Vintage Design', 'Beautiful Junghans starburst clock', 2, 4, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485486/vintastic/space-age-clock-from-junghans-1960s-1_c4ok7v.jpg', '-', 'Junghans', 'Mid Century Modern', '1960s', 'Good', '1', 4, 350, 0, '2022-01-07 09:56:54', NULL, NULL),
+(11, '61effb54c61a9', 'Space Age Rosewood Coat Rack', 'Beautiful wall coat rack from the 60s in a beautiful condition. The coat rack has 9 square rosewood panels that are separated by two wider panels. The five original aluminum coat hooks are provided with the coat rack. An aluminum frame can be found at the rear of the coat rack to which the panels are attached. In the frame there are two screw holes at the rear from which the coat rack can be hung.', 'Beautiful wall coat rack from the 60s', 2, 6, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485496/vintastic/vintage-space-age-rosewood-coat-rack-1960s-1_qqjpte.jpg', '-', '-', 'Mid-Century, Vintage, Scandinavian Modern', '1960s', 'Very Good', '1', 8, 645, 0, '2022-01-07 09:56:54', NULL, NULL),
+(12, '61effb54c8cf2', 'Handmade Wool Carpet', 'Has been professionally cleaned. The carpet has four light marks, see pictures. There was once a table on it. A stunning carpet from the 1970s in good condition.', 'Stunning carpet from the 1970s in good condition.', 4, 9, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485505/vintastic/space-age-scandinavian-handmade-wool-carpet-1970s-1_hahinv.jpg', '-', '-', 'Vintage, Space Age', '1970s', 'Good', '1', 2, 750, 0, '2022-01-07 09:56:54', NULL, NULL),
+(13, '61effb54cc50f', 'Wenge Wood Coffee Table', 'Vintage Design', 'Beautiful dark wood with glass coffee table', 3, 7, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_1200,w_1200/v1639485569/vintastic/vintage-space-age-wenge-wood-coffee-table-1_me1odu.jpg', '-', '-', 'Pop Art, Vintage, Space Age', '1960s', 'Good', '1', 1, 625, 0, '2022-01-07 09:56:54', NULL, NULL),
+(14, '61effb54cfa8f', 'Space Age Sconces', 'Pair of Space Age 1970 square -plexis smoked and metal * The cable of this item may be original and might need replacement, if not specified otherwise.', 'Pair of Space Age 1970 square sconces', 1, 2, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485629/vintastic/space-age-sconces-1970s-set-of-2-1_gbwf33.jpg', '-', '-', 'Mid-Century', '1970s', 'Very Good', '1', 6, 60, 1, '2022-01-07 09:56:54', NULL, NULL),
+(15, '61effb54d242d', 'Susy Bench', 'Beautiful bench for a waiting room with a base in black enameled iron, two fixed seats made of plastic material in a gray color and seats covered in red cloth. Mark Neolt on the back of the seats; Susy model.', 'Beautiful bench by Mark Neolt', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485696/vintastic/space-age-susy-bench-from-neolt-1980s-1_bqtxdg.jpg', '-', 'Neolt', 'Space Age', '1970s', 'Good', '1', 5, 335, 0, '2022-01-07 10:56:54', NULL, NULL),
+(16, '61effb54d5759', 'Lounge Chairs, Set of 2', '-', '', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/c_crop,h_1067,w_1067,x_250/v1639485703/vintastic/space-age-lounge-chairs-1970s-set-of-2-1_vlvqnc.jpg', '-', '-', 'Space Age', '1970s', 'Good', '1', 2, 1200, 0, '2022-01-07 11:56:54', NULL, NULL),
+(17, '61effb54d8a92', 'Pendant Lamp', 'Futuristic 1970s pendant lamp in beautiful original condition. Metal body with a brushed surface, aluminum tubes from the inside in matte (slightly red) orange coated.', 'Futuristic 1970s pendant lamp in beautiful condition', 1, 3, 'https://res.cloudinary.com/dezwo7e6f/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1639485713/vintastic/space-age-bar-pendant-lamp-in-aluminum-1970s-1_u56mwv.jpg', '-', '-', 'Space Age', '1970s', 'Very Good', '1', 3, 150, 0, '2022-01-07 12:56:54', NULL, NULL),
+(18, '61effb54db218', 'Brown Vase in Ceramic', '1970s Stunning Space Age Brown Vase in Ceramic and in excellent condition. Made in Italy', 'Stunning Space Age Vase in Ceramic', 2, 5, 'https://res.cloudinary.com/dezwo7e6f/image/upload/v1639485720/vintastic/space-age-brown-vase-in-ceramic-italy-1970s-1_aa3ucu.jpg', '-', '-', 'Space Age, Mid-Century', '1970s', 'Excellent', '1', 3, 125, 0, '2022-01-07 13:56:54', NULL, NULL),
+(19, '61effb54dddd3', 'Geometric Wool Rug', '1970s Stunning space age rug with a beautiful geometric design. Pure wool made in Italy. In excellent condition. This rug is rare.', 'Stunning space age rug with a beautiful geometric design', 4, 9, 'https://res.cloudinary.com/dezwo7e6f/image/upload/v1639485728/vintastic/space-age-geometric-wool-rug-italy-1970s-1_yj215y.jpg', '-', '-', 'Space Age, Mid-Century', '1970s', 'Excellent', '1', 1, 1905, 0, '2022-01-07 14:56:54', NULL, NULL),
+(20, '61effb54e0d7a', 'Garden Egg', 'The both of chairs are marked with the manufacturer stamps / see photos / and originally dated 1.Oct.1974 and 27.Aug.1974. The original condition, including the original cloth upholstery Lacquered surface with normal traces of use - abrasions. The Garden Egg chair was designed by the Hungarian émigré Peter Ghyczy 1968, who started his working career as chief designer for the Polyurethane factory \'Elastogran GmbH\' in Lemförde (West Germany). The license to produce the chair was sold to the VEB Synthesewerk Schwarzheide close to the city of Senftenberg. The latter gives the chair its other name, the \'Senftenberg Egg\'. Officially, one third of their production was for the West German market, the rest for East Germany and for export. The production was halted in 1975 as the lacquering remained problematic, yet the chair became and iconic \'east\' German product, due to its popularity in trade shows and exhibitions / Jana Scholze - Garden egg chair by Peter Ghyczy, 1968 - Victoria and Albert Museum.', 'Beautiful garden chair by Peter Ghyczy', 3, 8, 'https://res.cloudinary.com/dezwo7e6f/image/upload/v1639485735/vintastic/space-age-garden-egg-by-peter-ghyczy-1960s-1_uunsv0.jpg', 'Peter Ghyczy', 'VEB Synthesewerk Schwarzheide', 'Space Age, Vintage', '1970s', 'Good', '1', 1, 1899, 0, '2022-01-07 15:56:54', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_material_junction`
+--
+
+CREATE TABLE `product_material_junction` (
+  `id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `material_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_material_junction`
+--
+
+INSERT INTO `product_material_junction` (`id`, `product_id`, `material_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(5, 2, 1),
+(6, 2, 2),
+(7, 3, 2),
+(8, 4, 6),
+(9, 5, 6),
+(10, 6, 16),
+(11, 6, 1),
+(12, 7, 15),
+(13, 7, 2),
+(14, 8, 3),
+(15, 9, 21),
+(16, 10, 19),
+(17, 10, 1),
+(18, 11, 17),
+(19, 11, 16),
+(20, 12, 3),
+(21, 13, 5),
+(22, 14, 22),
+(23, 15, 2),
+(24, 15, 19),
+(25, 16, 1),
+(26, 16, 8),
+(27, 16, 14),
+(28, 17, 1),
+(29, 18, 6),
+(30, 19, 3),
+(31, 20, 13);
 
 -- --------------------------------------------------------
 
@@ -246,8 +381,31 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `first_name`, `last_name`, `password`, `created_at`, `edited_at`, `deleted_at`, `mailing_list`) VALUES
+(21, 'root', 'root@root', 'root', 'root', '$2y$10$rmJ9ZZ1P056YqzcfJfXSKulF0mwOHqURdfcVP50iRdpJwwFbZpcky', '2022-01-19 11:37:07', NULL, NULL, 1),
+(31, 'mithrandir', 'Gandalf@istar.me', 'Gandalf', 'Grey', '$2y$10$k47hoxcDDYTTPHfStGw8aO63fH0BabzOh7VTnYTXp00yWxppHXd4i', '2022-01-26 14:38:10', NULL, NULL, 1),
+(32, 'curunir', 'Saruman@istar.me', 'Saruman', 'White', '$2y$10$kO3mloa.0BgzyYO../YVROYnmnf4S9Juv67DG7t9K86VfUKHIUJzu', '2022-01-26 14:38:10', NULL, NULL, 0),
+(33, 'aiwendil', 'Radagast@istar.me', 'Radagast', 'Brown', '$2y$10$4pvUeqAWSBzxrA2q9684Xud0S9WRv.KqrMaQKhkDOtVRtx8OVS/j2', '2022-01-26 14:38:10', NULL, NULL, 1),
+(34, 'orald', 'TomB@withywindle.me', 'Tom', 'Bombadil', '$2y$10$vPIYglxgLCDqVSPvV0qHH.1m3gWuen7cOhIh5EksIPsrdWTFEdfSK', '2022-01-26 14:38:10', NULL, NULL, 0),
+(35, 'pippin', 'Ptook@shire.me', 'Peregrin', 'Took', '$2y$10$3QljDPK3ocYfIYMT7/3U3uocNOHD0QMxkfrmxwj4QM4VxV/caVIrG', '2022-01-26 14:38:10', NULL, NULL, 1),
+(36, 'merry', 'Mbran@shire.me', 'Meriadoc', 'Brandybuck', '$2y$10$NENRyltIoMr7J9.P6skhnuE/RBzZwtvWD43jeGf4ixAuuFTCS7Bnu', '2022-01-26 14:38:10', NULL, NULL, 0),
+(37, 'sam', 'Gardenlover@shire.me', 'Samwise', 'Gamgee', '$2y$10$OFTlSlsk7AbGd39hTwS2HODSou5ytu3JRcnxlps0nyLvJJ8.FqFVC', '2022-01-26 14:38:10', NULL, NULL, 1),
+(38, 'underhill', 'MrUnderhill@shire.me', 'Frodo', 'Baggins', '$2y$10$GAeKVusFbJRc.IQHvDfxf.lexFco435p0XdOcgPs848aO6A6BwQ2q', '2022-01-26 14:38:10', NULL, NULL, 0);
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `billing_addresses`
+--
+ALTER TABLE `billing_addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `categories`
@@ -263,14 +421,43 @@ ALTER TABLE `images`
   ADD KEY `p_id` (`p_id`);
 
 --
+-- Indexes for table `materials`
+--
+ALTER TABLE `materials`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `material` (`material`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `order_products`
+--
+ALTER TABLE `order_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`,`product_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product_id` (`product_id`),
   ADD KEY `category` (`category`,`subcategory`),
   ADD KEY `subcategory` (`subcategory`);
 ALTER TABLE `products` ADD FULLTEXT KEY `name` (`name`,`description`,`short`);
+
+--
+-- Indexes for table `product_material_junction`
+--
+ALTER TABLE `product_material_junction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `material_id` (`material_id`);
 
 --
 -- Indexes for table `subcategories`
@@ -293,6 +480,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `billing_addresses`
+--
+ALTER TABLE `billing_addresses`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -305,10 +498,34 @@ ALTER TABLE `images`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
+-- AUTO_INCREMENT for table `materials`
+--
+ALTER TABLE `materials`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `order_products`
+--
+ALTER TABLE `order_products`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `product_material_junction`
+--
+ALTER TABLE `product_material_junction`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -320,11 +537,17 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `billing_addresses`
+--
+ALTER TABLE `billing_addresses`
+  ADD CONSTRAINT `billing_addresses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `images`
@@ -333,11 +556,31 @@ ALTER TABLE `images`
   ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `products` (`id`);
 
 --
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `order_products`
+--
+ALTER TABLE `order_products`
+  ADD CONSTRAINT `order_products_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `order_products_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`subcategory`) REFERENCES `subcategories` (`id`);
+
+--
+-- Constraints for table `product_material_junction`
+--
+ALTER TABLE `product_material_junction`
+  ADD CONSTRAINT `product_material_junction_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `product_material_junction_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`);
 
 --
 -- Constraints for table `subcategories`

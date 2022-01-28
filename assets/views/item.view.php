@@ -1,5 +1,3 @@
-<double-nav :link=true></double-nav>
-
 <div class="container my-3">
 
     <h2 class="lobsterFont">{{pageItem.name}}</h2>
@@ -65,7 +63,7 @@
                         <div class="col"><i class="bi bi-plus-lg" @click="itemCounter(1)"></i></div>
                     </div>
                 </div>
-                <cart-button @click.native="addToCart(pageItem.product_id, counter)">{{addToCartText}}</cart-button>
+                <cart-button @click.native="addToCart(pageItem.product_id, counter)">Toevoegen aan winkelwagen</cart-button>
 
             </div>
 

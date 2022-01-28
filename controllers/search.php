@@ -13,5 +13,26 @@ function handleForm($view)
     };
     $search = $_POST["search"];
     header("Location: ?page=search&search=$search");
-    die();
+}
+
+function search($view, $query)
+{
+    $sql =
+        "SELECT
+    products.id,
+    products.name,
+    products.short,
+    products.thumbnail,
+    products.price
+    FROM products
+    WHERE MATCH (name, description, short)
+    AGAINST ('$query' IN NATURAL LANGUAGE MODE);
+    ";
+    $res = query($sql);
+    $search_results = $res->fetchAll(PDO::FETCH_CLASS);
+
+    echo json_encode([
+        'success'   => true,
+        'searchResults'    => $search_results,
+    ]);
 }

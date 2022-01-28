@@ -17,102 +17,110 @@ Vue.component('new-user-form', {
     },
     template:
         `
-<form class="needs-validation" id="new-user-form" novalidate>
+<div class="container-fluid my-3 mx-3">
 
-    <div class="row">
 
-        <div class="col">
+    <form class="needs-validation" id="new-user-form" novalidate>
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="firstname" name="first_name" placeholder="First Name"
-                            v-model="firstName" required>
-                        <label for="firstname" class="form-label">First name</label>
-                        <div class="invalid-feedback">
-                            Please enter your first name.
+        <div class="row">
+
+            <div class="col">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="firstname" name="first_name" placeholder="First Name"
+                                v-model="firstName" required>
+                            <label for="firstname" class="form-label">First name</label>
+                            <div class="invalid-feedback">
+                                Please enter your first name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="lastname" name="last_name" placeholder="Last Name"
+                                v-model="lastName" required>
+                            <label for="lastname" class="form-label">Last name</label>
+                            <div class="invalid-feedback">
+                                Please enter your last name.
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="lastname" name="last_name" placeholder="Last Name"
-                            v-model="lastName" required>
-                        <label for="lastname" class="form-label">Last name</label>
-                        <div class="invalid-feedback">
-                            Please enter your last name.
-                        </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="username" name="username" placeholder="username"
+                        @change="validateUsername" required>
+                    <label for="username" class="form-label">Username</label>
+                    <div class="invalid-feedback">
+                        {{ usernameerr }}
                     </div>
                 </div>
-            </div>
 
-            <div class="form-floating mb-3">
-                <input class="form-control" id="username" name="username" placeholder="username"
-                    @change="validateUsername" required>
-                <label for="username" class="form-label">Username</label>
-                <div class="invalid-feedback">
-                    {{ usernameerr }}
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                        @change="validateEmail" required>
+                    <label for="email" class="form-label">E-mail</label>
+                    <div class="invalid-feedback">
+                        {{ emailerr }}
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
-                    @change="validateEmail" required>
-                <label for="email" class="form-label">E-mail</label>
-                <div class="invalid-feedback">
-                    {{ emailerr }}
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="password" id="password"
+                        @change="validatePassword" required>
+                    <label for="password" class="form-label">Password</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid password.
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" placeholder="password" id="password"
-                    @change="validatePassword" required>
-                <label for="password" class="form-label">Password</label>
-                <div class="invalid-feedback">
-                    Please enter a valid password.
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" placeholder="password" id="confirm_password"
+                        @keyup="validatePassword" required>
+                    <label for="password" class="form-label">Confirm password</label>
+                    <div class="invalid-feedback">
+                        Passwords don't match.
+                    </div>
                 </div>
+
             </div>
 
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" placeholder="password" id="confirm_password"
-                    @keyup="validatePassword" required>
-                <label for="password" class="form-label">Confirm password</label>
-                <div class="invalid-feedback">
-                    Passwords don't match.
+            <div class="col">
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">I agree with the <a data-bs-toggle="collapse"
+                            href="#collapseExample" role="button" aria-expanded="false"
+                            aria-controls="collapseExample">terms and conditions</a></label>
+                    <div class="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                </div>
+
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        By making an account on this website, you agree to the facts that I'm in week 3 of learning PHP
+                        and
+                        MySQL, I know next to nothing about data protection, and there's a fat chance that your data
+                        will be
+                        leaked.
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="mailing_list" id="mailinglist"
+                        v-model="mailingList">
+                    <label class="form-check-label" for="mailinglist">I would like to receive promotional
+                        emails.</label>
                 </div>
             </div>
 
         </div>
-
-        <div class="col">
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">I agree with the <a data-bs-toggle="collapse"
-                        href="#collapseExample" role="button" aria-expanded="false"
-                        aria-controls="collapseExample">terms and conditions</a></label>
-                <div class="invalid-feedback">
-                    You must agree before submitting.
-                </div>
-            </div>
-
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    By making an account on this website, you agree to the facts that I'm in week 3 of learning PHP and
-                    MySQL, I know next to nothing about data protection, and there's a fat chance that your data will be
-                    leaked.
-                </div>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="mailing_list" id="mailinglist"
-                    v-model="mailingList">
-                <label class="form-check-label" for="mailinglist">I would like to receive promotional emails.</label>
-            </div>
-        </div>
-        <button class="btn btn-primary" @click="submitForm($event)">submit</button>
-    </div>
-</form>
+        <button class="btn btn-primary" @click.prevent="submitForm">submit</button>
+    </form>
+</div>
 `,
     methods: {
         getElementsById: function () {
@@ -179,9 +187,7 @@ Vue.component('new-user-form', {
 
             });
         },
-        submitForm: function (event) {
-            event.preventDefault()
-            event.stopPropagation()
+        submitForm: function () {
 
             let form = document.getElementById("new-user-form")
             form.classList.add('was-validated')

@@ -21,7 +21,9 @@ function fetchCart()
     products.id,
     products.name,
     products.price,
-    products.product_id
+    products.product_id,
+    products.thumbnail,
+    products.stock
     FROM products
     WHERE product_id IN ('" . implode("','", array_keys($_SESSION['cart'])) . "')";
     $res = query($sql);
