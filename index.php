@@ -1,45 +1,38 @@
 <?php
-session_start();
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-};
-if (!isset($_SESSION['alert'])) {
-    $_SESSION['alert'] = [];
-}
-if (!isset($_SESSION["loggedin"])) {
-    $_SESSION["loggedin"] = false;
-}
-if (!isset($_COOKIE["loggedIn"]) || !$_SESSION["loggedin"]) {
-    setcookie("loggedIn", "false");
-}
+
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require 'vendor/autoload.php';
-
-// .env configuration
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-// include core modules
-require 'core/mysql.php';
 require 'core/core.php';
 
+// Throw all errors to a central error handler function
+// This function is in core/core.php file
 set_exception_handler('exception_handler');
 
-if (!isAjax()) {
-    // Load the HTML <head> section
-    require 'assets/views/partials/head.view.php';
+use App\Libraries\Router;
+use App\Libraries\Request;
 
-    $content = [];
+require 'core/bootstrap.php';
+
+$route = Router::load('routes.php')->direct(Request::uri(), Request::method());
+
+require $route['uri'];
+
+$class = new $route['class'];
+$function = $route['function'];
+
+if (!Request::ajax()) {
+    // Load the HTML header
+    require 'views/layouts/head.view.php';
 
     // Inject code from controller
-    require 'core/bootstrap.php';
+    echo $class->$function();
 
-    // Close HTML <body> and <html> section
-    require 'assets/views/partials/foot.view.php';
+    // Close it with the bottom end </body> and </html> tags
+    require 'views/layouts/bottom.view.php';
 } else {
-    require 'core/bootstrap.php';
+    echo $class->$function();
 }
