@@ -29,7 +29,7 @@ Vue.component("card-row", {
 			let self = this;
 			axios({
 				method: 'GET',
-				url: `?page=home&action=get${type}`,
+				url: `home/${type}`,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}

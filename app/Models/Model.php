@@ -35,12 +35,7 @@ class Model
      * 
      */
 
-    /**
-     * na int userid een assoc array met key=condition and value = value
-     * 
-     */
-
-    public function all(array $selectedFields = null, int $userId = null, array $selector = null, $order = null)
+    public function all(array $selectedFields = null, int $userId = null): array
     {
         $fields = "*";
 
@@ -48,15 +43,10 @@ class Model
             $fields = $this->composeQuery($selectedFields);
         };
 
-        $selectorSql = ($selector ? "'" . array_keys($selector)[0] . "' = " . array_values($selector)[0] . " AND " : "");
-        $orderSql = ($order ? "" : "ORDER BY");
-
-
-        $sql = "SELECT " . $fields . " FROM " . $this->model . " WHERE " . ($userId > 0 ? 'user_id=' . $userId . ' AND ' : '') . $selectorSql . " deleted_at IS NULL" . (!empty($this->limit) ? " LIMIT " . $this->limit : "");
+        $sql = "SELECT " . $fields . " FROM " . $this->model . " WHERE " . ($userId > 0 ? 'user_id=' . $userId . ' AND ' : '') . " deleted_at IS NULL" . (!empty($this->limit) ? " LIMIT " . $this->limit : "");
 
         return MySql::query($sql)->fetchAll(PDO::FETCH_CLASS);
     }
-
 
     /**
      * Fetching one record based on the id

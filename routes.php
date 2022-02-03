@@ -17,6 +17,9 @@ use App\Middleware\Permissions;
 $router->get('', 'App/Controllers/HomeController.php@index');
 $router->get('home', 'App/Controllers/HomeController.php@index');
 $router->get('home/products', 'App/Controllers/HomeController.php@products');
+$router->get('home/spotlight', 'App/Controllers/HomeController.php@getSpotlight');
+$router->get('home/new', 'App/Controllers/HomeController.php@getNew');
+$router->get('home/random', 'App/Controllers/HomeController.php@getRandom');
 
 $router->get('login', 'App/Controllers/LoginController.php@index');
 $router->get('logout', 'App/Controllers/LoginController.php@logout');

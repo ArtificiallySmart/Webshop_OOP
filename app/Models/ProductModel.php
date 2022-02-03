@@ -50,4 +50,8 @@ class ProductModel extends Model
 
         return MySql::query($sql)->fetchAll(PDO::FETCH_CLASS);
     }
+
+    public function getCards()
+    {
+    }
 }

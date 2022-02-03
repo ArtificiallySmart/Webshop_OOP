@@ -22,6 +22,8 @@ function getData()
     ]);
 }
 
+$fields = ['id', 'name', 'short', 'thumbnail'];
+
 function getspotlight()
 {
     $sql = "SELECT `id`, `name`, `short`, `thumbnail` FROM `products` WHERE `spotlight`=true";
