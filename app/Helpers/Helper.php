@@ -36,7 +36,7 @@ class Helper
     /**
      * Get id from URL
      * @param $param (string) the parameter to search for
-     * @return value (int)
+     * @return int
      */
     public static function getIdFromUrl($param): int
     {

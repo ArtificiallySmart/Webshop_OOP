@@ -7,7 +7,19 @@ function index($view)
 
 function getItem($view, $id)
 {
-    $sql = "SELECT `products`.*, GROUP_CONCAT(images.url SEPARATOR ',') AS images FROM `products` LEFT JOIN `images` ON `images`.`p_id` = `products`.`id` WHERE `products`.id = $id GROUP BY id";
+    $sql = "
+    SELECT 
+        `products`.*, 
+    GROUP_CONCAT
+        (images.url SEPARATOR ',') AS images 
+    FROM 
+        `products` 
+    LEFT JOIN 
+        `images` 
+    ON 
+        `images`.`p_id` = `products`.`id` 
+    WHERE 
+        `products`.id = $id GROUP BY id";
 
     $res = query($sql);
 

@@ -16,6 +16,13 @@ namespace App\Libraries;
 class QueryBuilder
 {
     public $queryBuilder = '';
+    private $table = '';
+
+    function __construct(string $table = '')
+    {
+        $this->table = $table;
+    }
+
 
 
     /**
@@ -32,7 +39,7 @@ class QueryBuilder
         $selectFields = '';
 
         foreach ($fields as $field) {
-            $selectFields .= $this->composeField($field) . ", ";
+            $selectFields .= "`{$this->table}`." . $this->composeField($field) . ", ";
         }
 
         $this->queryBuilder .=  "SELECT " . rtrim($selectFields, ',' . chr(32));
@@ -40,14 +47,27 @@ class QueryBuilder
         return $this;
     }
 
+    public function groupConcat(string $field, string $table, string $separator = '')
+    {
+        $str = ", GROUP_CONCAT(`{$table}`.{$field}";
+        $str .= strlen($separator) > 0 ? " SEPARATOR `{$separator}`)" : ")";
+        $this->queryBuilder .= $str;
+        return $this;
+    }
+
+    public function as(string $alias)
+    {
+        $this->queryBuilder .= " AS `{$alias}`";
+        return $this;
+    }
 
     /**
      * Set the table name to select from
      * @param $table (string) the table name
      */
-    public function from($table)
+    public function from()
     {
-        $this->queryBuilder .= " FROM `{$table}`";
+        $this->queryBuilder .= " FROM `{$this->table}`";
 
         return $this;
     }
@@ -63,7 +83,7 @@ class QueryBuilder
     {
         $field = $this->composeField($field);
 
-        $this->queryBuilder .= " WHERE {$field} {$operator} {$value}";
+        $this->queryBuilder .= " WHERE {$this->table}.{$field} {$operator} {$value}";
 
         return $this;
     }
@@ -108,9 +128,9 @@ class QueryBuilder
      * @param $primaryKey (string, default = id) the primary key to compare the foreign key with
      * @param $joinType (string, default = LEFT)
      */
-    public function join($joinTable, $foreignKey, $table, $primaryKey = 'id', $joinType = 'LEFT')
+    public function join($joinTable, $foreignKey, $primaryKey = 'id', $joinType = ' LEFT')
     {
-        $this->queryBuilder .= $joinType . " JOIN `{$joinTable}` ON `{$joinTable}`.`{$foreignKey}`=`{$table}`.`{$primaryKey}`";
+        $this->queryBuilder .= $joinType . " JOIN `{$joinTable}` ON `{$joinTable}`.`{$foreignKey}`=`{$this->table}`.`{$primaryKey}`";
 
         return $this;
     }

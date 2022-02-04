@@ -24,7 +24,7 @@ class ProductModel extends Model
     ];
 
     /**
-     * Load class 'staticaly'
+     * Load class 'statically'
      */
     public static function load()
     {

@@ -43,67 +43,42 @@ class HomeController
     public function getspotlight()
     {
         if (!Request::ajax()) return;
-        $qb = new QueryBuilder;
+        $qb = new QueryBuilder('products');
         $qb->select(['id', 'name', 'short', 'thumbnail'])
-            ->from('products')
+            ->from()
             ->where('spotlight', '=', true)
             ->whereIsNull('deleted_at', true);
-        try {
-            $items = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS);
-            $success = true;
-            $message = "Success";
-        } catch (Exception $e) {
-            $items = null;
-            $success = false;
-            $message = $e->getMessage();
-        }
-        echo json_encode([
-            'success'   => $success,
-            'message'   => $message,
-            'items'  => $items,
-        ]);
+        $this->tryFetch($qb);
     }
 
     public function getnew()
     {
         if (!Request::ajax()) return;
-        $qb = new QueryBuilder;
+        $qb = new QueryBuilder('products');
         $qb->select(['id', 'name', 'short', 'thumbnail'])
-            ->from('products')
+            ->from()
             ->where('deleted_at', 'IS', 'NULL')
             ->orderBy(['created_at'])
             ->limit(6);
-        // dd($qb);
-        try {
-            $items = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS);
-            $success = true;
-            $message = "Success";
-        } catch (Exception $e) {
-            $items = null;
-            $success = false;
-            $message = $e->getMessage();
-        }
-        echo json_encode([
-            'success'   => $success,
-            'message'   => $message,
-            'items'  => $items,
-        ]);
-        // $sql = "SELECT `id`, `name`, `short`, `thumbnail` FROM `products` WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 6";
-        // pullItems($sql);
+        $this->tryFetch($qb);
     }
 
     public function getRandom()
     {
         if (!Request::ajax()) return;
-        $qb = new QueryBuilder;
+        $qb = new QueryBuilder('products');
         $qb->select(['id', 'name', 'short', 'thumbnail'])
-            ->from('products')
+            ->from()
             ->where('deleted_at', 'IS', 'NULL')
             ->orderBy(['RAND()'])
             ->limit(6);
-        // dd($qb);
+        $this->tryFetch($qb);
+    }
+
+    public function tryFetch(object $query)
+    {
         try {
-            $items = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS);
+            $items = MySql::query($query->get())->fetchAll(PDO::FETCH_CLASS);
             $success = true;
             $message = "Success";
         } catch (Exception $e) {

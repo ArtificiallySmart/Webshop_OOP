@@ -8,12 +8,13 @@ let app = new Vue({
 		catResults: [],
 		searchResults: [],
 		cartItems: [],
-		loggedIn: false
+		loggedIn: false,
+		path: window.location.pathname
 	},
 	created() {
 		this.isLoggedIn();
-		this.fetchCart();
-		if ($_GET.itemid) this.getPageItem();
+		//this.fetchCart();
+		if (this.path.includes('/items/')) this.getPageItem();
 		if ($_GET.category) this.getCatResults();
 		if ($_GET.search) this.getSearchResults();
 	},
@@ -67,13 +68,13 @@ let app = new Vue({
 
 			axios({
 				method: 'GET',
-				url: `?page=item&action=getitem&params=${$_GET.itemid}`,
+				url: `${this.path}/get`,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}
 			}).then(function (response) {
 				if (response.data.success) {
-					self.pageItem = response.data.item[0];
+					self.pageItem = response.data.item;
 				}
 			}).catch(function (error) {
 

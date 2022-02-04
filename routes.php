@@ -21,6 +21,9 @@ $router->get('home/spotlight', 'App/Controllers/HomeController.php@getSpotlight'
 $router->get('home/new', 'App/Controllers/HomeController.php@getNew');
 $router->get('home/random', 'App/Controllers/HomeController.php@getRandom');
 
+$router->get('items/{id}', 'App/Controllers/ItemController.php@index');
+$router->get('items/{id}/get', 'App/Controllers/ItemController.php@get');
+
 $router->get('login', 'App/Controllers/LoginController.php@index');
 $router->get('logout', 'App/Controllers/LoginController.php@logout');
 $router->post('login/auth', 'App/Controllers/LoginController.php@login');
