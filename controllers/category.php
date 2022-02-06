@@ -1,27 +1,5 @@
 <?php
 
-function index($view)
-{
-    return require $_SERVER['DOCUMENT_ROOT'] . '/assets/views/' . $view . '.view.php';
-};
-
-function getCategories()
-{
-    $sql = "SELECT categories.name AS category, GROUP_CONCAT(subcategories.name SEPARATOR ',') AS subcategory from categories join subcategories on categories.id = subcategories.cat_id GROUP BY categories.id";
-
-    $res = query($sql);
-
-    $categories = $res->fetchAll(PDO::FETCH_CLASS);
-    foreach ($categories as $category) {
-        $category->subcategory = explode(",", $category->subcategory);
-    }
-
-    echo json_encode([
-        'success'   => true,
-        'categories'    => $categories,
-    ]);
-}
-
 function getByCategory($view, $category)
 {
     $sql =

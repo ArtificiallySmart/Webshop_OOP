@@ -29,7 +29,7 @@ let self = this;
 
 axios({
 method: 'GET',
-url: '?page=category&action=getCategories',
+url: '/categories',
 headers: {
 "X-Requested-With": "XMLHttpRequest"
 }
@@ -89,16 +89,12 @@ template: `
 
                     <ul class="w-100 d-none d-md-flex justify-content-md-between">
                         <li v-for="category in categories">
-                            <a v-if="link" :href="'?page=category&category=' + category.category">{{ category.category
+                            <a v-if="link" :href="'/categories/' + category.category">{{ category.category
                                 }}</a>
-                            <button v-else class="btn" @click="$emit('newquery', category[0][0])">{{ category[0][0]
-                                }}</button>
                             <ul class="dropdown">
                                 <li v-for="subcategory in category.subcategory">
-                                    <a v-if="link" :href="'?page=category&category=' + subcategory">{{
+                                    <a v-if="link" :href="'/categories/' + subcategory">{{
                                         subcategory }}</a>
-                                    <button v-else class="btn" @click="$emit('newhash', subcategory)">{{ subcategory
-                                        }}</button>
                                 </li>
                             </ul>
                         </li>

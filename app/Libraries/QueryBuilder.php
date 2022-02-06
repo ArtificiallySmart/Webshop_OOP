@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Libraries;
+
 /**
  * Build queries in an easy way
  * 
@@ -10,8 +12,6 @@
     ->whereIsNull('deleted_at')
     ->orderBy('name')
  */
-
-namespace App\Libraries;
 
 class QueryBuilder
 {
