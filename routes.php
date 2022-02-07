@@ -22,7 +22,7 @@ $router->get('home/new', 'App/Controllers/HomeController.php@getNew');
 $router->get('home/random', 'App/Controllers/HomeController.php@getRandom');
 
 $router->get('categories', 'App/Controllers/CategoryController.php@getCategories');
-$router->get('categories/{id}', 'App/Controllers/CategoryController.php@getByCategory');
+// $router->get('categories/{id}', 'App/Controllers/CategoryController.php@getByCategory');
 
 $router->get('search', 'App/Controllers/SearchController.php@index');
 

@@ -102,7 +102,7 @@ let app = new Vue({
 
 			axios({
 				method: 'GET',
-				url: `?page=search&action=search&params=${$_GET.search}`,
+				url: `/search?search=${$_GET.search}`,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}

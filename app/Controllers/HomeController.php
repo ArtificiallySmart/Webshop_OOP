@@ -10,34 +10,12 @@ use Exception;
 use PDO;
 use App\Models\ProductModel;
 
-class HomeController
+class HomeController extends Controller
 {
 
     public function index()
     {
         return View::render('site/home.view');
-    }
-
-    public function products()
-    {
-        if (!Request::ajax()) return;
-        try {
-            $product = new ProductModel;
-            $products = $product->all();
-
-            $success = true;
-            $message = "Success";
-        } catch (Exception $e) {
-            $products = null;
-            $success = false;
-            $message = $e->getMessage();
-        }
-
-        echo json_encode([
-            'success'   => $success,
-            'message'   => $message,
-            'products'  => $products,
-        ]);
     }
 
     public function getspotlight()

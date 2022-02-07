@@ -11,11 +11,11 @@ use Exception;
 use PDO;
 use App\Models\ProductModel;
 
-class ItemController
+class ItemController extends Controller
 {
     public function index()
     {
-        return View::render('site/items.view');
+        return View::render('site/item.view');
     }
 
     public function get()
@@ -47,13 +47,3 @@ class ItemController
         ]);
     }
 }
-
-// $sql = "
-// SELECT
-//     `products`.*,
-//     GROUP_CONCAT(images.url SEPARATOR ',') AS images
-// FROM
-//     `products`
-// LEFT JOIN `images` ON `images`.`p_id` = `products`.`id`
-// WHERE
-//     `products`.id = 1

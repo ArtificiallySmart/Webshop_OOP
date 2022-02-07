@@ -6,11 +6,11 @@ namespace App\Libraries;
  * Build queries in an easy way
  * 
  * Example: 
-    ->select(['id', 'name'])
-    ->where('id', '>', 1)
-    ->whereAnd('name', 'LIKE %gorilla')
-    ->whereIsNull('deleted_at')
-    ->orderBy('name')
+ *   ->select(['id', 'name'])
+ *   ->where('id', '>', 1)
+ *   ->whereAnd('name', 'LIKE %gorilla')
+ *   ->whereIsNull('deleted_at')
+ *   ->orderBy('name')
  */
 
 class QueryBuilder
@@ -102,6 +102,17 @@ class QueryBuilder
         $this->queryBuilder .= " AND ({$field}{$operator}{$value})";
 
         return $this;
+    }
+
+    public function whereMatch(array $fields, string $query)
+    {
+        $selectFields = '';
+
+        foreach ($fields as $field) {
+            $selectFields .= "`{$this->table}`." . $this->composeField($field) . ", ";
+        }
+        $q = " WHERE MATCH(" . rtrim($selectFields, ',' . chr(32)) . ") AGAINST ('" . $query . "')";
+        $this->queryBuilder .= $q;
     }
 
 

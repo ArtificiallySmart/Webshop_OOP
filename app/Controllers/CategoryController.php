@@ -12,8 +12,9 @@ use PDO;
 use App\Models\ProductModel;
 
 
-class CategoryController
+class CategoryController extends Controller
 {
+
     public function getCategories()
     {
         if (!Request::ajax()) return;
