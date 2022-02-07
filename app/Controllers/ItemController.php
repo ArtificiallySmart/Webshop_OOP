@@ -15,27 +15,6 @@ class ItemController
 {
     public function index()
     {
-
-        // $itemId = Helper::getIdFromUrl('items');
-        // $qb = new QueryBuilder('products');
-        // $qb->select()
-        //     ->groupConcat('url', 'images')
-        //     ->as('images')
-        //     ->from()
-        //     ->join('images', 'p_id')
-        //     ->where('id', '=', $itemId);
-
-        // try {
-        //     $item = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS)[0];
-        //     $item->images = explode(",", $item->images);
-        //     $success = true;
-        //     $message = "Success";
-        // } catch (Exception $e) {
-        //     $item = null;
-        //     $success = false;
-        //     $message = $e->getMessage();
-        // }
-        // dd($item);
         return View::render('site/items.view');
     }
 

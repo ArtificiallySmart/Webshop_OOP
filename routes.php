@@ -24,6 +24,10 @@ $router->get('home/random', 'App/Controllers/HomeController.php@getRandom');
 $router->get('categories', 'App/Controllers/CategoryController.php@getCategories');
 $router->get('categories/{id}', 'App/Controllers/CategoryController.php@getByCategory');
 
+$router->get('search', 'App/Controllers/SearchController.php@index');
+
+
+
 $router->get('items/{id}', 'App/Controllers/ItemController.php@index');
 $router->get('items/{id}/get', 'App/Controllers/ItemController.php@get');
 

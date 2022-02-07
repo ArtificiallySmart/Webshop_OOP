@@ -1,47 +1,47 @@
 Vue.component("double-nav", {
-props: ['link', 'logged_in'],
-data: function () {
-return {
-categories: [],
-}
-},
-created() {
-this.getCategories();
-},
-methods: {
-logOut: function () {
-document.cookie = "loggedIn=false";
-axios({
-method: 'GET',
-url: '?page=login&action=logOut',
-headers: {
-"X-Requested-With": "XMLHttpRequest"
-}
-}).then(function (response) {
-if (response.data.success) {
-window.location.href = "/"
-}
-}).catch(function (error) {
-});
-},
-getCategories() {
-let self = this;
+    props: ['link', 'logged_in'],
+    data: function () {
+        return {
+            categories: [],
+        }
+    },
+    created() {
+        this.getCategories();
+    },
+    methods: {
+        logOut: function () {
+            document.cookie = "loggedIn=false";
+            axios({
+                method: 'GET',
+                url: '?page=login&action=logOut',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }).then(function (response) {
+                if (response.data.success) {
+                    window.location.href = "/"
+                }
+            }).catch(function (error) {
+            });
+        },
+        getCategories() {
+            let self = this;
 
-axios({
-method: 'GET',
-url: '/categories',
-headers: {
-"X-Requested-With": "XMLHttpRequest"
-}
-}).then(function (response) {
-if (response.data.success) {
-self.categories = response.data.categories;
-}
-}).catch(function (error) {
-});
-}
-},
-template: `
+            axios({
+                method: 'GET',
+                url: '/categories',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }).then(function (response) {
+                if (response.data.success) {
+                    self.categories = response.data.categories;
+                }
+            }).catch(function (error) {
+            });
+        }
+    },
+    template: `
 <div>
     <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
@@ -69,7 +69,7 @@ template: `
                         <a href="/?page=user" class="btn btn-outline-secondary">Profile</a>
                     </div>
 
-                    <form action="/?page=search&action=handleForm" method="POST">
+                    <form action="/search" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control " id="autoSizingInputGroup" placeholder="Search"
                                 name="search">
