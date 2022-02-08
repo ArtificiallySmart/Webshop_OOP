@@ -1,47 +1,47 @@
 Vue.component("double-nav", {
-    props: ['link', 'logged_in'],
-    data: function () {
-        return {
-            categories: [],
-        }
-    },
-    created() {
-        this.getCategories();
-    },
-    methods: {
-        logOut: function () {
-            document.cookie = "loggedIn=false";
-            axios({
-                method: 'GET',
-                url: '?page=login&action=logOut',
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            }).then(function (response) {
-                if (response.data.success) {
-                    window.location.href = "/"
-                }
-            }).catch(function (error) {
-            });
-        },
-        getCategories() {
-            let self = this;
+props: ['link', 'logged_in'],
+data: function () {
+return {
+categories: [],
+}
+},
+created() {
+this.getCategories();
+},
+methods: {
+logOut: function () {
+document.cookie = "loggedIn=false";
+axios({
+method: 'GET',
+url: '?page=login&action=logOut',
+headers: {
+"X-Requested-With": "XMLHttpRequest"
+}
+}).then(function (response) {
+if (response.data.success) {
+window.location.href = "/"
+}
+}).catch(function (error) {
+});
+},
+getCategories() {
+let self = this;
 
-            axios({
-                method: 'GET',
-                url: '/categories',
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            }).then(function (response) {
-                if (response.data.success) {
-                    self.categories = response.data.categories;
-                }
-            }).catch(function (error) {
-            });
-        }
-    },
-    template: `
+axios({
+method: 'GET',
+url: '/categories',
+headers: {
+"X-Requested-With": "XMLHttpRequest"
+}
+}).then(function (response) {
+if (response.data.success) {
+self.categories = response.data.categories;
+}
+}).catch(function (error) {
+});
+}
+},
+template: `
 <div>
     <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
@@ -62,11 +62,11 @@ Vue.component("double-nav", {
                     <div v-if="!logged_in">
                         <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                             data-bs-target="#loginModal">Login</button>
-                        <a href="/?page=newuser" class="btn btn-outline-secondary">Register</a>
+                        <a href="/register" class="btn btn-outline-secondary">Register</a>
                     </div>
                     <div v-else>
                         <button class="btn btn-outline-secondary" @click="logOut">Log out</button>
-                        <a href="/?page=user" class="btn btn-outline-secondary">Profile</a>
+                        <a href="/user" class="btn btn-outline-secondary">Profile</a>
                     </div>
 
                     <form action="/search" method="GET">
@@ -102,19 +102,6 @@ Vue.component("double-nav", {
 
 
                 </nav>
-                <!-- <a class="d-md-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    Categories
-                </a>
-
-                <div class="collapse d-md-none" id="collapseExample">
-                    <div>
-                        <a class="nav-link" href="#">Lighting</a>
-                        <a class="nav-link" href="#">Furniture</a>
-                        <a class="nav-link" href="#">Decor</a>
-                        <a class="nav-link" href="#">Textiles</a>
-                    </div>
-                </div> -->
             </div>
         </div>
 

@@ -7,6 +7,7 @@ use App\Libraries\MySql;
 use App\Libraries\QueryBuilder;
 use App\Libraries\Request;
 use App\Libraries\View;
+use App\Libraries\Fetcher;
 use Exception;
 use PDO;
 use App\Models\ProductModel;
@@ -30,20 +31,25 @@ class ItemController extends Controller
             ->join('images', 'p_id')
             ->where('id', '=', $itemId);
 
-        try {
-            $item = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS)[0];
-            $item->images = explode(",", $item->images);
-            $success = true;
-            $message = "Success";
-        } catch (Exception $e) {
-            $item = null;
-            $success = false;
-            $message = $e->getMessage();
-        }
-        echo json_encode([
-            'success'   => $success,
-            'message'   => $message,
-            'item'  => $item,
-        ]);
+        $reply = new Fetcher;
+        $reply->tryFetch($qb->get());
+        $reply->explode('images');
+        $reply->echo('item');
+
+        // try {
+        //     $item = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS)[0];
+        //     $item->images = explode(",", $item->images);
+        //     $success = true;
+        //     $message = "Success";
+        // } catch (Exception $e) {
+        //     $item = null;
+        //     $success = false;
+        //     $message = $e->getMessage();
+        // }
+        // echo json_encode([
+        //     'success'   => $success,
+        //     'message'   => $message,
+        //     'item'  => $item,
+        // ]);
     }
 }

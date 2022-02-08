@@ -10,7 +10,7 @@ use Exception;
 use PDO;
 use App\Models\ProductModel;
 
-class HomeController extends Controller
+class HomeController
 {
 
     public function index()
