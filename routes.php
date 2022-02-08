@@ -41,6 +41,7 @@ $router->get('contact', 'App/Controllers/ContactController.php@index');
 
 $router->get('register', 'App/Controllers/RegisterController.php@index');
 $router->post('register', 'App/Controllers/RegisterController.php@store');
+$router->post('register/validate', 'App/Controllers/RegisterController.php@validate');
 
 $router->get('admin', 'App/Controllers/AdminController.php@index', [
     'auth' => WhenNotLoggedin::class,

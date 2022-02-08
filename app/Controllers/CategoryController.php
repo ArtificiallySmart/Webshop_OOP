@@ -7,6 +7,7 @@ use App\Libraries\MySql;
 use App\Libraries\QueryBuilder;
 use App\Libraries\Request;
 use App\Libraries\View;
+use App\Libraries\Fetcher;
 use Exception;
 use PDO;
 use App\Models\ProductModel;
@@ -27,23 +28,11 @@ class CategoryController extends Controller
             ->join('subcategories', 'cat_id')
             ->groupBy(['categories.id']);
 
-        try {
-            $categories = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS);
-            foreach ($categories as $category) {
-                $category->subcategory = explode(",", $category->subcategory);
-            }
-            $success = true;
-            $message = "Success";
-        } catch (Exception $e) {
-            $categories = null;
-            $success = false;
-            $message = $e->getMessage();
-        }
-        echo json_encode([
-            'success'   => $success,
-            'message'   => $message,
-            'categories'  => $categories,
-        ]);
+
+        $reply = new Fetcher;
+        $reply->tryFetch($qb->get());
+        $reply->explode('subcategory');
+        $reply->echo('categories');
     }
     public function getByCategory()
     {

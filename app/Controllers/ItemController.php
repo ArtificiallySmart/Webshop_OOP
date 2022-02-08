@@ -16,7 +16,7 @@ class ItemController extends Controller
 {
     public function index()
     {
-        return View::render('site/item.view');
+        return View::render('site/items.view');
     }
 
     public function get()
@@ -32,24 +32,8 @@ class ItemController extends Controller
             ->where('id', '=', $itemId);
 
         $reply = new Fetcher;
-        $reply->tryFetch($qb->get());
+        $reply->tryFetch($qb->get(), false);
         $reply->explode('images');
         $reply->echo('item');
-
-        // try {
-        //     $item = MySql::query($qb->get())->fetchAll(PDO::FETCH_CLASS)[0];
-        //     $item->images = explode(",", $item->images);
-        //     $success = true;
-        //     $message = "Success";
-        // } catch (Exception $e) {
-        //     $item = null;
-        //     $success = false;
-        //     $message = $e->getMessage();
-        // }
-        // echo json_encode([
-        //     'success'   => $success,
-        //     'message'   => $message,
-        //     'item'  => $item,
-        // ]);
     }
 }

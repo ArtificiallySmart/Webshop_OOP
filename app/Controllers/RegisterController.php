@@ -9,6 +9,7 @@ use App\Libraries\View;
 use Exception;
 use PDO;
 use App\Models\ProductModel;
+use App\Models\UserModel;
 
 class RegisterController extends Controller
 {
@@ -19,5 +20,14 @@ class RegisterController extends Controller
 
     public function store()
     {
+    }
+    public function validate()
+    {
+        dd($_POST);
+        // if (UserModel::exists($post['type'], $post['value']) === true) {
+        //     dd('exists!');
+        // } else {
+        //     dd('not exists!');
+        // }
     }
 }

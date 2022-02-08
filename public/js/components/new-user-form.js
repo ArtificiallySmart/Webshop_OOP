@@ -6,6 +6,7 @@ Vue.component('new-user-form', {
             firstName: "",
             lastName: "",
             password: "",
+            token: "",
             confirm_password: "",
             mailingList: false,
             usernameerr: "Please enter a username",
@@ -21,7 +22,7 @@ Vue.component('new-user-form', {
 
 
     <form class="needs-validation" id="new-user-form" novalidate>
-
+    <input type="hidden" name="f_token" id="token" value="<?= createToken() ?>">
         <div class="row">
 
             <div class="col">
@@ -128,6 +129,7 @@ Vue.component('new-user-form', {
             this.confirm_password = document.getElementById("confirm_password");
             this.username = document.getElementById("username")
             this.email = document.getElementById("email")
+            this.token = document.getElementById("token");
         },
         validatePassword: function () {
             if (this.password.value != this.confirm_password.value) {
@@ -140,12 +142,14 @@ Vue.component('new-user-form', {
         },
         validateUsername: function () {
             let self = this;
+            let form = new FormData();
+            form.append('type', 'username');
+            form.append('value', this.username.value);
+            form.append('f_token', this.token.value)
             axios({
                 method: 'POST',
-                url: `?page=newuser&action=checkUsername`,
-                data: {
-                    username: this.username.value,
-                },
+                url: `/register/validate`,
+                data: form,
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
@@ -166,9 +170,10 @@ Vue.component('new-user-form', {
             let self = this;
             axios({
                 method: 'POST',
-                url: `?page=newuser&action=checkEmail`,
+                url: `/register/validate`,
                 data: {
-                    email: this.email.value,
+                    type: 'email',
+                    value: this.email.value,
                 },
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"

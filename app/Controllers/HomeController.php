@@ -6,6 +6,7 @@ use App\Libraries\MySql;
 use App\Libraries\QueryBuilder;
 use App\Libraries\Request;
 use App\Libraries\View;
+use App\Libraries\Fetcher;
 use Exception;
 use PDO;
 use App\Models\ProductModel;
@@ -26,7 +27,7 @@ class HomeController
             ->from()
             ->where('spotlight', '=', true)
             ->whereIsNull('deleted_at', true);
-        $this->tryFetch($qb);
+        Fetcher::tryCatchAndEcho($qb->get(), 'items');
     }
 
     public function getnew()
@@ -38,7 +39,7 @@ class HomeController
             ->where('deleted_at', 'IS', 'NULL')
             ->orderBy(['created_at'])
             ->limit(6);
-        $this->tryFetch($qb);
+        Fetcher::tryCatchAndEcho($qb->get(), 'items');
     }
 
     public function getRandom()
@@ -50,24 +51,6 @@ class HomeController
             ->where('deleted_at', 'IS', 'NULL')
             ->orderBy(['RAND()'])
             ->limit(6);
-        $this->tryFetch($qb);
-    }
-
-    public function tryFetch(object $query)
-    {
-        try {
-            $items = MySql::query($query->get())->fetchAll(PDO::FETCH_CLASS);
-            $success = true;
-            $message = "Success";
-        } catch (Exception $e) {
-            $items = null;
-            $success = false;
-            $message = $e->getMessage();
-        }
-        echo json_encode([
-            'success'   => $success,
-            'message'   => $message,
-            'items'  => $items,
-        ]);
+        Fetcher::tryCatchAndEcho($qb->get(), 'items');
     }
 }
