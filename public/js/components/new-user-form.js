@@ -1,4 +1,5 @@
 Vue.component('new-user-form', {
+    props: ["token"],
     data() {
         return {
             username: "",
@@ -6,7 +7,6 @@ Vue.component('new-user-form', {
             firstName: "",
             lastName: "",
             password: "",
-            token: "",
             confirm_password: "",
             mailingList: false,
             usernameerr: "Please enter a username",
@@ -22,7 +22,6 @@ Vue.component('new-user-form', {
 
 
     <form class="needs-validation" id="new-user-form" novalidate>
-    <input type="hidden" name="f_token" id="token" value="<?= createToken() ?>">
         <div class="row">
 
             <div class="col">
@@ -129,7 +128,6 @@ Vue.component('new-user-form', {
             this.confirm_password = document.getElementById("confirm_password");
             this.username = document.getElementById("username")
             this.email = document.getElementById("email")
-            this.token = document.getElementById("token");
         },
         validatePassword: function () {
             if (this.password.value != this.confirm_password.value) {
@@ -145,7 +143,7 @@ Vue.component('new-user-form', {
             let form = new FormData();
             form.append('type', 'username');
             form.append('value', this.username.value);
-            form.append('f_token', this.token.value)
+            form.append('f_token', this.token);
             axios({
                 method: 'POST',
                 url: `/register/validate`,
@@ -197,18 +195,20 @@ Vue.component('new-user-form', {
             let form = document.getElementById("new-user-form")
             form.classList.add('was-validated')
 
+            let formData = new FormData();
+            formData.append('first_name', this.firstName);
+            formData.append('last_name', this.lastName);
+            formData.append('username', this.username.value);
+            formData.append('email', this.email.value);
+            formData.append('password', this.password.value);
+            formData.append('mailing_list', this.mailingList ? '1' : '0');
+            formData.append('f_token', this.token);
+
             if (form.checkValidity()) {
                 axios({
                     method: 'POST',
-                    url: `?page=newuser&action=submitForm`,
-                    data: {
-                        first_name: this.firstName,
-                        last_name: this.lastName,
-                        username: this.username.value,
-                        email: this.email.value,
-                        password: this.password.value,
-                        mailing_list: this.mailingList ? '1' : '0'
-                    },
+                    url: `/register/store`,
+                    data: formData,
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"
                     }

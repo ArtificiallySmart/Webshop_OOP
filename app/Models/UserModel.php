@@ -41,9 +41,10 @@ class UserModel extends Model
     }
 
     /**
-     * Check if user exists by email
-     * @param $email (string) the email address
-     * @param $id (int) optional: the users ID 
+     * Check if user exists by a given field
+     * @param string $field The field to check.
+     * @param string $value The value which should be checked.
+     * @param int $id optional: the users ID 
      */
     public static function exists($field, $value, int $id = null)
     {

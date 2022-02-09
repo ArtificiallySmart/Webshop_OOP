@@ -23,11 +23,11 @@ class RegisterController extends Controller
     }
     public function validate()
     {
-        dd($_POST);
-        // if (UserModel::exists($post['type'], $post['value']) === true) {
-        //     dd('exists!');
-        // } else {
-        //     dd('not exists!');
-        // }
+        if (UserModel::exists($_POST['type'], $_POST['value']) === true) {
+            echo json_encode([
+                'success'   => true,
+                'message'    => 'already exists!!!',
+            ]);
+        }
     }
 }
