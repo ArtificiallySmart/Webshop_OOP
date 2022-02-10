@@ -166,13 +166,14 @@ Vue.component('new-user-form', {
         },
         validateEmail: function () {
             let self = this;
+            let form = new FormData();
+            form.append('type', 'email');
+            form.append('value', this.email.value);
+            form.append('f_token', this.token);
             axios({
                 method: 'POST',
                 url: `/register/validate`,
-                data: {
-                    type: 'email',
-                    value: this.email.value,
-                },
+                data: form,
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
@@ -207,7 +208,7 @@ Vue.component('new-user-form', {
             if (form.checkValidity()) {
                 axios({
                     method: 'POST',
-                    url: `/register/store`,
+                    url: `/register`,
                     data: formData,
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"

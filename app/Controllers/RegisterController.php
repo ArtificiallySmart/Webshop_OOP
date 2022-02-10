@@ -20,7 +20,24 @@ class RegisterController extends Controller
 
     public function store()
     {
+        $data = [
+            'username' => $_REQUEST['username'],
+            'email' => $_REQUEST['email'],
+            'first_name' => $_REQUEST['first_name'],
+            'last_name' => $_REQUEST['last_name'],
+            'password' => password_hash($_REQUEST['password'], PASSWORD_DEFAULT),
+            'mailing_list' => $_REQUEST['mailing_list']
+        ];
+
+        $user = new UserModel;
+        $user->store($data);
+
+        $_SESSION['alert'] = array("class" => "alert-success", "text" => "Thanks for registering, please login to continue.");
+        echo json_encode([
+            'success' => true
+        ]);
     }
+
     public function validate()
     {
         if (UserModel::exists($_POST['type'], $_POST['value']) === true) {
