@@ -21,13 +21,11 @@ $router->get('home/spotlight', 'App/Controllers/HomeController.php@getSpotlight'
 $router->get('home/new', 'App/Controllers/HomeController.php@getNew');
 $router->get('home/random', 'App/Controllers/HomeController.php@getRandom');
 
-$router->get('categories/getList', 'App/Controllers/CategoryController.php@getCategories');
 $router->get('categories', 'App/Controllers/CategoryController.php@index');
+$router->get('categories/getList', 'App/Controllers/CategoryController.php@getCategories');
 $router->get('categories/getByCategory', 'App/Controllers/CategoryController.php@getByCategory');
 
 $router->get('search', 'App/Controllers/SearchController.php@index');
-
-
 
 $router->get('items/{id}', 'App/Controllers/ItemController.php@index');
 $router->get('items/{id}/get', 'App/Controllers/ItemController.php@get');
@@ -36,7 +34,7 @@ $router->get('login', 'App/Controllers/LoginController.php@index');
 $router->get('logout', 'App/Controllers/LoginController.php@logout');
 $router->post('login/auth', 'App/Controllers/LoginController.php@login');
 
-$router->get('me', 'App/Controllers/ProfileController.php@index');
+$router->get('checkout', 'App/Controllers/CheckoutController.php@index');
 
 $router->get('contact', 'App/Controllers/ContactController.php@index');
 

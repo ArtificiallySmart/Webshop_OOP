@@ -40,7 +40,7 @@ Vue.component("hidden-cart-list", {
         </div>
 
         <div class="d-flex align-items-center justify-content-between">
-            <a class="btn btn-outline-secondary" href="/?page=checkout">To checkout</a>
+            <a class="btn btn-outline-secondary" href="/checkout">To checkout</a>
             <div>Total price: {{formattedPrice(totalprice)}}</div>
         </div>
 
