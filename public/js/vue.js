@@ -15,7 +15,7 @@ let app = new Vue({
 		this.isLoggedIn();
 		//this.fetchCart();
 		if (this.path.includes('/items/')) this.getPageItem();
-		if ($_GET.category) this.getCatResults();
+		if (this.path.includes('/categories')) this.getCatResults();
 		if ($_GET.search) this.getSearchResults();
 	},
 	mounted() {
@@ -85,7 +85,7 @@ let app = new Vue({
 
 			axios({
 				method: 'GET',
-				url: `?page=category&action=getByCategory&params=${$_GET.category}`,
+				url: `/categories/getByCategory?category=${$_GET.category}`,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}

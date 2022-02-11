@@ -1,47 +1,47 @@
 Vue.component("double-nav", {
-props: ['link', 'logged_in'],
-data: function () {
-return {
-categories: [],
-}
-},
-created() {
-this.getCategories();
-},
-methods: {
-logOut: function () {
-document.cookie = "loggedIn=false";
-axios({
-method: 'GET',
-url: '?page=login&action=logOut',
-headers: {
-"X-Requested-With": "XMLHttpRequest"
-}
-}).then(function (response) {
-if (response.data.success) {
-window.location.href = "/"
-}
-}).catch(function (error) {
-});
-},
-getCategories() {
-let self = this;
+    props: ['link', 'logged_in'],
+    data: function () {
+        return {
+            categories: [],
+        }
+    },
+    created() {
+        this.getCategories();
+    },
+    methods: {
+        logOut: function () {
+            document.cookie = "loggedIn=false";
+            axios({
+                method: 'GET',
+                url: '?page=login&action=logOut',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }).then(function (response) {
+                if (response.data.success) {
+                    window.location.href = "/"
+                }
+            }).catch(function (error) {
+            });
+        },
+        getCategories() {
+            let self = this;
 
-axios({
-method: 'GET',
-url: '/categories',
-headers: {
-"X-Requested-With": "XMLHttpRequest"
-}
-}).then(function (response) {
-if (response.data.success) {
-self.categories = response.data.categories;
-}
-}).catch(function (error) {
-});
-}
-},
-template: `
+            axios({
+                method: 'GET',
+                url: '/categories/getList',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }).then(function (response) {
+                if (response.data.success) {
+                    self.categories = response.data.categories;
+                }
+            }).catch(function (error) {
+            });
+        }
+    },
+    template: `
 <div>
     <nav class="navbar navbar-expand-md pb-0">
         <div class="container-fluid">
@@ -89,11 +89,11 @@ template: `
 
                     <ul class="w-100 d-none d-md-flex justify-content-md-between">
                         <li v-for="category in categories">
-                            <a v-if="link" :href="'/categories/' + category.category">{{ category.category
+                            <a v-if="link" :href="'/categories?category=' + category.category">{{ category.category
                                 }}</a>
                             <ul class="dropdown">
                                 <li v-for="subcategory in category.subcategory">
-                                    <a v-if="link" :href="'/categories/' + subcategory">{{
+                                    <a v-if="link" :href="'/categories?category=' + subcategory">{{
                                         subcategory }}</a>
                                 </li>
                             </ul>

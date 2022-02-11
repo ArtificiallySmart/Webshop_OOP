@@ -1,11 +1,29 @@
 <?php
+require 'core/core.php';
 
-$condition = 'spotlight';
-$value = true;
+dd(getCatFromUrl('/categories/Table%20lamps'));
 
-$selector = [$condition => $value];
+function getCatFromUrl()
+{
 
-$sql = "'" . array_keys($selector)[0] . "' = " . array_values($selector)[0] . " AND ";
+    $request  = trim($_SERVER['REQUEST_URI']);
+    //split the path by '/'
+    $params = explode("/", $request);
 
-var_dump($sql);
-die();
+    $cleans = cleansParams($params);
+    return urldecode($cleans[1]);
+}
+
+function cleansParams($params)
+{
+    $cleans = array();
+    if (count($params) > 0) {
+        foreach ($params as $key => $value) {
+            if (!empty($value)) {
+                array_push($cleans, trim(strtolower($value)));
+            }
+        }
+    }
+
+    return $cleans;
+}
