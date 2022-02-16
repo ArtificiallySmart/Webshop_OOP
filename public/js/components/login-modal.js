@@ -1,4 +1,5 @@
 Vue.component('login-modal', {
+    props: ["token"],
     data() {
         return {
             username: "",
@@ -10,7 +11,7 @@ Vue.component('login-modal', {
 
     },
     template:
-        `
+        /*html*/`
 <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="LoginModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -54,15 +55,16 @@ Vue.component('login-modal', {
             let self = this;
             let form = document.getElementById("login-form")
             form.classList.add('was-validated')
+            let userInfo = new FormData();
+            userInfo.append('username', this.username);
+            userInfo.append('password', this.password);
+            userInfo.append('f_token', this.token);
+
             if (form.checkValidity()) {
                 axios({
                     method: 'POST',
-                    url: `?page=login&action=verifyLogin`,
-                    data:
-                    {
-                        username: this.username,
-                        password: this.password,
-                    },
+                    url: `/login`,
+                    data: userInfo,
                     headers: {
                         "X-Requested-With": "XMLHttpRequest",
                     }

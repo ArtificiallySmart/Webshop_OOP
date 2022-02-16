@@ -17,7 +17,7 @@ Vue.component('new-user-form', {
         this.getElementsById();
     },
     template:
-        `
+        /*html*/`
 <div class="container-fluid my-3 mx-3">
 
 

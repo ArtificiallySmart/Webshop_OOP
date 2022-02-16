@@ -40,7 +40,7 @@
 <body>
 
     <div id="app">
-        <login-modal></login-modal>
+        <login-modal token="<?= htmlspecialchars(createToken(), ENT_QUOTES) ?>"></login-modal>
         <?php require 'views/partials/alerts.view.php'; ?>
-        <div class="container content-box" id="background">
+        <div class=" container content-box" id="background">
             <double-nav :link=true :logged_in=loggedIn></double-nav>

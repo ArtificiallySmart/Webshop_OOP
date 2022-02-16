@@ -18,7 +18,7 @@ class Fetcher
         try {
             $this->results = $all
                 ? MySql::query($query)->fetchAll(PDO::FETCH_CLASS)
-                : MySql::query($query)->fetchAll(PDO::FETCH_CLASS)[0];
+                : MySql::query($query)->fetch(PDO::FETCH_OBJ);
             $this->success = true;
             $this->message = "Success";
         } catch (Exception $e) {

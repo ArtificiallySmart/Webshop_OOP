@@ -36,7 +36,7 @@ class HomeController
         $qb = new QueryBuilder('products');
         $qb->select(['id', 'name', 'short', 'thumbnail'])
             ->from()
-            ->where('deleted_at', 'IS', 'NULL')
+            ->whereIsNull('deleted_at')
             ->orderBy(['created_at'])
             ->limit(6);
         Fetcher::tryCatchAndEcho($qb->get(), 'items');
@@ -48,7 +48,7 @@ class HomeController
         $qb = new QueryBuilder('products');
         $qb->select(['id', 'name', 'short', 'thumbnail'])
             ->from()
-            ->where('deleted_at', 'IS', 'NULL')
+            ->whereIsNull('deleted_at')
             ->orderBy(['RAND()'])
             ->limit(6);
         Fetcher::tryCatchAndEcho($qb->get(), 'items');

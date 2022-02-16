@@ -30,9 +30,11 @@ $router->get('search', 'App/Controllers/SearchController.php@index');
 $router->get('items/{id}', 'App/Controllers/ItemController.php@index');
 $router->get('items/{id}/get', 'App/Controllers/ItemController.php@get');
 
-$router->get('login', 'App/Controllers/LoginController.php@index');
+$router->get('login', 'App/Controllers/LoginController.php@logout');
+$router->post('login', 'App/Controllers/LoginController.php@verifyLogin');
+
 $router->get('logout', 'App/Controllers/LoginController.php@logout');
-$router->post('login/auth', 'App/Controllers/LoginController.php@login');
+
 
 $router->get('checkout', 'App/Controllers/CheckoutController.php@index');
 
@@ -45,3 +47,5 @@ $router->post('register/validate', 'App/Controllers/RegisterController.php@valid
 $router->get('admin', 'App/Controllers/AdminController.php@index', [
     'auth' => WhenNotLoggedin::class,
 ]);
+
+$router->get('user', 'App/Controllers/UserController.php@index');

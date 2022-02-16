@@ -83,7 +83,7 @@ class QueryBuilder
     {
         $field = $this->composeField($field);
 
-        $this->queryBuilder .= " WHERE {$this->table}.{$field} {$operator} {$value}";
+        $this->queryBuilder .= " WHERE `{$this->table}`.{$field} {$operator} '{$value}'";
 
         return $this;
     }
@@ -125,7 +125,7 @@ class QueryBuilder
     {
         $field = $this->composeField($field);
 
-        $this->queryBuilder .= ($and ? ' AND ' : '') . "{$field} IS NULL";
+        $this->queryBuilder .= ($and ? ' AND ' : ' WHERE ') . "`{$field}` IS NULL";
 
         return $this;
     }

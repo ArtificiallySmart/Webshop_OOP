@@ -13,7 +13,7 @@ Vue.component("double-nav", {
             document.cookie = "loggedIn=false";
             axios({
                 method: 'GET',
-                url: '?page=login&action=logOut',
+                url: '/login',
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }

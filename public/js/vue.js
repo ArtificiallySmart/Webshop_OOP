@@ -132,13 +132,13 @@ let app = new Vue({
 			this.fetchCart();
 		},
 		addToCart: function (ID, amt) {
+			let cartItem = new FormData();
+			cartItem.append('item', ID);
+			cartItem.append('amount', amt)
 			axios({
 				method: 'POST',
-				url: `?page=shoppingcart&action=addtocart`,
-				data: {
-					id: ID,
-					amt: amt
-				},
+				url: `/shoppingcart`,
+				data: cartItem,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}
