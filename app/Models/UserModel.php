@@ -16,12 +16,14 @@ class UserModel extends Model
 
     // Non writable fields
     protected $protectedFields = [
-        'id',
+        'user_id',
         'updated_at',
         'deleted_at',
         'updated_by',
         'deleted_by',
     ];
+
+    protected $userId;
 
     /**
      * Load class 'staticaly'
@@ -38,6 +40,11 @@ class UserModel extends Model
             $this->limit,
             $this->protectedFields
         );
+    }
+
+    public function getUserData()
+    {
+        return $this->get($this->getCurrentUser());
     }
 
     /**

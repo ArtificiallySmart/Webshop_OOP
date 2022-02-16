@@ -52,9 +52,11 @@ class Model
      * Fetching one record based on the id
      * @return object
      */
-    public function get(int $id, array $selectedFields = null)
+    public function get($id, array $selectedFields = null)
     {
-        if ($id === 0) return null;
+        if ($id === 0 || $id === null) {
+            return null;
+        }
 
         $fields = "*";
 
@@ -62,7 +64,7 @@ class Model
             $fields = $this->composeQuery($selectedFields);
         }
 
-        $sql = "SELECT " . $fields .  " FROM " . $this->model . " WHERE id=" . $id . " AND deleted_at IS NULL";
+        $sql = "SELECT " . $fields .  " FROM " . $this->model . " WHERE user_id=" . $id . " AND deleted_at IS NULL";
         $res = MySql::query($sql)->fetchAll(PDO::FETCH_CLASS);
 
         if (count($res) === 0) {
