@@ -21,7 +21,13 @@ class ShoppingCartController extends Controller
 
     public function addToCart()
     {
-        $item = $_REQUEST["item"];
-        $amount = $_REQUEST["amount"];
+        dd($_POST);
+    }
+
+    public function getCart()
+    {
+        $cartList = key($_POST);
+        $cartList = explode(',', $cartList);
+        dd($cartList);
     }
 }

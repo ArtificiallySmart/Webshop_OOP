@@ -49,3 +49,4 @@ $router->get('admin', 'App/Controllers/AdminController.php@index', [
 ]);
 
 $router->get('user', 'App/Controllers/UserController.php@index');
+$router->post('cart', 'App/Controllers/ShoppingCartController.php@getCart');

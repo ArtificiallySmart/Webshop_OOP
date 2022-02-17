@@ -132,28 +132,37 @@ let app = new Vue({
 			this.fetchCart();
 		},
 		addToCart: function (ID, amt) {
-			let cartItem = new FormData();
-			cartItem.append('item', ID);
-			cartItem.append('amount', amt)
-			axios({
-				method: 'POST',
-				url: `/shoppingcart`,
-				data: cartItem,
-				headers: {
-					"X-Requested-With": "XMLHttpRequest"
-				}
-			}).then(function (response) {
+			let currentCart = JSON.parse(window.localStorage.getItem("cart")) || {};
+			let itemList = Object.keys(currentCart);
+			if (itemList.includes(ID)) {
+				currentCart[ID] += amt;
+			} else {
+				currentCart[ID] = amt;
+			};
+			window.localStorage.setItem("cart", JSON.stringify(currentCart));
+			// let cartItem = new FormData();
+			// cartItem.append('item', ID);
+			// cartItem.append('amount', amt)
+			// axios({
+			// 	method: 'POST',
+			// 	url: `/shoppingcart`,
+			// 	data: cartItem,
+			// 	headers: {
+			// 		"X-Requested-With": "XMLHttpRequest"
+			// 	}
+			// }).then(function (response) {
 
-			}).catch(function (error) {
-				console.log(error)
-			});
+			// }).catch(function (error) {
+			// 	console.log(error)
+			// });
 			this.fetchCart();
 		},
 		fetchCart: function () {
 			let self = this;
 			axios({
-				method: 'GET',
-				url: `?page=shoppingcart&action=fetchcart`,
+				method: 'POST',
+				url: `/cart`,
+				data: window.localStorage.getItem('cart'),
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}

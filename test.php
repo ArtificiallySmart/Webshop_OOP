@@ -1,29 +1,20 @@
 <?php
 require 'core/core.php';
 
-dd(getCatFromUrl('/categories/Table%20lamps'));
-
-function getCatFromUrl()
-{
-
-    $request  = trim($_SERVER['REQUEST_URI']);
-    //split the path by '/'
-    $params = explode("/", $request);
-
-    $cleans = cleansParams($params);
-    return urldecode($cleans[1]);
+if (isset($var1) && isset($var2)) {
+    return x;
+} else {
+    return y;
 }
 
-function cleansParams($params)
-{
-    $cleans = array();
-    if (count($params) > 0) {
-        foreach ($params as $key => $value) {
-            if (!empty($value)) {
-                array_push($cleans, trim(strtolower($value)));
-            }
-        }
-    }
+// literal negation
+if (!(isset($var1) && isset($var2))) return y;
+return x;
 
-    return $cleans;
-}
+// DeMorgan law
+if (!isset($var1) || !isset($var2)) return y;
+return x;
+
+// more compact
+if (!isset($var1, $var2)) return y;
+return x;

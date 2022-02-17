@@ -39,32 +39,32 @@
         </div>
         <div class="col">
             <h3>Billing address</h3>
-            <?php if ($user->street) : ?>
+            <?php if ($address->street) : ?>
                 <table>
                     <tr>
                         <th>Street</th>
                         <td>
-                            <?= $user->street ?>
+                            <?= $address->street ?>
                         </td>
                     </tr>
                     <tr>
                         <th>Housenumber</th>
                         <td>
-                            <?= $user->house_number ?>
-                            <?= $user->addition ? "- $user->addition" : "" ?>
+                            <?= $address->house_number ?>
+                            <?= $address->addition ? "- $address->addition" : "" ?>
                         </td>
                     </tr>
                     <tr>
                         <th>Postal code</th>
                         <td>
-                            <?= $user->postal_code ?>
+                            <?= $address->postal_code ?>
                         </td>
                     </tr>
 
                     <tr>
                         <th>City</th>
                         <td>
-                            <?= $user->city ?>
+                            <?= $address->city ?>
                         </td>
                     </tr>
 

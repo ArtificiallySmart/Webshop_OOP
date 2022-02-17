@@ -47,6 +47,12 @@ class UserModel extends Model
         return $this->get($this->getCurrentUser());
     }
 
+    public function getUserAddress()
+    {
+        $query = "SELECT * FROM `addresses` WHERE `user_id` = " . $this->getCurrentUser();
+        return MySql::query($query)->fetch(PDO::FETCH_OBJ);
+    }
+
     /**
      * Check if user exists by a given field
      * @param string $field The field to check.

@@ -16,7 +16,7 @@ class Request
     public static function method()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            self::checkFormTokens();
+            // self::checkFormTokens();
         }
 
         return $_SERVER['REQUEST_METHOD'];
