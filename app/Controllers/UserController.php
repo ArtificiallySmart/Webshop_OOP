@@ -20,7 +20,7 @@ class UserController
     public function index()
     {
 
-        if (!isset($_SESSION, $_SESSION['user'])) return header('Location: home');
+        if (!isset($_SESSION['user'])) return header('Location: home');
 
         $userId = Helper::getUserIdFromSession();
         $user = UserModel::load()->get($userId);

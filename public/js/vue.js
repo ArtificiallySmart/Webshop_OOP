@@ -140,29 +140,18 @@ let app = new Vue({
 				currentCart[ID] = amt;
 			};
 			window.localStorage.setItem("cart", JSON.stringify(currentCart));
-			// let cartItem = new FormData();
-			// cartItem.append('item', ID);
-			// cartItem.append('amount', amt)
-			// axios({
-			// 	method: 'POST',
-			// 	url: `/shoppingcart`,
-			// 	data: cartItem,
-			// 	headers: {
-			// 		"X-Requested-With": "XMLHttpRequest"
-			// 	}
-			// }).then(function (response) {
-
-			// }).catch(function (error) {
-			// 	console.log(error)
-			// });
 			this.fetchCart();
 		},
 		fetchCart: function () {
+			let cartList = JSON.parse(window.localStorage.getItem("cart"));
+			cartList = Object.entries(cartList);
+			let data = new FormData();
+			data.append(cartList);
 			let self = this;
 			axios({
-				method: 'POST',
+				method: 'post',
 				url: `/cart`,
-				data: window.localStorage.getItem('cart'),
+				data: data,
 				headers: {
 					"X-Requested-With": "XMLHttpRequest"
 				}

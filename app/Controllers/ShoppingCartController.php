@@ -21,7 +21,7 @@ class ShoppingCartController extends Controller
 
     public function addToCart()
     {
-        dd($_POST);
+        //Fix this
     }
 
     public function getCart()
